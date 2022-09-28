@@ -7,6 +7,7 @@ import { TextField } from '@mui/material';
 import useThrottle from '../customhooks/useThrottle';
 import { FaPlay } from 'react-icons/fa'
 import LoadingButton from '@mui/lab/LoadingButton';
+import { useStopwatch } from 'react-timer-hook';
 
 function HomePage() {
   const navigate = useNavigate();
@@ -42,12 +43,35 @@ function HomePage() {
   const [bulkDownloadRunning, setBulkDownloadRunning] = useState(false)
   const [detailsList, setDetailsList] = useState(null)
 
+//timer 
+const {
+  seconds,
+  minutes,
+  hours,
+  days,
+  isRunning,
+  start,
+  pause,
+  reset,
+} = useStopwatch({ autoStart: false });
 
+//start timerr when a download is running and stop it when download finishes 
+useEffect(() => {
+  if (singleDownloadRunning || bulkDownloadRunning) {
+    reset(); start();
+  }
+  else {
+    pause();
+  }
+}, [singleDownloadRunning, bulkDownloadRunning])
 
 
   return (
     <div>
       <h3>Homepage</h3>
+      <div style={{fontSize: '20px'}}>
+       <span>{seconds}</span>
+      </div>
       {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FaPlay />} loading={!videoCover && singleDownloadRunning}
         onClick={() => {
           setStartSingleDownload(true)
