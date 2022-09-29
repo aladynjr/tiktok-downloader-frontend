@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
+import { Button, buttonBaseClasses } from '@mui/material';
 import GetID from '../utilities/GetID';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { FaPlay } from 'react-icons/fa'
+import { v4 as uuidv4 } from 'uuid';
 
 
-function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, startBulkDownload, setStartBulkDownload, setBulkDownloadRunning, detailsList, setDetailsList,photosDownloadResult, setPhotosDownloadResult }) {
+function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, startBulkDownload, setStartBulkDownload, bulkDownloadRunning, setBulkDownloadRunning, detailsList, setDetailsList, photosDownloadResult, setPhotosDownloadResult, socket }) {
 
   // const [setMainUrlField, setMainUrlField] = useState(``);
 
@@ -23,11 +24,34 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
     })
     setTiktokBulkUrls(cleanTiktokBulkUrls);
     sendUrlsToGetPhotos(cleanTiktokBulkUrls)
+  }
+  const [donePhotos, setDonePhotos] = useState([])
 
+  //JOIN THIS REQUEST'S ROOM 
+  var requestID;
+
+  const JoinRoom = (roomNumber) => {
+    socket.emit('join_room', { roomNumber });
   }
 
+  useEffect(() => {
+    requestID = uuidv4();
+    JoinRoom(requestID)
+  }, [])
+
+  //RECEIVE SOCKET MESSAGE
+   var lastSocketMessage;
+   useEffect(() => {
+     socket.on('thumbnailProgress', (data) => {
+       console.log(data)
 
 
+     })
+
+   }, [socket])
+
+
+  //SEND URL TO GET PHOTOS 
   const sendUrlsToGetPhotos = async (urls) => {
     console.log('%c sent urls', 'color: blue')
     try {
@@ -37,7 +61,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ links: urls })
+        body: JSON.stringify({ links: urls, requestID: requestID })
       })
 
       const jsonData = await response.json();
@@ -58,6 +82,8 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
     }
   }
+
+
 
 
   const sendUrls = async (urls) => {
@@ -106,7 +132,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
     setStartBulkDownload(false)
   }, [startBulkDownload])
 
-  
+
   //reset when starting again in parent component
   useEffect(() => {
     if (resetResults) {
@@ -115,9 +141,10 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
     }
   }, [resetResults])
 
+
+
   return (
     <div>
-
 
       <div>
         {detailsList && detailsList.map((details, i) => {
@@ -129,6 +156,8 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
           )
         })}
       </div>
+
+
 
       {/* {detailsList && <Button variant="contained" color='success' target="_blank"  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]); }}  >Download All Videos </a></Button>} */}
       {photosDownloadResult && <Button variant="contained" color='success' target="_blank"  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]) + 'photos'; }}  >Download All Photos</a></Button>}

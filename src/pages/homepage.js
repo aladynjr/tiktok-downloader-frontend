@@ -8,9 +8,21 @@ import useThrottle from '../customhooks/useThrottle';
 import { FaPlay } from 'react-icons/fa'
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useStopwatch } from 'react-timer-hook';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:8080');
 
 function HomePage() {
   const navigate = useNavigate();
+//socket
+const [room, setRoom] = useState("");
+
+// Messages States
+const [message, setMessage] = useState("");
+const [messageReceived, setMessageReceived] = useState("");
+
+
+
 
   const [mainUrlField, setMainUrlField] = useState('')
 
@@ -105,11 +117,13 @@ function HomePage() {
         setResetResults={setResetResults}
         startBulkDownload={startBulkDownload}
         setStartBulkDownload={setStartBulkDownload}
+        bulkDownloadRunning={bulkDownloadRunning}
         setBulkDownloadRunning={setBulkDownloadRunning}
         detailsList={detailsList}
         setDetailsList={setDetailsList}
         photosDownloadResult={photosDownloadResult}
-        setPhotosDownloadResult={setPhotosDownloadResult} />
+        setPhotosDownloadResult={setPhotosDownloadResult}
+        socket={socket} />
       <Divider style={{ width: '70%', margin: '50px auto' }} />
 
       <SingleVideoDownloader
