@@ -72,16 +72,13 @@ useEffect(() => {
       <div style={{fontSize: '20px'}}>
        <span>{seconds}</span>
       </div>
-      {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FaPlay />} loading={!videoCover && singleDownloadRunning}
-        onClick={() => {
-          setStartSingleDownload(true)
-        }}  >Start Single Download</LoadingButton>}
+   
 
 
   {throttledManyUrls && <LoadingButton variant="contained" 
       onClick={() => {
         setStartBulkDownload(true) }} endIcon={<FaPlay />} loading={bulkDownloadRunning && !detailsList} >Start Bulk Download</LoadingButton >}
-
+  <div style={{marginBlock:'20px'}} >
       <TextField
         id="outlined-multiline-flexible"
         label="Tiktok Url(s)"
@@ -90,7 +87,15 @@ useEffect(() => {
         value={mainUrlField}
         onChange={(e) => { setMainUrlField(e.target.value) }}
       />
+</div>
 
+<div>  {!throttledManyUrls && <LoadingButton  variant="contained" endIcon={<FaPlay />} loading={!videoCover && singleDownloadRunning}
+        onClick={() => {
+          setStartSingleDownload(true)
+        }}  >Start Single Download</LoadingButton>}
+        </div>
+
+        
       <BulkVideoDownloader 
       mainUrlField={mainUrlField} 
       resetResults={resetResults} 
