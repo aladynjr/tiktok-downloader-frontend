@@ -33,11 +33,9 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
       if (jsonData.download == 'success') {
         setVideoCover(jsonData.cover);
-        setSingleVideoSize(jsonData.progress);
 
         console.log('%c success : video downlaoded to server !', 'color: green');
 
-        setSingleDownloadRunning(false)
       }
     }
     catch (err) {
@@ -62,10 +60,37 @@ const sendUrlToGetPhoto = async (url) => {
 
     if (jsonData.download == 'success') {
       setVideoCover(jsonData.cover);
-      setSingleDownloadRunning(false)
 
       console.log('%c success : PHOTO is here !', 'color: green');
       //setSingleDownloadRunning(false)
+    }
+  }
+  catch (err) {
+    console.log(err);
+    setSingleDownloadRunning(false)
+  }
+}
+
+//send url to get thumbnail
+const sendUrlToGetVideo = async (url) => {
+  try {
+    let response = await fetch(process.env.REACT_APP_SERVER + '/api/single/url/video', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ link: url })
+    })
+
+    const jsonData = await response.json();
+
+    if (jsonData.download == 'success') {
+      //setVideoCover(jsonData.cover);
+      setSingleDownloadRunning(false)
+      setSingleVideoSize(jsonData.progress);
+
+      console.log('%c success : VIDEO is here !', 'color: green');
     }
   }
   catch (err) {
@@ -81,7 +106,7 @@ const sendUrlToGetPhoto = async (url) => {
     setSingleVideoSize('');
     setUrlErrorMessage('')
     setSingleDownloadRunning(true);
-    TiktokUrlValidator(mainUrlField, () => { sendUrlToGetPhoto(mainUrlField); /*sendUrl(mainUrlField)*/ }, () => { setUrlErrorMessage('Error, The url is not a tiktok link!'); setSingleDownloadRunning(false) })
+    TiktokUrlValidator(mainUrlField, () => { sendUrlToGetPhoto(mainUrlField); sendUrlToGetVideo(mainUrlField) /*sendUrl(mainUrlField)*/ }, () => { setUrlErrorMessage('Error, The url is not a tiktok link!'); setSingleDownloadRunning(false) })
 
   }
 
