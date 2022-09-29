@@ -15,34 +15,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
   //const [mainUrlField, setMainUrlField] = useState('');
   const [urlErrorMessage, setUrlErrorMessage] = useState('');
 
-  //send url to backend to get video link from api 
-  const [singleVideoSize, setSingleVideoSize] = useState('')
 
-  const sendUrl = async (url) => {
-    try {
-      let response = await fetch(process.env.REACT_APP_SERVER + '/api/single/url', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ link: url })
-      })
-
-      const jsonData = await response.json();
-
-      if (jsonData.download == 'success') {
-        setVideoCover(jsonData.cover);
-
-        console.log('%c success : video downlaoded to server !', 'color: green');
-
-      }
-    }
-    catch (err) {
-      console.log(err);
-      setSingleDownloadRunning(false)
-    }
-  }
 
 //send url to get thumbnail
 const sendUrlToGetPhoto = async (url) => {
@@ -71,7 +44,9 @@ const sendUrlToGetPhoto = async (url) => {
   }
 }
 
-//send url to get thumbnail
+//send url to get video
+  const [singleVideoSize, setSingleVideoSize] = useState('')
+
 const sendUrlToGetVideo = async (url) => {
   try {
     let response = await fetch(process.env.REACT_APP_SERVER + '/api/single/url/video', {
@@ -138,7 +113,7 @@ const sendUrlToGetVideo = async (url) => {
         <h3>{singleVideoSize}</h3>
         {videoCover && <b style={{ opacity: '0.5' }} >preview</b>}
         {videoCover && <img src={videoCover} alt="cover" width='320' />}
-        {videoCover && <Button variant="contained" color='success' target="_blank"  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/single/download/' + GetID(mainUrlField)); window.location = process.env.REACT_APP_SERVER + '/api/single/download/' + GetID(mainUrlField); }}  >Download One Video</a></Button>}
+        {videoCover && <LoadingButton variant="contained" color='success' target="_blank" loading={!singleVideoSize}  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/single/download/' + GetID(mainUrlField)); window.location = process.env.REACT_APP_SERVER + '/api/single/download/' + GetID(mainUrlField); }}  >Download One Video</a></LoadingButton>}
         {videoCover && <Button variant="contained" color='success'  > <a onClick={() => DownloadFromLink(videoCover, videoCover + '.png')}  >Download Thumbnail</a></Button>}
       </div>
     </div>
