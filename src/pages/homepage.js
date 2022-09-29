@@ -42,80 +42,85 @@ function HomePage() {
   const [startBulkDownload, setStartBulkDownload] = useState(false)
   const [bulkDownloadRunning, setBulkDownloadRunning] = useState(false)
   const [detailsList, setDetailsList] = useState(null)
+  const [photosDownloadResult, setPhotosDownloadResult] = useState(false)
 
-//timer 
-const {
-  seconds,
-  minutes,
-  hours,
-  days,
-  isRunning,
-  start,
-  pause,
-  reset,
-} = useStopwatch({ autoStart: false });
+  //timer 
+  const {
+    seconds,
+    minutes,
+    hours,
+    days,
+    isRunning,
+    start,
+    pause,
+    reset,
+  } = useStopwatch({ autoStart: false });
 
-//start timerr when a download is running and stop it when download finishes 
-useEffect(() => {
-  if (singleDownloadRunning || bulkDownloadRunning) {
-    reset(); start();
-  }
-  else {
-    pause();
-  }
-}, [singleDownloadRunning, bulkDownloadRunning])
+  //start timerr when a download is running and stop it when download finishes 
+  useEffect(() => {
+    if (singleDownloadRunning || bulkDownloadRunning) {
+      reset(); start();
+    }
+    else {
+      pause();
+    }
+  }, [singleDownloadRunning, bulkDownloadRunning])
 
 
   return (
     <div>
       <h3>Homepage</h3>
-      <div style={{fontSize: '20px'}}>
-       <span>{seconds}</span>
+      <div style={{ fontSize: '20px' }}>
+        <span>{seconds}</span>
       </div>
-   
 
 
-  {throttledManyUrls && <LoadingButton variant="contained" 
-      onClick={() => {
-        setStartBulkDownload(true) }} endIcon={<FaPlay />} loading={bulkDownloadRunning && !detailsList} >Start Bulk Download</LoadingButton >}
-  <div style={{marginBlock:'20px'}} >
-      <TextField
-        id="outlined-multiline-flexible"
-        label="Tiktok Url(s)"
-        multiline
-        //maxRows={4}
-        value={mainUrlField}
-        onChange={(e) => { setMainUrlField(e.target.value) }}
-      />
-</div>
+      <div style={{ marginBlock: '20px' }} >
+        <TextField
+          id="outlined-multiline-flexible"
+          label="Tiktok Url(s)"
+          multiline
+          //maxRows={4}
+          value={mainUrlField}
+          onChange={(e) => { setMainUrlField(e.target.value) }}
+        />
+      </div>
 
-<div>  {!throttledManyUrls && <LoadingButton  variant="contained" endIcon={<FaPlay />} loading={!videoCover && singleDownloadRunning}
+      <div>  {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FaPlay />} loading={!videoCover && singleDownloadRunning}
         onClick={() => {
           setStartSingleDownload(true)
         }}  >Start Single Download</LoadingButton>}
-        </div>
+      </div>
 
-        
-      <BulkVideoDownloader 
-      mainUrlField={mainUrlField} 
-      resetResults={resetResults} 
-      setResetResults={setResetResults}
-      startBulkDownload={startBulkDownload}
-      setStartBulkDownload={setStartBulkDownload}
-      setBulkDownloadRunning={setBulkDownloadRunning} 
-      detailsList={detailsList} 
-      setDetailsList={setDetailsList}/>
+<div>
+{throttledManyUrls && <LoadingButton variant="contained"
+        onClick={() => {
+          setStartBulkDownload(true);
+          setPhotosDownloadResult(false)
+        }} endIcon={<FaPlay />} loading={bulkDownloadRunning && !detailsList} >Start Bulk Download</LoadingButton >}
+  </div>
+      <BulkVideoDownloader
+        mainUrlField={mainUrlField}
+        resetResults={resetResults}
+        setResetResults={setResetResults}
+        startBulkDownload={startBulkDownload}
+        setStartBulkDownload={setStartBulkDownload}
+        setBulkDownloadRunning={setBulkDownloadRunning}
+        detailsList={detailsList}
+        setDetailsList={setDetailsList}
+        photosDownloadResult={photosDownloadResult}
+        setPhotosDownloadResult={setPhotosDownloadResult} />
       <Divider style={{ width: '70%', margin: '50px auto' }} />
-     
-      <SingleVideoDownloader 
-      mainUrlField={mainUrlField} 
-      resetResults={resetResults} 
-      setResetResults={setResetResults} 
-      startSingleDownload={startSingleDownload} 
-      setStartSingleDownload={setStartSingleDownload} 
-      videoCover={videoCover} 
-      setVideoCover={setVideoCover} 
-      setSingleDownloadRunning={setSingleDownloadRunning} />
+
+      <SingleVideoDownloader
+        mainUrlField={mainUrlField}
+        resetResults={resetResults}
+        setResetResults={setResetResults}
+        startSingleDownload={startSingleDownload}
+        setStartSingleDownload={setStartSingleDownload}
+        videoCover={videoCover}
+        setVideoCover={setVideoCover}
+        setSingleDownloadRunning={setSingleDownloadRunning} />
 
 
 
