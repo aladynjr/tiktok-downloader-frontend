@@ -11,7 +11,7 @@ import { useStopwatch } from 'react-timer-hook';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { v4 as uuidv4 } from 'uuid';
-import {BsImage, BsCameraVideoFill} from 'react-icons/bs'
+import { BsImage, BsCameraVideoFill } from 'react-icons/bs'
 
 import io from 'socket.io-client';
 
@@ -94,9 +94,13 @@ function HomePage() {
           <CircularProgressbarWithChildren value={videoProgress} styles={buildStyles({ pathColor: (detailsList || singleVideoSize) ? 'limegreen' : '#00f2ea' })}  >
             {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
             {/* <img style={{ width: 40, marginTop: -5 }} src="https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png" alt="doge" /> */}
-            <BsCameraVideoFill style={{ fontSize: 40, marginTop: -10, color:(detailsList || singleVideoSize) ? 'limegreen' : '#00f2ea'  }} />
+            <div className='tiktoklogo' style={{color:(detailsList || singleVideoSize) ? 'limegreen' : '#00fff8'}} >
 
-            <div style={{ fontSize: 12, marginTop: -1 }}>
+              <BsCameraVideoFill className='tiktokicon' />
+              <BsCameraVideoFill className='tiktokicon' />
+            </div>
+
+            <div style={{ fontSize: 12, marginTop: -5 }}>
               <strong>{videoProgress}%</strong>
             </div>
           </CircularProgressbarWithChildren>
@@ -105,10 +109,15 @@ function HomePage() {
 
         <div style={{ width: '170px', height: '170px', margin: '0 auto', marginInline: '10px' }}>
 
-          <CircularProgressbarWithChildren value={thumbnailProgress} styles={buildStyles({ pathColor: ((photosDownloadResult || videoCover) ? 'limegreen' :'#ff0050	') })} >
-            {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
-            {/* <img style={{ width: 40, marginTop: -5 }} src="https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png" alt="doge" /> */}
-            <BsImage style={{ fontSize: 32, marginTop: -5, color:(photosDownloadResult || videoCover) ? 'limegreen' : '#ff0050'  }} />
+          <CircularProgressbarWithChildren value={thumbnailProgress} styles={buildStyles({ pathColor: ((photosDownloadResult || videoCover) ? 'limegreen' : '#ff0050	') })} >
+            {/* <BsImage style={{ fontSize: 32, marginTop: -5, color:(photosDownloadResult || videoCover) ? 'limegreen' : '#ff0050'  }} /> */}
+
+            <div className='tiktoklogo' style={{fontSize:'40px', color:(photosDownloadResult || videoCover) ? 'limegreen' : '#00fff8' }} >
+
+              <BsImage className='tiktokicon' />
+              <BsImage className='tiktokicon' />
+            </div>
+
             <div style={{ fontSize: 12, marginTop: 5 }}>
               <strong>{thumbnailProgress}%</strong>
             </div>
@@ -127,11 +136,11 @@ function HomePage() {
         />
       </div>
 
-      <div>  
+      <div>
         {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FaPlay />} loading={!videoCover && !singleVideoSize && singleDownloadRunning}
-        onClick={() => {
-          setStartSingleDownload(true)
-        }}  >Start Single Download</LoadingButton>}
+          onClick={() => {
+            setStartSingleDownload(true)
+          }}  >Start Single Download</LoadingButton>}
       </div>
 
       <div>
