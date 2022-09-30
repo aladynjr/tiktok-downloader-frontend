@@ -135,31 +135,7 @@ function HomePage() {
 
         </div>
       </div>
-      <div style={{ marginBlock: '20px' }} >
-        <TextField
-          id="outlined-multiline-flexible"
-          label="Tiktok Url(s)"
-          multiline
-          //maxRows={4}
-          value={mainUrlField}
-          onChange={(e) => { setMainUrlField(e.target.value) }}
-        />
-      </div>
 
-      <div>
-        {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FaPlay />} loading={!videoCover && !singleVideoSize && singleDownloadRunning}
-          onClick={() => {
-            setStartSingleDownload(true)
-          }}  >Start Single Download</LoadingButton>}
-      </div>
-
-      <div>
-        {throttledManyUrls && <LoadingButton variant="contained"
-          onClick={() => {
-            setStartBulkDownload(true);
-            setPhotosDownloadResult(false)
-          }} endIcon={<FaPlay />} loading={bulkDownloadRunning && !detailsList} >Start Bulk Download</LoadingButton >}
-      </div>
       <BulkVideoDownloader
         mainUrlField={mainUrlField}
         resetResults={resetResults}
@@ -179,7 +155,7 @@ function HomePage() {
         setRequestID={setRequestID}
 
       />
-      <Divider style={{ width: '70%', margin: '50px auto' }} />
+      {/* <Divider style={{ width: '70%', margin: '50px auto' }} /> */}
 
       <SingleVideoDownloader
         mainUrlField={mainUrlField}
@@ -198,6 +174,33 @@ function HomePage() {
         requestID={requestID}
         setRequestID={setRequestID}
       />
+   <div>
+        {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FaPlay />} loading={!videoCover && !singleVideoSize && singleDownloadRunning}
+          onClick={() => {
+            setStartSingleDownload(true)
+          }}  >Start Single Download</LoadingButton>}
+      </div>
+
+      <div>
+        {throttledManyUrls && <LoadingButton variant="contained"
+          onClick={() => {
+            setStartBulkDownload(true);
+            setPhotosDownloadResult(false)
+          }} endIcon={<FaPlay />} loading={bulkDownloadRunning && !detailsList} >Start Bulk Download</LoadingButton >}
+      </div>
+      <div style={{ marginBlock: '20px' }} >
+        <TextField
+          id="outlined-multiline-flexible"
+          label="Tiktok Url(s)"
+          multiline
+          //maxRows={4}
+          value={mainUrlField}
+          onChange={(e) => { setMainUrlField(e.target.value) }}
+        />
+      </div>
+
+   
+     
 
 
     </div>

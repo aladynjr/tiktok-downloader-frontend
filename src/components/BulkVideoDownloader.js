@@ -33,14 +33,14 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   //RECEIVE SOCKET MESSAGE
    useEffect(() => {
      socket.on('thumbnailProgress', (data) => {
-       console.log(data)
-       setThumbnailProgress(data)
+      console.log('thumbnail  :  ' + data)
+      setThumbnailProgress(data)
 
      })
 
      socket.on('videoProgress', (data) => {
-    //    console.log(data)
-        setVideoProgress(data)
+      console.log('video  :  ' + data)
+      setVideoProgress(data)
       
       })
 
@@ -157,9 +157,11 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
       </div>
 
 
+      <div style={{display:'flex', justfiyContent:'center'}} >
 
-       {(photosDownloadResult || detailsList) && <LoadingButton loading={!detailsList} variant="contained" color='success' target="_blank"  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]); }}  >Download All Videos </a></LoadingButton>} 
-      {(photosDownloadResult || detailsList) && <LoadingButton loading={!photosDownloadResult} variant="contained" color='success' target="_blank"  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]) + 'photos'; }}  >Download All Photos</a></LoadingButton>}
+       {/*(photosDownloadResult || detailsList)*/ detailsList && <LoadingButton variant="contained" color='success' target="_blank" style={{margin:'7px'}}  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]); }}  >Download All Videos </a></LoadingButton>} 
+      {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton  variant="contained" color='success' target="_blank" style={{margin:'7px'}}  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]) + 'photos'; }}  >Download All Photos</a></LoadingButton>}
+      </div>
 
     </div>
   )
