@@ -10,6 +10,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { useStopwatch } from 'react-timer-hook';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { v4 as uuidv4 } from 'uuid';
 
 
 import io from 'socket.io-client';
@@ -18,13 +19,8 @@ const socket = io(process.env.REACT_APP_SERVER);
 
 function HomePage() {
   const navigate = useNavigate();
-  //socket
-  const [room, setRoom] = useState("");
-
-  // Messages States
-  const [message, setMessage] = useState("");
-  const [messageReceived, setMessageReceived] = useState("");
-
+  //socket room number 
+  const [requestID, setRequestID] = useState(uuidv4());
 
 
 
@@ -157,6 +153,8 @@ function HomePage() {
         socket={socket}
         setThumbnailProgress={setThumbnailProgress}
         setVideoProgress={setVideoProgress}
+        requestID={requestID}
+        setRequestID={setRequestID}
 
       />
       <Divider style={{ width: '70%', margin: '50px auto' }} />
@@ -175,6 +173,8 @@ function HomePage() {
         setVideoProgress={setVideoProgress}
         singleVideoSize={singleVideoSize}
         setSingleVideoSize={setSingleVideoSize}
+        requestID={requestID}
+        setRequestID={setRequestID}
       />
 
 
