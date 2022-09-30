@@ -157,7 +157,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
       </div>
 
 
-      <div style={{display:'flex', justfiyContent:'center'}} >
+      <div style={{display:'flex', justifyContent:'center'}} >
 
        {/*(photosDownloadResult || detailsList)*/ detailsList && <LoadingButton variant="contained" color='success' target="_blank" style={{margin:'7px'}}  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]); }}  >Download All Videos </a></LoadingButton>} 
       {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton  variant="contained" color='success' target="_blank" style={{margin:'7px'}}  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]) + 'photos'; }}  >Download All Photos</a></LoadingButton>}
