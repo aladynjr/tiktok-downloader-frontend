@@ -95,7 +95,7 @@ function HomePage() {
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '70%', margin: 'auto' }}>
         <div style={{ width: '170px', height: '170px', margin: '0 auto', marginInline: '10px' }}>
 
-          <CircularProgressbarWithChildren value={videoProgress} styles={buildStyles({ pathColor: '#00f2ea		' })}  >
+          <CircularProgressbarWithChildren value={videoProgress} styles={buildStyles({ pathColor: (detailsList || singleVideoSize) ? 'limegreen' : '#00f2ea' })}  >
             {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
             <img style={{ width: 40, marginTop: -5 }} src="https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png" alt="doge" />
             <div style={{ fontSize: 12, marginTop: 5 }}>
@@ -107,7 +107,7 @@ function HomePage() {
 
         <div style={{ width: '170px', height: '170px', margin: '0 auto', marginInline: '10px' }}>
 
-          <CircularProgressbarWithChildren value={thumbnailProgress} styles={buildStyles({ pathColor: '#ff0050	' })} >
+          <CircularProgressbarWithChildren value={thumbnailProgress} styles={buildStyles({ pathColor: ((photosDownloadResult || videoCover) ? 'limegreen' :'#ff0050	') })} >
             {/* Put any JSX content in here that you'd like. It'll be vertically and horizonally centered. */}
             <img style={{ width: 40, marginTop: -5 }} src="https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png" alt="doge" />
             <div style={{ fontSize: 12, marginTop: 5 }}>
