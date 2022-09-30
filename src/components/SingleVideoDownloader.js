@@ -127,7 +127,7 @@ const sendUrlToGetVideo = async (url) => {
         <h3>{singleVideoSize}</h3>
         {/* {videoCover && <b style={{ opacity: '0.5' }} >preview</b>} */}
         {/* {videoCover && <img src={videoCover} alt="cover" height='100' />} */}
-        <div style={{display:'flex', justfiyContent:'center'}} >
+        <div style={{display:'flex', justifyContent:'center'}} >
         {/*(videoCover || singleVideoSize)*/singleVideoSize && <LoadingButton variant="contained" color='success' target="_blank" style={{margin:'7px'}} > <a onClick={() => { window.location = process.env.REACT_APP_SERVER + '/api/single/download/video/' + GetID(mainUrlField); }}  >Download One Video</a></LoadingButton>}
         {/*(videoCover || singleVideoSize)*/videoCover && <LoadingButton variant="contained" color='success' target="_blank"  style={{margin:'7px'}} > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/single/download/photo/' + GetID(mainUrlField)); window.location = process.env.REACT_APP_SERVER + '/api/single/download/photo/' + GetID(mainUrlField); }}  >Download One Photo</a></LoadingButton>}
 
