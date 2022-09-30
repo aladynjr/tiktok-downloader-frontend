@@ -13,15 +13,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
   //const [mainUrlField, setMainUrlField] = useState('');
   const [urlErrorMessage, setUrlErrorMessage] = useState('');
 
-  //JOIN THIS REQUEST'S ROOM 
-  const JoinRoom = (roomNumber) => {
-    socket.emit('join_room', { roomNumber });
-  }
 
-  useEffect(() => {
-    console.log('request id changed with value : ' + requestID)
-    JoinRoom(requestID)
-  }, [requestID])
 
   //RECEIVE SOCKET MESSAGE
    useEffect(() => {
