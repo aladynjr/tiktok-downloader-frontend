@@ -7,15 +7,39 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import GetID from '../utilities/GetID';
 import TiktokUrlValidator from '../utilities/TiktokUrlValidator';
 import DownloadFromLink from '../utilities/DownloadFromLink';
+import { v4 as uuidv4 } from 'uuid';
 
-function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, startSingleDownload, setStartSingleDownload, videoCover, setVideoCover, setSingleDownloadRunning }) {
+function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, startSingleDownload, setStartSingleDownload, videoCover, setVideoCover, setSingleDownloadRunning, socket, setThumbnailProgress, setVideoProgress ,singleVideoSize, setSingleVideoSize }) {
 
-
-  //check if url is valid then send url to backend 
   //const [mainUrlField, setMainUrlField] = useState('');
   const [urlErrorMessage, setUrlErrorMessage] = useState('');
 
+  //JOIN THIS REQUEST'S ROOM 
+  const [requestID, setRequestID] = useState(uuidv4());
+  const JoinRoom = (roomNumber) => {
+    socket.emit('join_room', { roomNumber });
+  }
 
+  useEffect(() => {
+    console.log('request id changed with value : ' + requestID)
+    JoinRoom(requestID)
+  }, [requestID])
+
+  //RECEIVE SOCKET MESSAGE
+   useEffect(() => {
+     socket.on('thumbnailProgress', (data) => {
+     //  console.log('thumbnail  :  ' + data)
+       setThumbnailProgress(data)
+
+     })
+
+     socket.on('videoProgress', (data) => {
+        console.log('video  :  ' + data)
+        setVideoProgress(data)
+      
+      })
+
+   }, [socket])
 
 //send url to get thumbnail
 const sendUrlToGetPhoto = async (url) => {
@@ -26,13 +50,13 @@ const sendUrlToGetPhoto = async (url) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ link: url })
+      body: JSON.stringify({ link: url, requestID: requestID })
     })
 
     const jsonData = await response.json();
 
-    if (jsonData.download == 'success') {
-      setVideoCover(jsonData.cover);
+    if (jsonData.photosDownloadResult == 'success') {
+      setVideoCover(jsonData.videoCover);
 
       console.log('%c success : PHOTO is here !', 'color: green');
       //setSingleDownloadRunning(false)
@@ -45,7 +69,6 @@ const sendUrlToGetPhoto = async (url) => {
 }
 
 //send url to get video
-  const [singleVideoSize, setSingleVideoSize] = useState('')
 
 const sendUrlToGetVideo = async (url) => {
   try {
@@ -60,10 +83,10 @@ const sendUrlToGetVideo = async (url) => {
 
     const jsonData = await response.json();
 
-    if (jsonData.download == 'success') {
+    if (jsonData.videosDownloadResult == 'success') {
       //setVideoCover(jsonData.cover);
       setSingleDownloadRunning(false)
-      setSingleVideoSize(jsonData.progress);
+      setSingleVideoSize(jsonData.size);
 
       console.log('%c success : VIDEO is here !', 'color: green');
     }
@@ -76,6 +99,7 @@ const sendUrlToGetVideo = async (url) => {
 
   //start download button clicked in parent component
   function StartDownloadButtonClicked() {
+    
     setResetResults(true);
     setVideoCover('');
     setSingleVideoSize('');
@@ -113,8 +137,10 @@ const sendUrlToGetVideo = async (url) => {
         <h3>{singleVideoSize}</h3>
         {videoCover && <b style={{ opacity: '0.5' }} >preview</b>}
         {videoCover && <img src={videoCover} alt="cover" width='320' />}
-        {videoCover && <LoadingButton variant="contained" color='success' target="_blank" loading={!singleVideoSize}  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/single/download/' + GetID(mainUrlField)); window.location = process.env.REACT_APP_SERVER + '/api/single/download/' + GetID(mainUrlField); }}  >Download One Video</a></LoadingButton>}
-        {videoCover && <Button variant="contained" color='success'  > <a onClick={() => DownloadFromLink(videoCover, videoCover + '.png')}  >Download Thumbnail</a></Button>}
+        {(videoCover || singleVideoSize) && <LoadingButton variant="contained" color='success' target="_blank" loading={!singleVideoSize}  > <a onClick={() => { window.location = process.env.REACT_APP_SERVER + '/api/single/download/video/' + GetID(mainUrlField); }}  >Download One Video</a></LoadingButton>}
+        {(videoCover || singleVideoSize) && <LoadingButton variant="contained" color='success' target="_blank" loading={!videoCover}  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/single/download/photo/' + GetID(mainUrlField)); window.location = process.env.REACT_APP_SERVER + '/api/single/download/photo/' + GetID(mainUrlField); }}  >Download One Photo</a></LoadingButton>}
+
+        {/* {videoCover && <Button variant="contained" color='success'  > <a onClick={() => DownloadFromLink(videoCover, videoCover + '.png')}  >Download Thumbnail</a></Button>} */}
       </div>
     </div>
   )

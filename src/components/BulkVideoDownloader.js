@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
+import { Button, buttonBaseClasses } from '@mui/material';
 import GetID from '../utilities/GetID';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { FaPlay } from 'react-icons/fa'
+import { v4 as uuidv4 } from 'uuid';
 
 
-function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, startBulkDownload, setStartBulkDownload, setBulkDownloadRunning, detailsList, setDetailsList,photosDownloadResult, setPhotosDownloadResult }) {
+function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, startBulkDownload, setStartBulkDownload, bulkDownloadRunning, setBulkDownloadRunning, detailsList, setDetailsList, photosDownloadResult, setPhotosDownloadResult, socket, setThumbnailProgress, setVideoProgress }) {
 
   // const [setMainUrlField, setMainUrlField] = useState(``);
 
@@ -22,14 +23,41 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
       }
     })
     setTiktokBulkUrls(cleanTiktokBulkUrls);
-    sendUrlsToGetPhotos(cleanTiktokBulkUrls)
+    sendUrlsToGetPhotos(cleanTiktokBulkUrls);
+    sendUrlsToGetVideos(cleanTiktokBulkUrls);
+  }
+  const [donePhotos, setDonePhotos] = useState([])
 
+  //JOIN THIS REQUEST'S ROOM 
+const [requestID, setRequestID] = useState(uuidv4());
+  const JoinRoom = (roomNumber) => {
+    socket.emit('join_room', { roomNumber });
   }
 
+  useEffect(() => {
+    console.log('request id changed with value : ' + requestID)
+    JoinRoom(requestID)
+  }, [requestID])
 
+  //RECEIVE SOCKET MESSAGE
+   useEffect(() => {
+     socket.on('thumbnailProgress', (data) => {
+       console.log(data)
+       setThumbnailProgress(data)
 
+     })
+
+     socket.on('videoProgress', (data) => {
+    //    console.log(data)
+        setVideoProgress(data)
+      
+      })
+
+   }, [socket])
+
+  //SEND URL TO GET PHOTOS 
   const sendUrlsToGetPhotos = async (urls) => {
-    console.log('%c sent urls', 'color: blue')
+    console.log('%c sent urls to get photos', 'color: blue')
     try {
       let response = await fetch(process.env.REACT_APP_SERVER + '/api/bulk/urls/photos', {
         method: 'POST',
@@ -37,7 +65,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ links: urls })
+        body: JSON.stringify({ links: urls, requestID: requestID })
       })
 
       const jsonData = await response.json();
@@ -60,26 +88,28 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   }
 
 
-  const sendUrls = async (urls) => {
-    console.log('%c sent urls', 'color: blue')
+
+
+  const sendUrlsToGetVideos = async (urls) => {
+    console.log('%c sent urls to get videos', 'color: blue')
     try {
-      let response = await fetch(process.env.REACT_APP_SERVER + '/api/bulk/urls', {
+      let response = await fetch(process.env.REACT_APP_SERVER + '/api/bulk/urls/videos', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ links: urls })
+        body: JSON.stringify({ links: urls, requestID: requestID })
       })
 
       const jsonData = await response.json();
 
-      if (jsonData.download == 'success') {
+      if (jsonData.videosDownloadResult == 'success') {
         //setVideoCover(jsonData.cover);
         setDetailsList(jsonData.detailsList);
         setBulkDownloadRunning(false)
 
-        console.log('%c success : video downlaoded to server !', 'color: green');
+        console.log('%c success : videos downloaded to server !', 'color: green');
 
       }
 
@@ -93,6 +123,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
   //start download button clicked in parent component
   function StartDownloadButtonClicked() {
+    setPhotosDownloadResult(null)
     setResetResults(true);
     setDetailsList(null);
     setBulkDownloadRunning(true);
@@ -106,32 +137,38 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
     setStartBulkDownload(false)
   }, [startBulkDownload])
 
-  
+
   //reset when starting again in parent component
   useEffect(() => {
     if (resetResults) {
+      setPhotosDownloadResult(null)
       setDetailsList(null)
       setResetResults(false)
+      setVideoProgress(0)
+      setThumbnailProgress(0)
     }
   }, [resetResults])
 
+
+
   return (
     <div>
-
 
       <div>
         {detailsList && detailsList.map((details, i) => {
 
           return (
             <p key={i}>
-              <b>{details.title}</b>-<b>{details.author}</b>
+              <b>{details.author}</b> - <b>{details.title}</b> - <b>{details.id}</b>
             </p>
           )
         })}
       </div>
 
-      {/* {detailsList && <Button variant="contained" color='success' target="_blank"  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]); }}  >Download All Videos </a></Button>} */}
-      {photosDownloadResult && <Button variant="contained" color='success' target="_blank"  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]) + 'photos'; }}  >Download All Photos</a></Button>}
+
+
+       {(photosDownloadResult || detailsList) && <LoadingButton loading={!detailsList} variant="contained" color='success' target="_blank"  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]); }}  >Download All Videos </a></LoadingButton>} 
+      {(photosDownloadResult || detailsList) && <LoadingButton loading={!photosDownloadResult} variant="contained" color='success' target="_blank"  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]) + 'photos'; }}  >Download All Photos</a></LoadingButton>}
 
     </div>
   )
