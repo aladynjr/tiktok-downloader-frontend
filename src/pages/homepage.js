@@ -19,9 +19,19 @@ const socket = io(process.env.REACT_APP_SERVER);
 
 function HomePage() {
   const navigate = useNavigate();
-  //socket room number 
+  //SOCKET IO  
   const [requestID, setRequestID] = useState(uuidv4());
 
+
+  //JOIN THIS REQUEST'S ROOM 
+  const JoinRoom = (roomNumber) => {
+    socket.emit('join_room', { roomNumber });
+  }
+
+  useEffect(() => {
+    console.log('request id changed with value : ' + requestID)
+    JoinRoom(requestID)
+  }, [requestID])
 
 
   const [mainUrlField, setMainUrlField] = useState('')
