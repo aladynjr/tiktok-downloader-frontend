@@ -14,7 +14,7 @@ import 'react-circular-progressbar/dist/styles.css';
 
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:8080');
+const socket = io(process.env.REACT_APP_SERVER);
 
 function HomePage() {
   const navigate = useNavigate();
