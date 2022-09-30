@@ -7,7 +7,7 @@ import { FaPlay } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid';
 
 
-function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, startBulkDownload, setStartBulkDownload, bulkDownloadRunning, setBulkDownloadRunning, detailsList, setDetailsList, photosDownloadResult, setPhotosDownloadResult, socket, setThumbnailProgress, setVideoProgress }) {
+function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, startBulkDownload, setStartBulkDownload, bulkDownloadRunning, setBulkDownloadRunning, detailsList, setDetailsList, photosDownloadResult, setPhotosDownloadResult, socket, setThumbnailProgress, setVideoProgress, requestID, setRequestID }) {
 
   // const [setMainUrlField, setMainUrlField] = useState(``);
 
@@ -29,7 +29,6 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   const [donePhotos, setDonePhotos] = useState([])
 
   //JOIN THIS REQUEST'S ROOM 
-const [requestID, setRequestID] = useState(uuidv4());
   const JoinRoom = (roomNumber) => {
     socket.emit('join_room', { roomNumber });
   }

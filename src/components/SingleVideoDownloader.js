@@ -7,15 +7,13 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import GetID from '../utilities/GetID';
 import TiktokUrlValidator from '../utilities/TiktokUrlValidator';
 import DownloadFromLink from '../utilities/DownloadFromLink';
-import { v4 as uuidv4 } from 'uuid';
 
-function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, startSingleDownload, setStartSingleDownload, videoCover, setVideoCover, setSingleDownloadRunning, socket, setThumbnailProgress, setVideoProgress ,singleVideoSize, setSingleVideoSize }) {
+function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, startSingleDownload, setStartSingleDownload, videoCover, setVideoCover, setSingleDownloadRunning, socket, setThumbnailProgress, setVideoProgress ,singleVideoSize, setSingleVideoSize, requestID, setRequestID }) {
 
   //const [mainUrlField, setMainUrlField] = useState('');
   const [urlErrorMessage, setUrlErrorMessage] = useState('');
 
   //JOIN THIS REQUEST'S ROOM 
-  const [requestID, setRequestID] = useState(uuidv4());
   const JoinRoom = (roomNumber) => {
     socket.emit('join_room', { roomNumber });
   }
