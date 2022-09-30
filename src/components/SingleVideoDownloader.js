@@ -34,7 +34,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
      })
 
      socket.on('videoProgress', (data) => {
-        console.log('video  :  ' + data)
+       // console.log('video  :  ' + data)
         setVideoProgress(data)
       
       })

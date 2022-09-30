@@ -73,7 +73,7 @@ const [requestID, setRequestID] = useState(uuidv4());
       if (jsonData.photosDownloadResult == 'success') {
         //setVideoCover(jsonData.cover);
         setPhotosDownloadResult(jsonData.photosDownloadResult);
-        setBulkDownloadRunning(false)
+       // setBulkDownloadRunning(false)
 
         console.log('%c success : PHOTOS downlaoded to server !', 'color: green');
 
