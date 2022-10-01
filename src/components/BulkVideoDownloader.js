@@ -47,6 +47,8 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
    }, [socket])
 
   //SEND URL TO GET PHOTOS 
+  const [responseID, setResponseID] = useState('')
+
   const sendUrlsToGetPhotos = async (urls) => {
     console.log('%c sent urls to get photos', 'color: blue')
     try {
@@ -64,6 +66,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
       if (jsonData.photosDownloadResult == 'success') {
         //setVideoCover(jsonData.cover);
         setPhotosDownloadResult(jsonData.photosDownloadResult);
+        setResponseID(jsonData.id)
        // setBulkDownloadRunning(false)
 
         console.log('%c success : PHOTOS downlaoded to server !', 'color: green');
@@ -99,6 +102,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
         //setVideoCover(jsonData.cover);
         setDetailsList(jsonData.detailsList);
         setBulkDownloadRunning(false)
+        setResponseID(jsonData.id)
 
         console.log('%c success : videos downloaded to server !', 'color: green');
 
@@ -159,8 +163,8 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
       <div style={{display:'flex', justifyContent:'center'}} >
 
-       {/*(photosDownloadResult || detailsList)*/ detailsList && <LoadingButton variant="contained" color='success' target="_blank" style={{margin:'7px'}}  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]); }}  >Download All Videos </a></LoadingButton>} 
-      {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton  variant="contained" color='success' target="_blank" style={{margin:'7px'}}  > <a onClick={() => { console.log(process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0])); window.location = process.env.REACT_APP_SERVER + '/api/bulk/download/' + GetID(tiktokBulkUrls[0]) + 'photos'; }}  >Download All Photos</a></LoadingButton>}
+       {/*(photosDownloadResult || detailsList)*/ detailsList && <LoadingButton variant="contained" color='success' style={{margin:'7px'}}  > <a target="_blank" style={{ textDecoration: 'none', color:'white' }} href={  process.env.REACT_APP_SERVER + '/api/bulk/download/' + responseID}  >Download All Videos </a></LoadingButton>} 
+      {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton  variant="contained" color='success' style={{margin:'7px'}}  > <a target="_blank" style={{ textDecoration: 'none', color:'white' }} href={  process.env.REACT_APP_SERVER + '/api/bulk/download/' + responseID + 'photos' }  >Download All Photos</a></LoadingButton>}
       </div>
 
     </div>
