@@ -12,7 +12,7 @@ import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-pro
 import 'react-circular-progressbar/dist/styles.css';
 import { v4 as uuidv4 } from 'uuid';
 import { BsImage, BsCameraVideoFill } from 'react-icons/bs'
-
+import Footer from '../components/Footer';
 import io from 'socket.io-client';
 
 const socket = io(process.env.REACT_APP_SERVER);
@@ -206,8 +206,8 @@ function HomePage() {
 
 
 
-
-
+<div style={{marginTop:'260px'}} ></div>
+<Footer />
     </div>
   )
 }
