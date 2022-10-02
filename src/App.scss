@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 .tiktoklogo {
   font-size: 50px;
   position: relative;
@@ -13,4 +14,42 @@
   position: absolute;
   left: 2px;
   top: 5px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: fit-content;
+  line-height: 60px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  //add linear gradeint background 
+  background: linear-gradient(180deg, #252e69 0%, #29358f 100%);
+  color: #fff;
+  margin-bottom: -200px;
+}
+
+/* // Simple Scroll */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 0, 0, .9);
 }
