@@ -162,7 +162,7 @@ useEffect(() => {
 
           <div style={{ display: 'flex', flexDirection: 'column' }} >
             {/*(videoCover || singleVideoSize)*/singleVideoSize && <LoadingButton endIcon={<FiDownload />} variant="contained" color='success' style={{ margin: '7px' }} > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + responseID}  >Download Video</a></LoadingButton>}
-            {((singleDownloadRunning || singleVideoSize ) && !hideVideoProgress) && <div className='ProgressContainer' > <VideoProgressBar videoProgress={videoProgress}  singleVideoSize={singleVideoSize} /></div>}
+            {((singleDownloadRunning || singleVideoSize ) && !hideVideoProgress) && <div className='SingleProgressContainer' > <VideoProgressBar videoProgress={videoProgress}  singleVideoSize={singleVideoSize} /></div>}
 
             {(singleDownloadRunning && !singleVideoSize) && <Skeleton style={{ backgroundColor: '#f5f5f55c' }} variant="rectangular" width={400} height={700} />}
 
@@ -176,7 +176,7 @@ useEffect(() => {
 
           <div style={{ display: 'flex', flexDirection: 'column' }} >
             {/*(videoCover || singleVideoSize)*/videoCover && <LoadingButton endIcon={<FiDownload />} variant="contained" color='success' style={{ margin: '7px' }} > <a target="_blank " style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + responseID}  >Download Thumbnail</a></LoadingButton>}
-            {((singleDownloadRunning || videoCover) && !hideCoverProgress) &&<div className='ProgressContainer' ><CoverProgressBar thumbnailProgress={thumbnailProgress}  videoCover={videoCover} /> </div>}
+            {((singleDownloadRunning || videoCover) && !hideCoverProgress) &&<div className='SingleProgressContainer' ><CoverProgressBar thumbnailProgress={thumbnailProgress}  videoCover={videoCover} /> </div>}
 
             {(singleDownloadRunning && !videoCover) && <Skeleton style={{ backgroundColor: '#f5f5f55c' }} variant="rectangular" width={400} height={700} />}
             {videoCover && <img src={videoCover} width="400" />}
