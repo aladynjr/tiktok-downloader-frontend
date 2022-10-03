@@ -8,6 +8,7 @@ import {AiOutlineDown} from 'react-icons/ai'
 export default function FAQ() {
   return (
     <div style={{maxWidth:'1000px', margin:'50px auto'}} >
+        <h1 style={{color:'white'}} >FREQUENTLY ASKED QUESTIONS</h1>
       <Accordion TransitionProps={{ unmountOnExit: true }}  className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}

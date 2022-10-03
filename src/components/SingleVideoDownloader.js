@@ -161,28 +161,28 @@ useEffect(() => {
 
 
 
-        <div style={{ display: 'flex', justifyContent: 'center', justifyContent: 'space-evenly', width: '100%', flexWrap: "wrap" }} >
+        <div style={{ display: 'flex', justifyContent: 'center', justifyContent: 'center', width: '80%', flexWrap: "wrap", padding:'30px' }} >
 
-          <div style={{ display: 'flex', flexDirection: 'column' }} >
-            {/*(videoCover || singleVideoSize)*/singleVideoSize && <LoadingButton endIcon={<FiDownload style={{color:'white'}} />} variant="contained" color='success' style={{ margin: '7px' }} > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + videoFilename}  >Download Video</a></LoadingButton>}
+          <div style={{ display: 'flex', flexDirection: 'column', marginInline:'55px' }} >
             {((singleDownloadRunning || singleVideoSize ) && !hideVideoProgress) && <div className='SingleProgressContainer' > <VideoProgressBar videoProgress={videoProgress}  singleVideoSize={singleVideoSize} /></div>}
 
             {(singleDownloadRunning && !singleVideoSize) && <Skeleton style={{ backgroundColor: '#f5f5f55c' }} variant="rectangular" width={400} height={700} />}
 
-            {singleVideoSize && <video style={{width:'400px', maxWidth:'90vw'}} controls>
+            {singleVideoSize && <video style={{width:'400px', maxWidth:'80vw'}} controls>
               <source src={process.env.REACT_APP_SERVER + '/api/single/display/video/' + videoFilename} type="video/mp4" />
               Your browser does not support HTML video.
             </video>}
-            <h3 style={{color:'whitesmoke'}} >{singleVideoSize}</h3>
+            {/*(videoCover || singleVideoSize)*/singleVideoSize && <LoadingButton endIcon={<FiDownload style={{color:'white'}} />} variant="contained" color='success' style={{ margin: '7px' }} > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + videoFilename}  >Download Video</a></LoadingButton>}
+            {/* <h3 style={{color:'whitesmoke'}} >{singleVideoSize}</h3> */}
 
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column' }} >
-            {/*(videoCover || singleVideoSize)*/videoCover && <LoadingButton endIcon={<FiDownload style={{color:'white'}} />} variant="contained" color='success' style={{ margin: '7px' }} > <a target="_blank " style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + photoFilename}  >Download Thumbnail</a></LoadingButton>}
+          <div style={{ display: 'flex', flexDirection: 'column', marginInline:'55px' }} >
             {((singleDownloadRunning || videoCover) && !hideCoverProgress) &&<div className='SingleProgressContainer' ><CoverProgressBar thumbnailProgress={thumbnailProgress}  videoCover={videoCover} /> </div>}
 
             {(singleDownloadRunning && !videoCover) && <Skeleton style={{ backgroundColor: '#f5f5f55c' }} variant="rectangular" width={400} height={700} />}
-            {videoCover && <img src={videoCover} style={{width:'400px', maxWidth:'90vw'}} />}
+            {videoCover && <img src={videoCover} style={{width:'400px', maxWidth:'80vw'}} />}
+            {/*(videoCover || singleVideoSize)*/videoCover && <LoadingButton endIcon={<FiDownload style={{color:'white'}} />} variant="contained" color='success' style={{ margin: '7px' }} > <a target="_blank " style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + photoFilename}  >Download Thumbnail</a></LoadingButton>}
           </div>
 
         </div>
