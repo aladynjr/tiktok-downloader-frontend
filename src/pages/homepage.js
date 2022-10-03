@@ -64,9 +64,9 @@ useEffect(()=>{
       cleanTiktokBulkUrls.push(line);
     }
   })
-  if(cleanTiktokBulkUrls.length >= 1){
+  if(cleanTiktokBulkUrls[0]?.includes('tiktok.com/t') || cleanTiktokBulkUrls[0]?.includes('vm.tiktok.com') || cleanTiktokBulkUrls[0]?.includes('www.tiktok.com/@')){
     setRequestID(GetID(cleanTiktokBulkUrls[0]))
-
+    //check if it contains a tiktok url 
   }
 },[mainUrlField])
 
