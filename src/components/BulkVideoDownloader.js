@@ -5,9 +5,12 @@ import GetID from '../utilities/GetID';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { FaPlay } from 'react-icons/fa'
 import { v4 as uuidv4 } from 'uuid';
+import { FiDownload } from 'react-icons/fi'
+import VideoProgressBar from './VideoProgressBar';
+import CoverProgressBar from './CoverProgressBar';
+import Skeleton from '@mui/material/Skeleton';
 
-
-function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, startBulkDownload, setStartBulkDownload, bulkDownloadRunning, setBulkDownloadRunning, detailsList, setDetailsList, photosDownloadResult, setPhotosDownloadResult, socket, setThumbnailProgress, setVideoProgress, requestID, setRequestID }) {
+function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, startBulkDownload, setStartBulkDownload, bulkDownloadRunning, setBulkDownloadRunning, detailsList, setDetailsList, photosDownloadResult, setPhotosDownloadResult, socket, thumbnailProgress, setThumbnailProgress, videoProgress, setVideoProgress, requestID, setRequestID }) {
 
   // const [setMainUrlField, setMainUrlField] = useState(``);
 
@@ -31,23 +34,23 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
 
   //RECEIVE SOCKET MESSAGE
-   useEffect(() => {
-     socket.on('thumbnailProgress', (data) => {
+  useEffect(() => {
+    socket.on('thumbnailProgress', (data) => {
       console.log('thumbnail  :  ' + data)
       setThumbnailProgress(data)
 
-     })
+    })
 
-     socket.on('videoProgress', (data) => {
+    socket.on('videoProgress', (data) => {
       console.log('video  :  ' + data)
       setVideoProgress(data)
-      
-      })
 
-   }, [socket])
+    })
+
+  }, [socket])
 
   //SEND URL TO GET PHOTOS 
-  const [responseID, setResponseID] = useState('')
+  const [photosFolderName, setPhotosFolderName] = useState('')
 
   const sendUrlsToGetPhotos = async (urls) => {
     console.log('%c sent urls to get photos', 'color: blue')
@@ -66,8 +69,11 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
       if (jsonData.photosDownloadResult == 'success') {
         //setVideoCover(jsonData.cover);
         setPhotosDownloadResult(jsonData.photosDownloadResult);
-        setResponseID(jsonData.id)
-       // setBulkDownloadRunning(false)
+        setPhotosFolderName(jsonData.photosFolderName)
+
+        setDetailsList(jsonData.detailsList);
+
+        // setBulkDownloadRunning(false)
 
         console.log('%c success : PHOTOS downlaoded to server !', 'color: green');
 
@@ -81,8 +87,8 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
     }
   }
 
-
-
+  const [videosFolderName, setVideosFolderName] = useState('')
+  console.log({videosFolderName})
 
   const sendUrlsToGetVideos = async (urls) => {
     console.log('%c sent urls to get videos', 'color: blue')
@@ -100,9 +106,8 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
       if (jsonData.videosDownloadResult == 'success') {
         //setVideoCover(jsonData.cover);
-        setDetailsList(jsonData.detailsList);
         setBulkDownloadRunning(false)
-        setResponseID(jsonData.id)
+        setVideosFolderName(jsonData.videosFolderName)
 
         console.log('%c success : videos downloaded to server !', 'color: green');
 
@@ -115,10 +120,12 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
     }
   }
-
+  console.log({ detailsList })
   //start download button clicked in parent component
   function StartDownloadButtonClicked() {
     setPhotosDownloadResult(null)
+    setPhotosFolderName('')
+      setVideosFolderName('')
     setResetResults(true);
     setDetailsList(null);
     setBulkDownloadRunning(true);
@@ -137,6 +144,9 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   useEffect(() => {
     if (resetResults) {
       setPhotosDownloadResult(null)
+      setPhotosFolderName('')
+      setVideosFolderName('')
+
       setDetailsList(null)
       setResetResults(false)
       setVideoProgress(0)
@@ -149,23 +159,44 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   return (
     <div>
 
+      <div style={{ display: 'flex', justifyContent: 'center', flexWrap:"wrap" }} >
+        <div>
+
+          {/*(photosDownloadResult || detailsList)*/ (videosFolderName) && <LoadingButton endIcon={<FiDownload />} variant="contained" color='success' style={{ margin: '7px' }}  > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}  >Download All Videos </a></LoadingButton>}
+         <div style={{margin:'20px'}}  >
+
+          {(bulkDownloadRunning && !videosFolderName  ) && <div className='BulkProgressContainer' style={{    marginLeft: '-6px'}} > <VideoProgressBar videoProgress={videoProgress} detailsList={videosFolderName} /></div>}
+          {(bulkDownloadRunning && !videosFolderName ) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginTop:'-200px', marginRight:'-5px' }} variant="rectangular" width={200} height={200} />}
+         </div>
+        </div>
+        <div>
+
+          {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton endIcon={<FiDownload />} variant="contained" color='success' style={{ margin: '7px' }}  > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}  >Download All Photos</a></LoadingButton>}
+        
+        <div style={{margin:'20px'}} >
+
+          {(bulkDownloadRunning && !photosDownloadResult ) && <div className='BulkProgressContainer' style={{    marginLeft: '-6px'}} ><CoverProgressBar thumbnailProgress={thumbnailProgress} photosDownloadResult={photosDownloadResult} /> </div>}
+          {(bulkDownloadRunning && !photosDownloadResult) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginTop:'-200px' , marginRight:'-5px'}} variant="rectangular" width={200} height={200} />}
+
+        </div>
+
+        </div>
+      </div>
+
       <div>
-        {detailsList && detailsList.map((details, i) => {
+        {detailsList && detailsList.map((detail, i) => {
 
           return (
-            <p key={i}>
-              <b>{details.author}</b> - <b>{details.title}</b> - <b>{details.id}</b>
-            </p>
+            <div key={i} style={{ backgroundColor: 'whitesmoke', padding: '10px', borderRadius: '10px', width: 'fit-content', margin: 'auto', marginTop: '25px' }} >
+              <b> {detail.title}</b>
+              <p style={{ fontSize: '12px' }} >ID : {detail.id}</p>
+              <img src={detail.cover} style={{ width: 'fit-content', maxWidth: '90vw' }} />
+            </div>
           )
         })}
       </div>
 
 
-      <div style={{display:'flex', justifyContent:'center'}} >
-
-       {/*(photosDownloadResult || detailsList)*/ detailsList && <LoadingButton variant="contained" color='success' style={{margin:'7px'}}  > <a target="_blank" style={{ textDecoration: 'none', color:'white' }} href={  process.env.REACT_APP_SERVER + '/api/bulk/download/' + responseID}  >Download All Videos </a></LoadingButton>} 
-      {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton  variant="contained" color='success' style={{margin:'7px'}}  > <a target="_blank" style={{ textDecoration: 'none', color:'white' }} href={  process.env.REACT_APP_SERVER + '/api/bulk/download/' + responseID + 'photos' }  >Download All Photos</a></LoadingButton>}
-      </div>
 
     </div>
   )
