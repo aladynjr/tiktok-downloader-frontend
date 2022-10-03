@@ -57,10 +57,11 @@
 
 
 .HomepageContainer {
-    transition: all .5s;
+   // transition: all .5s;
+   background: linear-gradient(180deg, #6f0bfb 0%, #962fee 100%);
 
   //set svg background photo from assets folder bg.svg
-  background-image: url('./assets/bg.svg');
+ // background-image: url('./assets/bg.svg');
   background-repeat: no-repeat;
   //background-size: 100%;
   //set backgorund height to fit the screen 
@@ -123,3 +124,10 @@ h1 {
     margin-top: 167px;
 }
 
+.FaqAccordion {
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741));
+  //background: linear-gradient(45deg, #dbc1ff 0%, rgba(238, 47, 212, 0.61) 100%);
+
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}

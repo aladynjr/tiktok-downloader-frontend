@@ -18,6 +18,10 @@ import Footer from '../components/Footer';
 import io from 'socket.io-client';
 import { MdContentPaste } from 'react-icons/md'
 import GetID from '../utilities/GetID';
+
+import {BsFillCaretDownFill} from 'react-icons/bs'
+import {FiDownload} from 'react-icons/fi'
+import FAQ from '../components/FAQ';
 const socket = io(process.env.REACT_APP_SERVER);
 
 function HomePage() {
@@ -129,7 +133,7 @@ useEffect(()=>{
 
 
 
-          <div style={{ marginBlock: '20px' }} className='maininputfield' >
+          <div style={{ width:'80%', maxWidth:'1000px', margin:'20px auto' }} className='maininputfield' >
             <OutlinedInput
               id="outlined-multiline-flexible"
               placeholder={`Enter TikTok Url(s) Here
@@ -155,20 +159,20 @@ www.tiktok.com/t/ZTlmHPdAS
             onClick={() => { Paste() }} >Paste <MdContentPaste style={{ fontSize: '18px' }} /> </Button>
 
           <div  >
-            {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FaPlay />} sx={{ padding: '14px 50px', marginTop: '-55px' }} loading={!videoCover && !singleVideoSize && singleDownloadRunning}
+            {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FiDownload style={{fontSize:'25px'}} />} sx={{ padding: '14px 50px', marginTop: '-55px', textTransform:'none' }} loading={!videoCover && !singleVideoSize && singleDownloadRunning}
               onClick={() => {
                 JoinRoom(requestID)
                 setStartSingleDownload(true)
-              }}  >Start</LoadingButton>}
+              }}  >Download</LoadingButton>}
           </div>
 
           <div  >
-            {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 50px', marginTop: '-55px' }}
+            {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 50px', marginTop: '-55px', textTransform:'none'  }}
               onClick={() => {
                 JoinRoom(requestID)
                 setStartBulkDownload(true);
                 setPhotosDownloadResult(false)
-              }} endIcon={<FaPlay />} loading={bulkDownloadRunning && !detailsList} >Start</LoadingButton >}
+              }} endIcon={<FiDownload style={{fontSize:'25px'}} />} loading={bulkDownloadRunning && !detailsList} >Download</LoadingButton >}
           </div>
 
         </div>
@@ -226,7 +230,7 @@ www.tiktok.com/t/ZTlmHPdAS
         />
 
 
-
+<FAQ />
 
         {/* <div style={{ marginTop: '500px' }} ></div> */}
         <Footer />
