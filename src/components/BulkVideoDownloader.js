@@ -10,7 +10,7 @@ import VideoProgressBar from './VideoProgressBar';
 import CoverProgressBar from './CoverProgressBar';
 import Skeleton from '@mui/material/Skeleton';
 
-function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, startBulkDownload, setStartBulkDownload, bulkDownloadRunning, setBulkDownloadRunning, detailsList, setDetailsList, photosDownloadResult, setPhotosDownloadResult, socket, thumbnailProgress, setThumbnailProgress, videoProgress, setVideoProgress, requestID, setRequestID }) {
+function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, startBulkDownload, setStartBulkDownload, bulkDownloadRunning, setBulkDownloadRunning, detailsList, setDetailsList, photosDownloadResult, setPhotosDownloadResult, socket, thumbnailProgress, setThumbnailProgress, videoProgress, setVideoProgress, requestID, setRequestID, setSingleDownloadRunning }) {
 
   // const [setMainUrlField, setMainUrlField] = useState(``);
 
@@ -123,6 +123,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   console.log({ detailsList })
   //start download button clicked in parent component
   function StartDownloadButtonClicked() {
+    setSingleDownloadRunning(false)
     setPhotosDownloadResult(null)
     setPhotosFolderName('')
       setVideosFolderName('')
@@ -146,7 +147,6 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
       setPhotosDownloadResult(null)
       setPhotosFolderName('')
       setVideosFolderName('')
-
       setDetailsList(null)
       setResetResults(false)
       setVideoProgress(0)

@@ -77,6 +77,7 @@ useEffect(()=>{
   //Start Single Download 
   const [startSingleDownload, setStartSingleDownload] = useState(false)
   const [singleDownloadRunning, setSingleDownloadRunning] = useState(false)
+  console.log({singleDownloadRunning})
   const [videoCover, setVideoCover] = useState('')
   const [singleVideoSize, setSingleVideoSize] = useState('')
 
@@ -198,6 +199,7 @@ www.tiktok.com/t/ZTlmHPdAS
           setVideoProgress={setVideoProgress}
           requestID={requestID}
           setRequestID={setRequestID}
+          setSingleDownloadRunning={setSingleDownloadRunning}
 
         />
         {/* <Divider style={{ width: '70%', margin: '50px auto' }} /> */}
