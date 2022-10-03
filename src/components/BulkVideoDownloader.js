@@ -162,7 +162,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
       <div style={{ display: 'flex', justifyContent: 'center', flexWrap:"wrap" }} >
         <div>
 
-          {/*(photosDownloadResult || detailsList)*/ (videosFolderName) && <LoadingButton endIcon={<FiDownload />} variant="contained" color='success' style={{ margin: '7px' }}  > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}  >Download All Videos </a></LoadingButton>}
+          {/*(photosDownloadResult || detailsList)*/ (videosFolderName) && <LoadingButton endIcon={<FiDownload style={{color:'white'}} />} variant="contained" color='success' style={{ margin: '7px' }}  > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}  >Download All Videos </a></LoadingButton>}
          <div style={{margin:'20px'}}  >
 
           {(bulkDownloadRunning && !videosFolderName  ) && <div className='BulkProgressContainer' style={{    marginLeft: '-6px'}} > <VideoProgressBar videoProgress={videoProgress} detailsList={videosFolderName} /></div>}
@@ -171,7 +171,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
         </div>
         <div>
 
-          {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton endIcon={<FiDownload />} variant="contained" color='success' style={{ margin: '7px' }}  > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}  >Download All Photos</a></LoadingButton>}
+          {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton endIcon={<FiDownload style={{color:'white'}} />} variant="contained" color='success' style={{ margin: '7px' }}  > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}  >Download All Photos</a></LoadingButton>}
         
         <div style={{margin:'20px'}} >
 
@@ -183,14 +183,15 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
         </div>
       </div>
 
-      <div>
+      <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center'}} >
         {detailsList && detailsList.map((detail, i) => {
 
           return (
-            <div key={i} style={{ backgroundColor: 'whitesmoke', padding: '10px', borderRadius: '10px', width: 'fit-content', margin: 'auto', marginTop: '25px' }} >
+            <div key={i} 
+            style={{ backgroundColor: 'whitesmoke', padding: '10px', borderRadius: '10px', width: 'fit-content',margin: '25px' }} >
               <b> {detail.title}</b>
               <p style={{ fontSize: '12px' }} >ID : {detail.id}</p>
-              <img src={detail.cover} style={{ width: 'fit-content', maxWidth: '90vw' }} />
+              <img src={detail.cover} style={{ width: '170px' }} />
             </div>
           )
         })}
