@@ -185,11 +185,14 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
       <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center'}} >
         {detailsList && detailsList.map((detail, i) => {
-
+          var Title = detail.title.toString();
+          if(Title.length >20){
+            Title = Title.substring(0,20) + '...'
+          }
           return (
             <div key={i} 
             style={{ backgroundColor: 'whitesmoke', padding: '10px', borderRadius: '10px', width: 'fit-content',margin: '25px' }} >
-              <b> {detail.title}</b>
+              <b> {Title}</b>
               <p style={{ fontSize: '12px' }} >ID : {detail.id}</p>
               <img src={detail.cover} style={{ width: '170px' }} />
             </div>

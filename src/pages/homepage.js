@@ -18,9 +18,10 @@ import Footer from '../components/Footer';
 import io from 'socket.io-client';
 import { MdContentPaste } from 'react-icons/md'
 import GetID from '../utilities/GetID';
+import TextareaAutosize from 'react-textarea-autosize';
 
-import {BsFillCaretDownFill} from 'react-icons/bs'
-import {FiDownload} from 'react-icons/fi'
+import { BsFillCaretDownFill } from 'react-icons/bs'
+import { FiDownload } from 'react-icons/fi'
 import FAQ from '../components/FAQ';
 const socket = io(process.env.REACT_APP_SERVER);
 
@@ -28,7 +29,7 @@ function HomePage() {
   const navigate = useNavigate();
   //SOCKET IO  
   const [requestID, setRequestID] = useState();
-console.log('requestID  :  ' + requestID)
+  console.log('requestID  :  ' + requestID)
 
   //JOIN THIS REQUEST'S ROOM 
   const JoinRoom = (roomNumber) => {
@@ -60,19 +61,19 @@ console.log('requestID  :  ' + requestID)
     }
   }
 
-useEffect(()=>{
-  let lines = mainUrlField.split(/\r?\n/);
-  let cleanTiktokBulkUrls = [];
-  lines.map((line) => {
-    if (line !== "") {
-      cleanTiktokBulkUrls.push(line);
+  useEffect(() => {
+    let lines = mainUrlField.split(/\r?\n/);
+    let cleanTiktokBulkUrls = [];
+    lines.map((line) => {
+      if (line !== "") {
+        cleanTiktokBulkUrls.push(line);
+      }
+    })
+    if (cleanTiktokBulkUrls[0]?.includes('tiktok.com/t') || cleanTiktokBulkUrls[0]?.includes('vm.tiktok.com') || cleanTiktokBulkUrls[0]?.includes('www.tiktok.com/@')) {
+      setRequestID(GetID(cleanTiktokBulkUrls[0]))
+      //check if it contains a tiktok url 
     }
-  })
-  if(cleanTiktokBulkUrls[0]?.includes('tiktok.com/t') || cleanTiktokBulkUrls[0]?.includes('vm.tiktok.com') || cleanTiktokBulkUrls[0]?.includes('www.tiktok.com/@')){
-    setRequestID(GetID(cleanTiktokBulkUrls[0]))
-    //check if it contains a tiktok url 
-  }
-},[mainUrlField])
+  }, [mainUrlField])
 
   const throttledManyUrls = useThrottle(ManyUrls(), 0)
 
@@ -81,7 +82,7 @@ useEffect(()=>{
   //Start Single Download 
   const [startSingleDownload, setStartSingleDownload] = useState(false)
   const [singleDownloadRunning, setSingleDownloadRunning] = useState(false)
-  console.log({singleDownloadRunning})
+  console.log({ singleDownloadRunning })
   const [videoCover, setVideoCover] = useState('')
   const [singleVideoSize, setSingleVideoSize] = useState('')
 
@@ -129,56 +130,59 @@ useEffect(()=>{
       <div className='Homepage' >
         <h1 style={{ color: 'white' }} >Download TikTok Videos & Thumbnails</h1>
         <h2 style={{ color: 'white' }} > With No Watermark Fast & Free</h2>
-        <div>
+        <div style={{display:'flex', alignItems: 'center', justifyContent: 'center'}} >
 
 
+          <div  className='maininputfield' >
 
-          <div style={{ width:'80%', maxWidth:'1000px', margin:'20px auto' }} className='maininputfield' >
-            <OutlinedInput
-              id="outlined-multiline-flexible"
+            <TextareaAutosize
+              maxRows={4}
               placeholder={`Enter TikTok Url(s) Here
 
-www.tiktok.com/@user/video/325876398923320581
-www.tiktok.com/@user/video/35478928923327777
-www.tiktok.com/t/ZTlmHPdAS
-... ` }
+                     ` }
+                    /* www.tiktok.com/@user/video/325876398923320581
+                     www.tiktok.com/@user/video/35478928923327777
+                     www.tiktok.com/t/ZTlmHPdAS
+                     ...*/
               className='glasscard'
               multiline
-              minRows={6}
-              sx={{
-                '&:hover fieldset': {
-                  borderColor: 'grey',
-                },
-              }}
+              minRows={6.5}
               value={mainUrlField}
               onChange={(e) => { setMainUrlField(e.target.value) }}
+              style={{outline:'none', width: '90vw', maxWidth: '700px', margin: '20px auto'}}
             />
-          </div>
-          <Button variant="contained"
-            style={{ padding: '2px 6px', backgroundColor: 'white', color: '#b340c2', textTransform: 'none', fontSize: '13px', marginTop: '-150px' }}
-            onClick={() => { Paste() }} >Paste <MdContentPaste style={{ fontSize: '18px' }} /> </Button>
 
-          <div  >
-            {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FiDownload style={{fontSize:'25px'}} />} sx={{ padding: '14px 50px', marginTop: '-55px', textTransform:'none' }} loading={!videoCover && !singleVideoSize && singleDownloadRunning}
-              onClick={() => {
-                JoinRoom(requestID)
-                setStartSingleDownload(true)
-              }}  >Download</LoadingButton>}
+          </div>
+          <div>
+            <div>
+              <Button variant="contained"
+                style={{ padding: '2px 6px', backgroundColor: 'white', color: '#b340c2', textTransform: 'none', fontSize: '13px', marginTop: '3px', marginLeft:'-330px' }}
+                onClick={() => { Paste() }} >Paste <MdContentPaste style={{ fontSize: '18px' }} /> </Button>
+            </div>
+
+            <div  >
+              {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FiDownload style={{ fontSize: '25px' }} />} sx={{ padding: '14px 50px', marginTop: '-37px',marginInline:'20px', textTransform: 'none' }} loading={!videoCover && !singleVideoSize && singleDownloadRunning}
+                onClick={() => {
+                  JoinRoom(requestID)
+                  setStartSingleDownload(true)
+                }}  >Download</LoadingButton>}
+            </div>
+
+            <div>
+              {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 50px', marginTop: '-37px',marginInline:'20px', textTransform: 'none' }}
+                onClick={() => {
+                  JoinRoom(requestID)
+                  setStartBulkDownload(true);
+                  setPhotosDownloadResult(false)
+                }} endIcon={<FiDownload style={{ fontSize: '25px' }} />} loading={bulkDownloadRunning && !detailsList} >Download</LoadingButton >}
+            </div>
           </div>
 
-          <div  >
-            {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 50px', marginTop: '-55px', textTransform:'none'  }}
-              onClick={() => {
-                JoinRoom(requestID)
-                setStartBulkDownload(true);
-                setPhotosDownloadResult(false)
-              }} endIcon={<FiDownload style={{fontSize:'25px'}} />} loading={bulkDownloadRunning && !detailsList} >Download</LoadingButton >}
-          </div>
 
         </div>
 
 
-<Divider style={{width:'70%', margin:'20px auto'}} />
+        <Divider style={{ width: '70%', margin: '20px auto' }} />
 
         {/* <div style={{ fontSize: '20px' }}><p>time : {seconds}</p></div> */}
 
@@ -230,7 +234,7 @@ www.tiktok.com/t/ZTlmHPdAS
         />
 
 
-<FAQ />
+        <FAQ />
 
         {/* <div style={{ marginTop: '500px' }} ></div> */}
         <Footer />
