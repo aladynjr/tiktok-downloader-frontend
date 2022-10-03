@@ -26,7 +26,7 @@ function Navbar(props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} >
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} style={{fontWeight:'900'}} >
       <Typography variant="h6" sx={{ my: 2 }}>
         LOGO
       </Typography>
@@ -59,11 +59,12 @@ function Navbar(props) {
             <BiMenu />
           </IconButton>
           <Typography
-            variant="h6"
+            variant="h5"
             component="div"
             color='primary'
             className='NavbarLogo'
             sx={{  display: {  sm: 'block' } }}
+            style={{fontWeight:'900'}}
           >
             LOGO
           </Typography>
