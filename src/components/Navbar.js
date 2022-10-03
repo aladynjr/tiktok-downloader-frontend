@@ -26,9 +26,9 @@ function Navbar(props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} style={{margin:'auto'}}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} >
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        LOGO
       </Typography>
       <Divider />
       <List >

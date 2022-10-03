@@ -169,7 +169,7 @@ useEffect(() => {
 
             {(singleDownloadRunning && !singleVideoSize) && <Skeleton style={{ backgroundColor: '#f5f5f55c' }} variant="rectangular" width={400} height={700} />}
 
-            {singleVideoSize && <video width="400" controls>
+            {singleVideoSize && <video style={{width:'400px', maxWidth:'90vw'}} controls>
               <source src={process.env.REACT_APP_SERVER + '/api/single/display/video/' + videoFilename} type="video/mp4" />
               Your browser does not support HTML video.
             </video>}
@@ -182,7 +182,7 @@ useEffect(() => {
             {((singleDownloadRunning || videoCover) && !hideCoverProgress) &&<div className='SingleProgressContainer' ><CoverProgressBar thumbnailProgress={thumbnailProgress}  videoCover={videoCover} /> </div>}
 
             {(singleDownloadRunning && !videoCover) && <Skeleton style={{ backgroundColor: '#f5f5f55c' }} variant="rectangular" width={400} height={700} />}
-            {videoCover && <img src={videoCover} width="400" />}
+            {videoCover && <img src={videoCover} style={{width:'400px', maxWidth:'90vw'}} />}
           </div>
 
         </div>
