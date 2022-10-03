@@ -17,24 +17,24 @@ import { BsImage, BsCameraVideoFill } from 'react-icons/bs'
 import Footer from '../components/Footer';
 import io from 'socket.io-client';
 import { MdContentPaste } from 'react-icons/md'
-
+import GetID from '../utilities/GetID';
 const socket = io(process.env.REACT_APP_SERVER);
 
 function HomePage() {
   const navigate = useNavigate();
   //SOCKET IO  
-  const [requestID, setRequestID] = useState(uuidv4());
-
+  const [requestID, setRequestID] = useState();
+console.log('requestID  :  ' + requestID)
 
   //JOIN THIS REQUEST'S ROOM 
   const JoinRoom = (roomNumber) => {
     socket.emit('join_room', { roomNumber });
   }
 
-  useEffect(() => {
-    console.log('request id changed with value : ' + requestID)
-    JoinRoom(requestID)
-  }, [requestID])
+  // useEffect(() => {
+  //   console.log('request id changed with value : ' + requestID)
+  //   JoinRoom(requestID)
+  // }, [requestID])
 
 
   const [mainUrlField, setMainUrlField] = useState('')
@@ -47,6 +47,7 @@ function HomePage() {
         cleanTiktokBulkUrls.push(line);
       }
     })
+
     if (cleanTiktokBulkUrls.length > 1) {
       return true
     }
@@ -54,6 +55,20 @@ function HomePage() {
       return false
     }
   }
+
+useEffect(()=>{
+  let lines = mainUrlField.split(/\r?\n/);
+  let cleanTiktokBulkUrls = [];
+  lines.map((line) => {
+    if (line !== "") {
+      cleanTiktokBulkUrls.push(line);
+    }
+  })
+  if(cleanTiktokBulkUrls.length >= 1){
+    setRequestID(GetID(cleanTiktokBulkUrls[0]))
+
+  }
+},[mainUrlField])
 
   const throttledManyUrls = useThrottle(ManyUrls(), 0)
 
@@ -141,6 +156,7 @@ www.tiktok.com/t/ZTlmHPdAS
           <div  >
             {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FaPlay />} sx={{ padding: '14px 50px', marginTop: '-55px' }} loading={!videoCover && !singleVideoSize && singleDownloadRunning}
               onClick={() => {
+                JoinRoom(requestID)
                 setStartSingleDownload(true)
               }}  >Start</LoadingButton>}
           </div>
@@ -148,6 +164,7 @@ www.tiktok.com/t/ZTlmHPdAS
           <div  >
             {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 50px', marginTop: '-55px' }}
               onClick={() => {
+                JoinRoom(requestID)
                 setStartBulkDownload(true);
                 setPhotosDownloadResult(false)
               }} endIcon={<FaPlay />} loading={bulkDownloadRunning && !detailsList} >Start</LoadingButton >}
