@@ -23,6 +23,9 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { BsFillCaretDownFill } from 'react-icons/bs'
 import { FiDownload } from 'react-icons/fi'
 import FAQ from '../components/FAQ';
+import Qualitites from '../components/Qualitites';
+import HowToBox from '../components/HowToBox';
+
 const socket = io(process.env.REACT_APP_SERVER);
 
 function HomePage() {
@@ -129,53 +132,60 @@ function HomePage() {
     <div className='HomepageContainer' >
       <div className='Homepage' >
         <h1 style={{ color: 'white' }} >Download TikTok Videos & Thumbnails</h1>
-        <h2 style={{ color: 'white' }} > With No Watermark Fast & Free</h2>
-        <div style={{display:'flex', alignItems: 'center', justifyContent: 'center'}} >
+        <h2 style={{ color: 'white' }} className='HomepageSubtitle' > With No Watermark Fast & Free</h2>
 
-
-          <div  className='maininputfield' >
+        <div className='ButtonsAndMainInput' >
+          <div className='maininputfield' >
 
             <TextareaAutosize
               maxRows={4}
               placeholder={`Enter TikTok Url(s) Here
 
                      ` }
-                    /* www.tiktok.com/@user/video/325876398923320581
-                     www.tiktok.com/@user/video/35478928923327777
-                     www.tiktok.com/t/ZTlmHPdAS
-                     ...*/
+              /* www.tiktok.com/@user/video/325876398923320581
+               www.tiktok.com/@user/video/35478928923327777
+               www.tiktok.com/t/ZTlmHPdAS
+               ...*/
               className='glasscard'
               multiline
               minRows={6.5}
               value={mainUrlField}
               onChange={(e) => { setMainUrlField(e.target.value) }}
-              style={{outline:'none', width: '90vw', maxWidth: '700px', margin: '20px auto'}}
+              style={{ outline: 'none', width: '90vw', maxWidth: '800px', margin: '20px auto' }}
             />
 
           </div>
-          <div>
+          <div className='DownloadButtonsAndPaste' >
             <div>
               <Button variant="contained"
-                style={{ padding: '2px 6px', backgroundColor: 'white', color: '#b340c2', textTransform: 'none', fontSize: '13px', marginTop: '3px', marginLeft:'-330px' }}
+                style={{ padding: '5px 6px', marginRight: '-10px', backgroundColor: 'white', color: '#b340c2', textTransform: 'none', fontSize: '13px' }}
                 onClick={() => { Paste() }} >Paste <MdContentPaste style={{ fontSize: '18px' }} /> </Button>
             </div>
+            <div className='DownloadButtons' >
 
-            <div  >
-              {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FiDownload style={{ fontSize: '25px' }} />} sx={{ padding: '14px 50px', marginTop: '-37px',marginInline:'20px', textTransform: 'none' }} loading={!videoCover && !singleVideoSize && singleDownloadRunning}
-                onClick={() => {
-                  JoinRoom(requestID)
-                  setStartSingleDownload(true)
-                }}  >Download</LoadingButton>}
+              <div  >
+                {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FiDownload style={{ fontSize: '25px' }} />}
+                  sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px' }}
+                  loading={!videoCover && !singleVideoSize && singleDownloadRunning}
+                  onClick={() => {
+                    JoinRoom(requestID)
+                    setStartSingleDownload(true)
+                  }}  >Download</LoadingButton>}
+              </div>
+
+              <div>
+                {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px' }}
+                  onClick={() => {
+                    JoinRoom(requestID)
+                    setStartBulkDownload(true);
+                    setPhotosDownloadResult(false)
+                  }} endIcon={<FiDownload style={{ fontSize: '25px' }} />} loading={bulkDownloadRunning && !detailsList}
+                >Download</LoadingButton >}
+              </div>
+
             </div>
 
-            <div>
-              {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 50px', marginTop: '-37px',marginInline:'20px', textTransform: 'none' }}
-                onClick={() => {
-                  JoinRoom(requestID)
-                  setStartBulkDownload(true);
-                  setPhotosDownloadResult(false)
-                }} endIcon={<FiDownload style={{ fontSize: '25px' }} />} loading={bulkDownloadRunning && !detailsList} >Download</LoadingButton >}
-            </div>
+
           </div>
 
 
@@ -233,6 +243,8 @@ function HomePage() {
           setRequestID={setRequestID}
         />
 
+        <Qualitites />
+        <HowToBox />
 
         <FAQ />
 

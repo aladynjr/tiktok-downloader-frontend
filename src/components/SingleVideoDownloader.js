@@ -10,8 +10,11 @@ import DownloadFromLink from '../utilities/DownloadFromLink';
 import Skeleton from '@mui/material/Skeleton';
 import VideoProgressBar from './VideoProgressBar';
 import CoverProgressBar from './CoverProgressBar';
-import {FiDownload} from 'react-icons/fi'
-function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, startSingleDownload, setStartSingleDownload, videoCover, setVideoCover, singleDownloadRunning, setSingleDownloadRunning, socket,thumbnailProgress, setThumbnailProgress,videoProgress, setVideoProgress, singleVideoSize, setSingleVideoSize, requestID, setRequestID }) {
+import { FiDownload } from 'react-icons/fi'
+import clsx from 'clsx';
+
+
+function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, startSingleDownload, setStartSingleDownload, videoCover, setVideoCover, singleDownloadRunning, setSingleDownloadRunning, socket, thumbnailProgress, setThumbnailProgress, videoProgress, setVideoProgress, singleVideoSize, setSingleVideoSize, requestID, setRequestID }) {
 
   //const [mainUrlField, setMainUrlField] = useState('');
   const [urlErrorMessage, setUrlErrorMessage] = useState('');
@@ -68,7 +71,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
   }
 
   //send url to get video
-const [videoFilename, setVideoFilename] = useState('')
+  const [videoFilename, setVideoFilename] = useState('')
   const sendUrlToGetVideo = async (url) => {
     try {
       let response = await fetch(process.env.REACT_APP_SERVER + '/api/single/url/video', {
@@ -129,29 +132,37 @@ const [videoFilename, setVideoFilename] = useState('')
     }
   }, [resetResults])
 
-//hide progress circle after 1 second of completing download 
-const [hideVideoProgress, setHideVideoProgress] = useState(false);
-const [hideCoverProgress, setHideCoverProgress] = useState(false);
+  //hide progress circle after 1 second of completing download 
+  const [hideVideoProgress, setHideVideoProgress] = useState(false);
+  const [hideCoverProgress, setHideCoverProgress] = useState(false);
 
-useEffect(() => {
-  if (videoProgress >= 100) {
-    setTimeout(() => {
-      setHideVideoProgress(true)
-    }, 1000)
-  }
-}, [videoProgress])
+  useEffect(() => {
+    if (videoProgress >= 100) {
+      setTimeout(() => {
+        setHideVideoProgress(true)
+      }, 1000)
+    }
+  }, [videoProgress])
 
-useEffect(() => {
-  if (thumbnailProgress >= 100) {
-    setTimeout(() => {
-      setHideCoverProgress(true)
-    }, 1000)
-  }
-}, [thumbnailProgress])
+  useEffect(() => {
+    if (thumbnailProgress >= 100) {
+      setTimeout(() => {
+        setHideCoverProgress(true)
+      }, 1000)
+    }
+  }, [thumbnailProgress])
 
+ 
+
+const [option, setOption] = useState(1);
 
   return (
     <div>
+      {videoCover && <div style={{marginBottom:'10px'}} >
+  <button onClick={()=>setOption(1)} >OPTION 1 </button>
+  <button onClick={()=>setOption(2)} >OPTION 2 </button>
+  <button onClick={()=>setOption(3)} >OPTION 3 </button>
+  </div>}
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '70%', margin: 'auto' }}>
 
       </div>
@@ -160,29 +171,40 @@ useEffect(() => {
         <b style={{ color: 'red' }} >{urlErrorMessage}</b>
 
 
+        {videoCover && <img src={videoCover} className={clsx(option==1 &&'SingleResultsBackground',option==2 && 'SingleResultsBackground otheroption', option==3 && 'SingleResultsBackground otherotheroption')}/>}
+        <div className='SinglePhotoVideoResults'  >
+          <div style={{ display: 'flex', flexDirection: 'column', marginInline: '55px',alignItems:' center'  }} >
+            {((singleDownloadRunning || singleVideoSize) && !hideVideoProgress) && <div className='SingleProgressContainer' > <VideoProgressBar videoProgress={videoProgress} singleVideoSize={singleVideoSize} /></div>}
 
-        <div style={{ display: 'flex', justifyContent: 'center', justifyContent: 'center', width: '80%', flexWrap: "wrap", padding:'30px' }} >
+            {(singleDownloadRunning && !singleVideoSize) && <Skeleton style={{ backgroundColor: '#f5f5f55c' }} variant="rectangular" width={200} height={400} />}
 
-          <div style={{ display: 'flex', flexDirection: 'column', marginInline:'55px' }} >
-            {((singleDownloadRunning || singleVideoSize ) && !hideVideoProgress) && <div className='SingleProgressContainer' > <VideoProgressBar videoProgress={videoProgress}  singleVideoSize={singleVideoSize} /></div>}
-
-            {(singleDownloadRunning && !singleVideoSize) && <Skeleton style={{ backgroundColor: '#f5f5f55c' }} variant="rectangular" width={400} height={700} />}
-
-            {singleVideoSize && <video style={{width:'400px', maxWidth:'80vw'}} controls>
+            {singleVideoSize && <video style={{ width: '200px', maxWidth: '80vw', borderRadius:'10px' }} controls>
               <source src={process.env.REACT_APP_SERVER + '/api/single/display/video/' + videoFilename} type="video/mp4" />
               Your browser does not support HTML video.
             </video>}
-            {/*(videoCover || singleVideoSize)*/singleVideoSize && <LoadingButton endIcon={<FiDownload style={{color:'white'}} />} variant="contained" color='success' style={{ margin: '7px' }} > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + videoFilename}  >Download Video</a></LoadingButton>}
+            {/*(videoCover || singleVideoSize)*/singleVideoSize && <LoadingButton
+              endIcon={<FiDownload style={{ color: 'white' }} />}
+              variant="contained"  style={{ margin: '7px', backgroundColor:'#ff0050	', width:'230px' }} >
+              <a target="_blank" style={{ textDecoration: 'none', color: 'white' }}
+                href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + videoFilename}  >
+                Download Video</a>
+            </LoadingButton>}
             {/* <h3 style={{color:'whitesmoke'}} >{singleVideoSize}</h3> */}
 
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', marginInline:'55px' }} >
-            {((singleDownloadRunning || videoCover) && !hideCoverProgress) &&<div className='SingleProgressContainer' ><CoverProgressBar thumbnailProgress={thumbnailProgress}  videoCover={videoCover} /> </div>}
+          <div style={{ display: 'flex', flexDirection: 'column', marginInline: '55px', alignItems:' center' }} >
+            {((singleDownloadRunning || videoCover) && !hideCoverProgress) && <div className='SingleProgressContainer' ><CoverProgressBar thumbnailProgress={thumbnailProgress} videoCover={videoCover} /> </div>}
 
-            {(singleDownloadRunning && !videoCover) && <Skeleton style={{ backgroundColor: '#f5f5f55c' }} variant="rectangular" width={400} height={700} />}
-            {videoCover && <img src={videoCover} style={{width:'400px', maxWidth:'80vw'}} />}
-            {/*(videoCover || singleVideoSize)*/videoCover && <LoadingButton endIcon={<FiDownload style={{color:'white'}} />} variant="contained" color='success' style={{ margin: '7px' }} > <a target="_blank " style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + photoFilename}  >Download Thumbnail</a></LoadingButton>}
+            {(singleDownloadRunning && !videoCover) && <Skeleton style={{ backgroundColor: '#f5f5f55c' }} variant="rectangular" width={200} height={400} />}
+            {videoCover && <img src={videoCover} style={{ width: '200px', maxWidth: '80vw', borderRadius:'10px'  }} />}
+            {/*(videoCover || singleVideoSize)*/videoCover && <LoadingButton
+              endIcon={<FiDownload style={{ color: 'black' }} />}
+              variant="contained"  style={{ margin: '7px', backgroundColor:'#00f2ea	', color:'black', width:'230px' }} >
+              <a target="_blank " style={{ textDecoration: 'none', color: 'black', fontWeight:'900' }}
+                href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + photoFilename}  >
+                Download Cover</a>
+            </LoadingButton>}
           </div>
 
         </div>
@@ -196,4 +218,4 @@ useEffect(() => {
 export default SingleVideoDownloader
 
 
-{/* {videoCover && <Button variant="contained" color='success'  > <a onClick={() => DownloadFromLink(videoCover, videoCover + '.png')}  >Download Thumbnail</a></Button>} */ }
+{/* {videoCover && <Button variant="contained"   > <a onClick={() => DownloadFromLink(videoCover, videoCover + '.png')}  >Download Thumbnail</a></Button>} */ }
