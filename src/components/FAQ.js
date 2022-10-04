@@ -7,8 +7,8 @@ import {AiOutlineDown} from 'react-icons/ai'
 
 export default function FAQ() {
   return (
-    <div style={{maxWidth:'1000px', margin:'50px auto'}} >
-        <h1 style={{color:'white'}} >FREQUENTLY ASKED QUESTIONS</h1>
+    <div style={{maxWidth:'1200px', margin:'50px auto'}} className='FaqContainer' >
+        <h1 style={{color:'#252e69'}} >FREQUENTLY ASKED QUESTIONS</h1>
       <Accordion TransitionProps={{ unmountOnExit: true }}  className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}
@@ -18,7 +18,7 @@ export default function FAQ() {
           <Typography  variant='h6' color='secondary'   >FAQ Question 1</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography variant='h6' style={{color:'#252e69'}} >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget.
           </Typography>
@@ -30,10 +30,10 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' color='secondary' >FAQ 2</Typography>
+          <Typography variant='h6' color='secondary' >FAQ Question 2</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography variant='h6' style={{color:'#252e69'}} >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget.
           </Typography>
@@ -45,10 +45,10 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' color='secondary' >FAQ 3</Typography>
+          <Typography variant='h6' color='secondary' >FAQ Question 3</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography variant='h6' style={{color:'#252e69'}} >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget.
           </Typography>
@@ -60,10 +60,10 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' color='secondary' >FAQ 4</Typography>
+          <Typography variant='h6' color='secondary' >FAQ Question 4</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography variant='h6' style={{color:'#252e69'}} >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget.
           </Typography>

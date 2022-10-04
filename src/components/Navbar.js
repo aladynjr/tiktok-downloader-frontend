@@ -15,7 +15,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
-const navItems = [/*'Home', 'About', 'Contact'*/];
+const navItems = ['Popular Videos', 'How to save TikTok video', 'Download TikTok MP3'];
 
 function Navbar(props) {
   const { window } = props;
@@ -31,9 +31,9 @@ function Navbar(props) {
         LOGO
       </Typography>
       <Divider />
-      <List >
+      <List  >
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item} >
             <ListItemButton sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>
@@ -48,7 +48,7 @@ function Navbar(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar component="nav" color='default' >
-        <Toolbar>
+        <Toolbar style={{width:'90%', margin:'auto'}} >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -68,13 +68,16 @@ function Navbar(props) {
           >
             LOGO
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }} style={{margin:'auto'}}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex' } }} style={{  margin:'auto', width:'50%'}}>
             {navItems.map((item) => (
-              <Button key={item} color='secondary' >
+              <Button key={item} color='secondary' style={{ textTransform:'none', margin:'auto'}} >
                 {item}
               </Button>
             ))}
           </Box>
+
+<Button color='secondary' variant='outlined' style={{ textTransform:'none'}} > Download With App </Button>
+
         </Toolbar>
       </AppBar>
       <Box component="nav"   >

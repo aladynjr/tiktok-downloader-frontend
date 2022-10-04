@@ -88,7 +88,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   }
 
   const [videosFolderName, setVideosFolderName] = useState('')
-  console.log({videosFolderName})
+  console.log({ videosFolderName })
 
   const sendUrlsToGetVideos = async (urls) => {
     console.log('%c sent urls to get videos', 'color: blue')
@@ -126,7 +126,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
     setSingleDownloadRunning(false)
     setPhotosDownloadResult(null)
     setPhotosFolderName('')
-      setVideosFolderName('')
+    setVideosFolderName('')
     setResetResults(true);
     setDetailsList(null);
     setBulkDownloadRunning(true);
@@ -159,39 +159,61 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   return (
     <div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap:"wrap" }} >
+      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: "wrap" }} >
         <div>
 
-          {/*(photosDownloadResult || detailsList)*/ (videosFolderName) && <LoadingButton endIcon={<FiDownload style={{color:'white'}} />} variant="contained" color='success' style={{ margin: '7px' }}  > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}  >Download All Videos </a></LoadingButton>}
-         <div style={{margin:'20px'}}  >
+         {/*(photosDownloadResult || detailsList)*/ (videosFolderName) && <LoadingButton
+            endIcon={<FiDownload style={{ color: 'black', marginLeft:'15px' }} />}
+            variant="contained"  style={{ margin: '7px' , background: 'linear-gradient(90deg, #ff0050 82% , #00f2ea 50%)' }}  >
+            <a target="_blank" style={{ textDecoration: 'none', color: 'white' }}
+              href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}  >
+              Download All Videos </a>
+          </LoadingButton>}
 
-          {(bulkDownloadRunning && !videosFolderName  ) && <div className='BulkProgressContainer' style={{    marginLeft: '-6px'}} > <VideoProgressBar videoProgress={videoProgress} detailsList={videosFolderName} /></div>}
-          {(bulkDownloadRunning && !videosFolderName ) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginTop:'-200px', marginRight:'-5px' }} variant="rectangular" width={200} height={200} />}
-         </div>
+          <div style={{ margin: '20px' }}  >
+
+            {(bulkDownloadRunning && !videosFolderName) && <div
+              className='BulkProgressContainer'
+              style={{ marginLeft: '-6px' }} >
+              <VideoProgressBar videoProgress={videoProgress} detailsList={videosFolderName} />
+            </div>}
+            {(bulkDownloadRunning && !videosFolderName) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginTop: '-200px', marginRight: '-5px' }} variant="rectangular" width={200} height={200} />}
+          </div>
         </div>
         <div>
 
-          {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton endIcon={<FiDownload style={{color:'white'}} />} variant="contained" color='success' style={{ margin: '7px' }}  > <a target="_blank" style={{ textDecoration: 'none', color: 'white' }} href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}  >Download All Photos</a></LoadingButton>}
-        
-        <div style={{margin:'20px'}} >
+          {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton
+            endIcon={<FiDownload style={{ color: 'black', marginLeft:'15px' }} />}
+            variant="contained" 
+            style={{ margin: '7px', background: 'linear-gradient(90deg, #00f2ea 82% , #ff0050 50%)'  }}  >
+            <a target="_blank"
+              style={{ textDecoration: 'none', color:'black' }}
+              href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}  >
+              Download All Covers</a>
+          </LoadingButton>}
 
-          {(bulkDownloadRunning && !photosDownloadResult ) && <div className='BulkProgressContainer' style={{    marginLeft: '-6px'}} ><CoverProgressBar thumbnailProgress={thumbnailProgress} photosDownloadResult={photosDownloadResult} /> </div>}
-          {(bulkDownloadRunning && !photosDownloadResult) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginTop:'-200px' , marginRight:'-5px'}} variant="rectangular" width={200} height={200} />}
+          <div style={{ margin: '20px' }} >
 
-        </div>
+            {(bulkDownloadRunning && !photosDownloadResult) && <div
+              className='BulkProgressContainer'
+              style={{ marginLeft: '-6px' }} >
+              <CoverProgressBar thumbnailProgress={thumbnailProgress} photosDownloadResult={photosDownloadResult} />
+            </div>}
+            {(bulkDownloadRunning && !photosDownloadResult) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginTop: '-200px', marginRight: '-5px' }} variant="rectangular" width={200} height={200} />}
+
+          </div>
 
         </div>
       </div>
 
-      <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center'}} >
+      <div  className='BulkResultPhotos' >
         {detailsList && detailsList.map((detail, i) => {
           var Title = detail.title.toString();
-          if(Title.length >20){
-            Title = Title.substring(0,20) + '...'
+          if (Title.length > 20) {
+            Title = Title.substring(0, 20) + '...'
           }
           return (
-            <div key={i} 
-            style={{ backgroundColor: 'whitesmoke', padding: '10px', borderRadius: '10px', width: 'fit-content',margin: '25px' }} >
+            <div key={i} className='BulkResultPhotoCard' >
               <b> {Title}</b>
               <p style={{ fontSize: '12px' }} >ID : {detail.id}</p>
               <img src={detail.cover} style={{ width: '170px' }} />
