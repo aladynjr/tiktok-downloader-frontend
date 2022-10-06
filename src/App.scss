@@ -140,11 +140,11 @@ h1 {
 }
 
 .FaqAccordion {
-  background: linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741));
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741))!important;
   //background: linear-gradient(45deg, #dbc1ff 0%, rgba(238, 47, 212, 0.61) 100%);
 
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px!important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)!important;
 }
 
 .DownloadButtonsAndPaste {
@@ -491,12 +491,12 @@ border-radius: 20px;
 
 .css-1elwnq4-MuiPaper-root-MuiAccordion-root{
   padding: 20px!important;
-  margin-block: 20px;
+  margin-block: 20px!important;
 }
 
 .css-2ulfj5-MuiTypography-root{
-  color: #252e69;
-  font-weight: 700;
+  color: #252e69!important;
+  font-weight: 700!important;
   font-size: 17px!important;
 }
 .AccordionText{

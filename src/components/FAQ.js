@@ -15,7 +15,7 @@ export default function FAQ() {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography variant='h6'   >How many videos can I download at a time?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}   >How many videos can I download at a time?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -29,7 +29,7 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6'  >How long does it take to download more than 1 video at a time?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >How long does it take to download more than 1 video at a time?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -43,7 +43,7 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6'  >How do I open files when I mass download?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >How do I open files when I mass download?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -57,7 +57,7 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6'  >Can TOKdownload save videos from personal / private TikTok accounts?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Can TOKdownload save videos from personal / private TikTok accounts?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -71,7 +71,7 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6'  >Where are TikTok videos saved after downloading?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Where are TikTok videos saved after downloading?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -85,7 +85,7 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6'  >Do I need to have a TikTok account to download TikTok videos?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Do I need to have a TikTok account to download TikTok videos?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -101,7 +101,7 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6'  >Do I need to be logged into a TikTok account to download TikTok videos?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Do I need to be logged into a TikTok account to download TikTok videos?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -114,7 +114,7 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6'  >Do I need to install extensions to use TikTok downloader?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Do I need to install extensions to use TikTok downloader?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -129,7 +129,7 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6'  >How do I get the link to download TikTok videos?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >How do I get the link to download TikTok videos?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -146,7 +146,7 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6'  >Do I have to pay to download TikTok video?
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Do I have to pay to download TikTok video?
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
