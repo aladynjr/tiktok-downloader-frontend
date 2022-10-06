@@ -9,13 +9,13 @@ export default function FAQ() {
   return (
     <div style={{ maxWidth: '1200px', margin: '50px auto' }} className='FaqContainer' >
       <h1 style={{ color: '#252e69' }}  >FREQUENTLY ASKED QUESTIONS</h1>
-      <Accordion TransitionProps={{ unmountOnExit: true }} className='FaqAccordion'  >
+      <Accordion TransitionProps={{ unmountOnExit: true }} style={{marginBlock:'20px', background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741))',borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)'}} className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}   >How many videos can I download at a time?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px', padding:'20px' }}   >How many videos can I download at a time?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -23,13 +23,13 @@ export default function FAQ() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion TransitionProps={{ unmountOnExit: true }} className='FaqAccordion'  >
+      <Accordion TransitionProps={{ unmountOnExit: true }} style={{marginBlock:'20px', background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741))',borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)'}} className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >How long does it take to download more than 1 video at a time?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px', padding:'20px' }}  >How long does it take to download more than 1 video at a time?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -37,13 +37,13 @@ export default function FAQ() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion TransitionProps={{ unmountOnExit: true }} className='FaqAccordion'  >
+      <Accordion TransitionProps={{ unmountOnExit: true }} style={{marginBlock:'20px', background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741))',borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)'}} className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >How do I open files when I mass download?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px', padding:'20px' }}  >How do I open files when I mass download?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -57,7 +57,7 @@ export default function FAQ() {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Can TOKdownload save videos from personal / private TikTok accounts?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px', padding:'20px' }}  >Can TOKdownload save videos from personal / private TikTok accounts?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -65,13 +65,13 @@ export default function FAQ() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion TransitionProps={{ unmountOnExit: true }} className='FaqAccordion'  >
+      <Accordion TransitionProps={{ unmountOnExit: true }} style={{marginBlock:'20px', background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741))',borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)'}} className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Where are TikTok videos saved after downloading?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px', padding:'20px' }}  >Where are TikTok videos saved after downloading?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -79,13 +79,13 @@ export default function FAQ() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion TransitionProps={{ unmountOnExit: true }} className='FaqAccordion'  >
+      <Accordion TransitionProps={{ unmountOnExit: true }} style={{marginBlock:'20px', background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741))',borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)'}} className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Do I need to have a TikTok account to download TikTok videos?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px', padding:'20px' }}  >Do I need to have a TikTok account to download TikTok videos?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -95,26 +95,26 @@ export default function FAQ() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion TransitionProps={{ unmountOnExit: true }} className='FaqAccordion'  >
+      <Accordion TransitionProps={{ unmountOnExit: true }} style={{marginBlock:'20px', background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741))',borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)'}} className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Do I need to be logged into a TikTok account to download TikTok videos?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px', padding:'20px' }}  >Do I need to be logged into a TikTok account to download TikTok videos?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
             Nope! You can use TOKdownload to download TikTok Videos & Cover Images in bulk without even needing to log-in to a TikTok account. Making it super simple and easy to use anywhere at any time.          </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion TransitionProps={{ unmountOnExit: true }} className='FaqAccordion'  >
+      <Accordion TransitionProps={{ unmountOnExit: true }} style={{marginBlock:'20px', background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741))',borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)'}} className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Do I need to install extensions to use TikTok downloader?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px', padding:'20px' }}  >Do I need to install extensions to use TikTok downloader?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -123,13 +123,13 @@ export default function FAQ() {
           </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion TransitionProps={{ unmountOnExit: true }} className='FaqAccordion'  >
+      <Accordion TransitionProps={{ unmountOnExit: true }} style={{marginBlock:'20px', background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741))',borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)'}} className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >How do I get the link to download TikTok videos?</Typography>
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px', padding:'20px' }}  >How do I get the link to download TikTok videos?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography className='AccordionText'  >
@@ -140,13 +140,13 @@ export default function FAQ() {
             Go to the video you want to download, copy the URL at the top, and paste it into TOKdownload. That’s it!          </Typography>
         </AccordionDetails>
       </Accordion>
-      <Accordion TransitionProps={{ unmountOnExit: true }} className='FaqAccordion'  >
+      <Accordion TransitionProps={{ unmountOnExit: true }} style={{marginBlock:'20px', background: 'linear-gradient(45deg, rgba(255, 255, 255, 0.995), rgba(255, 255, 255, 0.696), rgba(255, 255, 255, 0.741))',borderRadius: '16px', boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)'}} className='FaqAccordion'  >
         <AccordionSummary
           expandIcon={<AiOutlineDown />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px' }}  >Do I have to pay to download TikTok video?
+          <Typography variant='h6' style={{ color: '#252e69', fontWeight:'700', fontSize:'17px', padding:'20px' }}  >Do I have to pay to download TikTok video?
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
