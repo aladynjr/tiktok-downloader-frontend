@@ -164,7 +164,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
          {/*(photosDownloadResult || detailsList)*/ (videosFolderName) && <LoadingButton
             endIcon={<FiDownload style={{ color: 'black', marginLeft:'15px' }} />}
-            variant="contained"  style={{ margin: '7px' , background: 'linear-gradient(90deg, #ff0050 82% , #00f2ea 50%)' }}  >
+            variant="contained"  style={{ margin: '7px',marginTop:'26px' , background: 'linear-gradient(90deg, #ff0050 82% , #00f2ea 50%)' }}  >
             <a target="_blank" style={{ textDecoration: 'none', color: 'white' }}
               href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}  >
               Download All Videos </a>
@@ -185,7 +185,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
           {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton
             endIcon={<FiDownload style={{ color: 'black', marginLeft:'15px' }} />}
             variant="contained" 
-            style={{ margin: '7px', background: 'linear-gradient(90deg, #00f2ea 82% , #ff0050 50%)'  }}  >
+            style={{ margin: '7px',marginTop:'26px', background: 'linear-gradient(90deg, #00f2ea 82% , #ff0050 50%)'  }}  >
             <a target="_blank"
               style={{ textDecoration: 'none', color:'black' }}
               href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}  >
