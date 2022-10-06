@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  margin-top: 50px;
+  margin-top: -2px;
 }
 
 :root {
@@ -64,11 +64,11 @@
 
 .HomepageContainer {
   // transition: all .5s;
-  background: linear-gradient(90deg, #3f0bfb 10%, #b82fee 70%);
+  background: linear-gradient(90deg, #002df82c 10%, #b700ff25 70%);
+  background-repeat: no-repeat;
 
   //set svg background photo from assets folder bg.svg
   // background-image: url('./assets/bg.svg');
-  background-repeat: no-repeat;
   //background-size: 100%;
   //set backgorund height to fit the screen 
   // height: 100vh;
@@ -82,12 +82,19 @@
   font-weight: 200;
   font-size: 27px;
   padding: 0px 10px;
+  margin-top: -18px;
 }
 
 h1 {
   font-size: 40px;
   padding: 0px 10px;
 
+}
+.UnderSubtitle{
+  margin: 0;
+  color: white;
+  margin-bottom: -20px;
+    opacity: 0.8;
 }
 
 .glasscard {
@@ -215,6 +222,10 @@ textarea {
   box-shadow: none;
   object-position: -19px -463px;
 }
+.otherotherotheroption {
+  filter: blur(0px) hue-rotate(15deg) brightness(0.15);
+
+}
 
 @media (max-width: 600px) {
   .SingleResultsBackground {
@@ -232,14 +243,14 @@ textarea {
   width: fit-content;
   margin: 25px;
   //mix-blend-mode: plus-lighter;
-  box-shadow: 1px 0px 5px rgba(255, 0, 242, 0.53);
+ // box-shadow: 1px 0px 5px rgba(255, 0, 242, 0.53);
 
 }
 
 .QualityContainer {
   background-color: whitesmoke;
   padding: 50px;
-  box-shadow: 1px 0px 5px rgba(255, 0, 242, 0.53);
+ // box-shadow: 1px 0px 5px rgba(255, 0, 242, 0.53);
   width: 70%;
   max-width: 1200px;
   margin: 50px auto;
@@ -277,7 +288,7 @@ border-radius: 20px;
   }
 
   .main-highlights .responsive img {
-    height: 125px;
+   // height: 125px;
   }
 
   h4 {
@@ -310,7 +321,7 @@ border-radius: 20px;
 .HowToBoxContainer {
   background-color: whitesmoke;
   padding: 50px;
-  box-shadow: 1px 0px 5px rgba(255, 0, 242, 0.53);
+  //box-shadow: 1px 0px 5px rgba(255, 0, 242, 0.53);
   width: 70%;
   max-width: 1200px;
   margin: 50px auto;
@@ -443,7 +454,7 @@ border-radius: 20px;
   
   background-color: whitesmoke;
   padding: 50px;
-  box-shadow: 1px 0px 5px rgba(255, 0, 242, 0.53);
+ // box-shadow: 1px 0px 5px rgba(255, 0, 242, 0.53);
   width: 70%;
   max-width: 1200px;
   margin: 50px auto;
@@ -458,4 +469,50 @@ border-radius: 20px;
     background: #181a172e;
         margin: auto;
     border-radius: 10px;
+}
+
+.MainPart{
+  background: linear-gradient(90deg, #3f0bfb 10%, #b82fee 70%);
+  background-repeat: no-repeat;
+  padding: 50px;
+}
+
+.GetExtensionButton{
+    //background: black;
+    color: whitesmoke;
+    width: 226px;
+    display: flex;
+    align-items: center;
+    width: 227px;
+    justify-content: space-between;
+    
+}
+
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root{
+  padding: 20px!important;
+  margin-block: 20px;
+}
+
+.css-2ulfj5-MuiTypography-root{
+  color: #252e69;
+  font-weight: 700;
+  font-size: 17px!important;
+}
+.AccordionText{
+  font-size: 17px!important;
+  color: #252e69!important;
+}
+
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root{
+  box-shadow: none!important;
+  border-radius: 10px!important;
+  border : none!important;
+}
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root:before{
+  content: none!important;
+}
+
+.css-yw020d-MuiAccordionSummary-expandIconWrapper{
+  color: #000060!important;
+    font-size: 19px!important;
 }
