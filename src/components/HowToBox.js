@@ -1,7 +1,7 @@
 import React from 'react'
-import YouTube from 'react-youtube';
-import Plyr from "plyr-react";
-import "plyr-react/dist/plyr.css";
+// import YouTube from 'react-youtube';
+// import Plyr from "plyr-react";
+// import "plyr-react/dist/plyr.css";
 
 const videoSrc = {
   type: "video",
