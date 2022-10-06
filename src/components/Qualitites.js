@@ -14,7 +14,7 @@ function Qualitites() {
 <div class="main-highlights snipcss-pOU4h" style={{maxWidth: '900px', margin: '0 auto' }}>
   <div class="responsive">
     <div class="is-center u-m-bottom img-wrapper">
-      <img src={Pic1} loading="lazy" height={height} class="snip-img"/>
+      <img src={Pic2} loading="lazy" height={height} class="snip-img"/>
     </div>
     <div class="content is-center">
       <h4 class="text-color--main u-bigger-text snip-h4">
@@ -27,7 +27,7 @@ function Qualitites() {
   </div>
   <div class="responsive">
     <div class="is-center u-m-bottom img-wrapper">
-      <img src={Pic2} loading="lazy" height={height} class="snip-img" />
+      <img src={Pic3} loading="lazy" height={height} class="snip-img" />
     </div>
     <div class="content is-center">
       <h4 class="text-color--main u-bigger-text snip-h4">
@@ -41,7 +41,7 @@ function Qualitites() {
   </div>
   <div class="responsive">
     <div class="is-center u-m-bottom img-wrapper">
-      <img src={Pic3} loading="lazy" height={height}  class="snip-img" />
+      <img src={Pic1} loading="lazy" height={height}  class="snip-img" />
     </div>
     <div class="content is-center">
       <h4 class="text-color--main u-bigger-text snip-h4">
