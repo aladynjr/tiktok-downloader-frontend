@@ -2,71 +2,54 @@ import React from 'react'
 import {FcLike} from 'react-icons/fc'
 import {FcMultipleCameras} from 'react-icons/fc'
 import {FcAndroidOs} from 'react-icons/fc'
-
+import Pic1 from '../assets/point1.png'
+import Pic2 from '../assets/point2.png'
+import Pic3 from '../assets/point3.png'
 function Qualitites() {
+  var height = 160;
   return (
-    <div className='QualityContainer' >
+    <div className='QualityContainer' style={{marginTop:'-27px'}} >
 
-    {/* <div className='QualityCards' >
-        
-<div  className='QualityCard' >
-    <FcLike style={{fontSize:'100px'}} />
-    <h2>Placeholder</h2>
-    <p>Download videos in the best quality available.</p>
-</div>
-
-<div  className='QualityCard' >
-    <FcMultipleCameras style={{fontSize:'100px'}} />
-    <h2>Placeholder</h2>
-    <p>Download videos in multiple formats.</p>
-
-</div>
-
-<div  className='QualityCard' >
-    <FcAndroidOs style={{fontSize:'100px'}} />
-    <h2>Placeholder</h2>
-    <p>Download videos on your android device.</p>
-    </div>
-
-</div> */}
 
 <div class="main-highlights snipcss-pOU4h" style={{maxWidth: '900px', margin: '0 auto' }}>
   <div class="responsive">
     <div class="is-center u-m-bottom img-wrapper">
-      <img src="https://ssstik.io/images/endless.png" loading="lazy" height="125" width="137" class="snip-img"/>
+      <img src={Pic1} loading="lazy" height={height} class="snip-img"/>
     </div>
     <div class="content is-center">
       <h4 class="text-color--main u-bigger-text snip-h4">
-        Selling Point 1
+      Bulk Download
       </h4>
-      <div>
-        Save as many videos as you need, no limits or any other restrictions.
+      <div  >
+      Download more than 1 video / cover image at a time with our bulk download.
       </div>
     </div>
   </div>
   <div class="responsive">
     <div class="is-center u-m-bottom img-wrapper">
-      <img src="https://ssstik.io/images/no-watermark.png" loading="lazy" height="125" width="134.25" class="snip-img" />
+      <img src={Pic2} loading="lazy" height={height} class="snip-img" />
     </div>
     <div class="content is-center">
       <h4 class="text-color--main u-bigger-text snip-h4">
-        Selling Point 2
+      Unlimited Downloads
       </h4>
       <div>
-        Download TikTok without watermark, remove a TT logo.
+      Download as many videos as you want with NO watermark instantly.
+
       </div>
     </div>
   </div>
   <div class="responsive">
     <div class="is-center u-m-bottom img-wrapper">
-      <img src="https://ssstik.io/images/audio.png" loading="lazy" height="125" width="150" class="snip-img" />
+      <img src={Pic3} loading="lazy" height={height}  class="snip-img" />
     </div>
     <div class="content is-center">
       <h4 class="text-color--main u-bigger-text snip-h4">
-        Selling Point 3
+      Download Cover Images
       </h4>
       <div>
-        Save videos in hd quality, MP4 file format or convert to audio MP3.
+      Download the cover images of any TikTok video in 1 click!
+
       </div>
     </div>
   </div>

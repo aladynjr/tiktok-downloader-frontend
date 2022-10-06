@@ -131,8 +131,11 @@ function HomePage() {
   return (
     <div className='HomepageContainer' >
       <div className='Homepage' >
-        <h1 style={{ color: 'white' }} >Download TikTok Videos & Thumbnails</h1>
-        <h2 style={{ color: 'white' }} className='HomepageSubtitle' > With No Watermark Fast & Free</h2>
+        <div className="MainPart">
+
+       
+        <h1 style={{ color: 'white' }} >Download TikTok Videos & Cover Images</h1>
+        <h2 style={{ color: 'white' }} className='HomepageSubtitle' > No Watermarks - Bulk Download Videos & Cover Images</h2>
 
         <div className='ButtonsAndMainInput' >
           <div className='maininputfield' >
@@ -188,11 +191,11 @@ function HomePage() {
 
           </div>
 
-
+        </div>
+          <p className='UnderSubtitle' >Paste your TikTok links above and download in bulk</p>
         </div>
 
-
-        <Divider style={{ width: '70%', margin: '20px auto' }} />
+        {/* <Divider style={{ width: '70%', margin: '20px auto' }} /> */}
 
         {/* <div style={{ fontSize: '20px' }}><p>time : {seconds}</p></div> */}
 

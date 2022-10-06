@@ -159,7 +159,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   return (
     <div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: "wrap" }} >
+      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: "wrap" ,alignItems: 'center'}} >
         <div>
 
          {/*(photosDownloadResult || detailsList)*/ (videosFolderName) && <LoadingButton
