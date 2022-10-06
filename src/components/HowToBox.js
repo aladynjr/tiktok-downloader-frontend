@@ -54,7 +54,7 @@ function HowToBox() {
         - go back to sssTikTok and paste the link in the text field on the page and tap on the "Download" button
       </li>
     </ol> */}
-            <Plyr source={videoSrc} />
+            {/* <Plyr source={videoSrc} /> */}
           </div>
         </section>
       </div>
