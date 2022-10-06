@@ -337,6 +337,7 @@ border-radius: 20px;
   }
 
   .blue__block {
+    width: fit-content!important;
     background: #5940f1;
     box-shadow: 0 84px 84px -56px rgba(89, 64, 241, .3);
     border-radius: 32px;
@@ -515,4 +516,7 @@ border-radius: 20px;
 .css-yw020d-MuiAccordionSummary-expandIconWrapper{
   color: #000060!important;
     font-size: 19px!important;
+}
+#widget4{
+  border-radius: 3%!important;
 }

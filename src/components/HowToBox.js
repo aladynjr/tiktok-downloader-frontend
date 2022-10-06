@@ -1,5 +1,5 @@
 import React from 'react'
-// import YouTube from 'react-youtube';
+ import YouTube from 'react-youtube';
 // import Plyr from "plyr-react";
 // import "plyr-react/dist/plyr.css";
 
@@ -54,6 +54,7 @@ function HowToBox() {
         - go back to sssTikTok and paste the link in the text field on the page and tap on the "Download" button
       </li>
     </ol> */}
+    <YouTube videoId="rjjjlJw2cgM" />
             {/* <Plyr source={videoSrc} /> */}
           </div>
         </section>
