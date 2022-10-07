@@ -185,7 +185,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
             </video>}
 
 
-            {singleVideoSize && <LoadingButton
+            {/* {singleVideoSize && <LoadingButton
               endIcon={<FiDownload style={{ color: 'white', fontSize: '22px' }} />}
               variant="contained"
               style={{ marginBlock: '35px', backgroundColor: '#ff0050	', fontSize: '17px', width: 'fit-content', padding: '12px 20px' }} >
@@ -194,15 +194,15 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
                 href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + videoFilename}  >
                 Download Video</a>
 
-            </LoadingButton>}
+            </LoadingButton>} */}
 
-            {singleVideoSize || 1 && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg)  ' }}>
+            {singleVideoSize && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg)  ', marginLeft:'-16px', marginTop:'28px' }}>
               <div class="_9l28 snipcss-PjCMs" >
                 <div class="_9l2w">
                   <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
                     <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
-                    <a role="button" className='GradientButtonText' style={{ fontWeight: '600', fontSize: '23px' }}  >
+                    <a role="button" className='GradientButtonText'   >
                       Download Video <FiDownload className='GradientButtonIcon'  />
                     </a>
                     <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
@@ -211,21 +211,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
               </div>
             </div>}
-            {singleVideoSize || 1 && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg)  ' }}>
-              <div class="_9l28 snipcss-PjCMs" >
-                <div class="_9l2w">
-                  <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
-                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
-
-                    <a role="button" className='GradientButtonText' style={{ fontWeight: '600', fontSize: '23px' }}  >
-                      Download Cover <FiDownload className='GradientButtonIcon'  />
-                    </a>
-                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
-                  </div>
-                </div>
-
-              </div>
-            </div>}
+           
 
             {/* <h3 style={{color:'whitesmoke'}} >{singleVideoSize}</h3> */}
 
@@ -244,7 +230,21 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
                 Download Cover</a>
             </LoadingButton>} */}
 
+{videoCover && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg)  ', marginLeft:'-16px', marginTop:'28px' }}>
+              <div class="_9l28 snipcss-PjCMs" >
+                <div class="_9l2w">
+                  <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
+                    <a role="button" className='GradientButtonText'   >
+                      Download Cover <FiDownload className='GradientButtonIcon'  />
+                    </a>
+                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                  </div>
+                </div>
+
+              </div>
+            </div>}
 
           </div>
 
