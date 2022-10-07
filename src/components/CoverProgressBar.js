@@ -3,7 +3,7 @@ import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-pro
 import 'react-circular-progressbar/dist/styles.css';
 import { v4 as uuidv4 } from 'uuid';
 import { BsImage, BsCameraVideoFill } from 'react-icons/bs'
-function CoverProgressBar({thumbnailProgress, photosDownloadResult, videoCover,}) {
+function CoverProgressBar({thumbnailProgress, photosDownloadResult, videoCover, totalNumberOfLinks, numberOfDownloadedPhotos }) {
   return (
     <div>
           <div className='ProgressLoader'>
@@ -16,8 +16,8 @@ function CoverProgressBar({thumbnailProgress, photosDownloadResult, videoCover,}
     <BsImage className='tiktokicon' />
   </div>
 
-  <div style={{ fontSize: 12, marginTop: 5 }}>
-    {/* <strong>{thumbnailProgress}%</strong> */}
+  <div style={{ fontSize: 18, marginTop: 5, opacity:'0.9' }}>
+  <strong>{numberOfDownloadedPhotos} / {totalNumberOfLinks?.length}   </strong>
   </div>
 </CircularProgressbarWithChildren>
 

@@ -19,7 +19,6 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
   //const [mainUrlField, setMainUrlField] = useState('');
   const [urlErrorMessage, setUrlErrorMessage] = useState('');
 
-  console.log({ singleDownloadRunning })
 
   //RECEIVE SOCKET MESSAGE
   useEffect(() => {

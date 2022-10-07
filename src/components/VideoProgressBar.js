@@ -4,7 +4,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { v4 as uuidv4 } from 'uuid';
 import { BsImage, BsCameraVideoFill } from 'react-icons/bs'
 
-function VideoProgressBar({videoProgress, detailsList, singleVideoSize }) {
+function VideoProgressBar({videoProgress, detailsList, singleVideoSize,numberOfDownloadedVideos, totalNumberOfLinks }) {
   return (
     <div>
          <div  className='ProgressLoader' >
@@ -16,8 +16,8 @@ function VideoProgressBar({videoProgress, detailsList, singleVideoSize }) {
     <BsCameraVideoFill className='tiktokicon' />
   </div>
 
-  <div style={{ fontSize: 12, marginTop: -5 }}>
-    {/* <strong>{videoProgress}%</strong> */}
+  <div style={{ fontSize: 18, marginTop: -5, opacity:'0.9' }}>
+     <strong>{numberOfDownloadedVideos} / {totalNumberOfLinks?.length}   </strong>
   </div>
 </CircularProgressbarWithChildren>
 

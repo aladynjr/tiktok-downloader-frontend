@@ -32,7 +32,7 @@ function HomePage() {
   const navigate = useNavigate();
   //SOCKET IO  
   const [requestID, setRequestID] = useState();
-  console.log('requestID  :  ' + requestID)
+  //console.log('requestID  :  ' + requestID)
 
   //JOIN THIS REQUEST'S ROOM 
   const JoinRoom = (roomNumber) => {
@@ -85,7 +85,6 @@ function HomePage() {
   //Start Single Download 
   const [startSingleDownload, setStartSingleDownload] = useState(false)
   const [singleDownloadRunning, setSingleDownloadRunning] = useState(false)
-  console.log({ singleDownloadRunning })
   const [videoCover, setVideoCover] = useState('')
   const [singleVideoSize, setSingleVideoSize] = useState('')
 

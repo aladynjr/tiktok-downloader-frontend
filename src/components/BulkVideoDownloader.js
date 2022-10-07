@@ -34,18 +34,29 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
 
   //RECEIVE SOCKET MESSAGE
+  const [numberOfDownloadedVideos, setNumberOfDownloadedVideos] = useState(0);
+  const [numberOfDownloadedPhotos, setNumberOfDownloadedPhotos] = useState(0);
   useEffect(() => {
     socket.on('thumbnailProgress', (data) => {
-      console.log('thumbnail  :  ' + data)
+      //console.log('thumbnail  :  ' + data)
       setThumbnailProgress(data)
+
+    })
+    socket.on('thumbnailOrder', (data) => {
+      console.log('thumbnail  :  ' + data)
+      setNumberOfDownloadedPhotos(data)
 
     })
 
     socket.on('videoProgress', (data) => {
-      console.log('video  :  ' + data)
+     // console.log('video  :  ' + data)
       setVideoProgress(data)
 
     })
+    socket.on('videoOrder', (data) => {
+      // console.log('video order :  ' + data)
+       setNumberOfDownloadedVideos(data)
+     })
 
   }, [socket])
 
@@ -88,7 +99,6 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   }
 
   const [videosFolderName, setVideosFolderName] = useState('')
-  console.log({ videosFolderName })
 
   const sendUrlsToGetVideos = async (urls) => {
     console.log('%c sent urls to get videos', 'color: blue')
@@ -120,7 +130,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
     }
   }
-  console.log({ detailsList })
+
   //start download button clicked in parent component
   function StartDownloadButtonClicked() {
     setSingleDownloadRunning(false)
@@ -144,6 +154,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   //reset when starting again in parent component
   useEffect(() => {
     if (resetResults) {
+      setNumberOfDownloadedVideos(0)
       setPhotosDownloadResult(null)
       setPhotosFolderName('')
       setVideosFolderName('')
@@ -175,7 +186,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
             {(bulkDownloadRunning && !videosFolderName) && <div
               className='BulkProgressContainer'
               style={{ marginLeft: '-6px' }} >
-              <VideoProgressBar videoProgress={videoProgress} detailsList={videosFolderName} />
+              <VideoProgressBar videoProgress={videoProgress} detailsList={videosFolderName} numberOfDownloadedVideos={numberOfDownloadedVideos} totalNumberOfLinks={tiktokBulkUrls} />
             </div>}
             {(bulkDownloadRunning && !videosFolderName) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginTop: '-200px', marginRight: '-5px' }} variant="rectangular" width={200} height={200} />}
           </div>
@@ -197,7 +208,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
             {(bulkDownloadRunning && !photosDownloadResult) && <div
               className='BulkProgressContainer'
               style={{ marginLeft: '-6px' }} >
-              <CoverProgressBar thumbnailProgress={thumbnailProgress} photosDownloadResult={photosDownloadResult} />
+              <CoverProgressBar thumbnailProgress={thumbnailProgress} photosDownloadResult={photosDownloadResult} numberOfDownloadedPhotos={numberOfDownloadedPhotos} totalNumberOfLinks={tiktokBulkUrls} />
             </div>}
             {(bulkDownloadRunning && !photosDownloadResult) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginTop: '-200px', marginRight: '-5px' }} variant="rectangular" width={200} height={200} />}
 
