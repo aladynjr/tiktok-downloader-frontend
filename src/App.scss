@@ -47,16 +47,15 @@
 }
 
 .footer {
-  bottom: 0;
-  width: 100%;
-  height: -moz-fit-content;
-  height: fit-content;
-  line-height: 20px;
-  padding-top: 13px;
-  padding-bottom: 4px;
-  background: linear-gradient(180deg, #252e69 0%, #29358f 100%);
+  background: linear-gradient(180deg,#252e69,#29358f);
   color: #fff;
-  margin-bottom: -200px;
+  line-height: 20px;
+  margin-bottom: -67px;
+  padding-bottom: 4px;
+  padding-top: 13px;
+  width: 100%;
+  margin-top: 48px;
+  height: 101px;
 }
 
 
