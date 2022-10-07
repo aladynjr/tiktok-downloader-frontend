@@ -30,12 +30,7 @@ function HowToBox() {
       <img src="https://ssstik.io/images/info-arrow.png" alt="" class="snip-img"/>
     </div> */}
           </div>
-          <div className='VideoContainer' >
-
-          <YouTube videoId="rjjjlJw2cgM" />
-          </div>
-
-          <div /*class="blue__block"*/>
+          <div class="blue__block">
             {/* <h3 class="snip-h3">
       How to download TikTok without watermark?
     </h3> */}
@@ -59,6 +54,7 @@ function HowToBox() {
         - go back to sssTikTok and paste the link in the text field on the page and tap on the "Download" button
       </li>
     </ol> */}
+    <YouTube videoId="rjjjlJw2cgM" />
             {/* <Plyr source={videoSrc} /> */}
           </div>
         </section>
