@@ -529,3 +529,218 @@ border-radius: 20px;
 #widget4{
   border-radius: 3%!important;
 }
+.GradientButton{
+  ._9o26 { 
+      align-items: center; 
+      background: transparent; 
+      border: none; 
+      color: #000; 
+      display: inline-flex; 
+      font-size: 14px; 
+      justify-content: center; 
+      letter-spacing: 0; 
+      min-height: 20px; 
+      min-width: 75px; 
+      position: relative; 
+      text-align: center; 
+      text-decoration: none; 
+      transition: color 500ms cubic-bezier(0, .61, .28, .92), filter 500ms cubic-bezier(0, .61, .28, .92), -webkit-filter 500ms cubic-bezier(0, .61, .28, .92); 
+      white-space: nowrap; 
+      z-index: 0;
+  } 
+  
+  ._9l2w > *  { 
+      margin-left: 16px; 
+      margin-right: 16px;
+  } 
+  
+  ._9l2w > :last-child  { 
+      margin-right: 0;
+  } 
+  
+  ._9l2w ._9o26  { 
+      max-width: 327px;
+  } 
+  
+  ._9o26:hover { 
+      color:  #fff;
+      text-decoration:  none;
+  } 
+  
+
+  
+  @media (min-width: 801px){ 
+    ._9aos { 
+      font-size: 18px; 
+      line-height: 30px;
+    } 
+  }     
+  
+
+  
+  ._9aos._3cr5 { 
+      color: #4080ff;
+  } 
+  
+  a:hover { 
+      text-decoration: underline;
+  } 
+  
+  ._1s6a._3cr5:hover { 
+      color: #4267b2; 
+      text-decoration: none;
+  } 
+  
+  img { 
+      border: 0;
+  } 
+  
+  ._9o2u { 
+      height: 100%; 
+      left: 0; 
+      max-width: inherit; 
+      position: absolute; 
+      top: 0; 
+      transition: opacity 500ms; 
+      transition-timing-function: cubic-bezier(0, .61, .28, .92); 
+      width: 100%; 
+      z-index: -1;
+  } 
+  
+  ._9o2w { 
+      opacity: 0;
+  } 
+  
+  ._8gj0 { 
+      height: 52px; 
+      left: 0; 
+      position: absolute; 
+      top: 0; 
+      transition: opacity 500ms; 
+      transition-timing-function: cubic-bezier(0, .61, .28, .92); 
+      width: 100%; 
+      z-index: -1;
+  } 
+  
+  ._8gj2 { 
+      opacity: 0;
+  } 
+  
+  ._9o26 ._9o2u  { 
+      height: 100%; 
+      margin: 0;
+  } 
+  
+  ._a742 ._9pju  { 
+      height: 100%;
+  } 
+  
+  ._9o26:hover ._9o2w  { 
+      opacity: 1;
+  } 
+  
+
+  
+
+  
+
+  
+
+
+
+  
+  ._a742   { 
+      display:  inline-block;
+    //  background-image: linear-gradient( 222.35deg, #d300c5 -24.77%, #f00679 41.3%, #ff7a00 111.8%);
+  } 
+  
+  ._9o26._a742   { 
+      -webkit-background-clip: text; 
+      border: 1px solid transparent; 
+      border-radius: 40px; 
+      -webkit-text-fill-color: transparent;
+  } 
+  
+
+  
+
+  ._9l2w ._9o26   { 
+      letter-spacing: 0; 
+      width: 100%;
+  } 
+  
+  ._9l2w  { 
+      font-size: 16px;
+  } 
+  
+
+  
+  :hover { 
+     // background: #3b5998;
+     background: transparent;
+  } 
+  
+  ._9o26._a742 :hover  { 
+      background-clip: unset; 
+      background-origin: border-box; 
+      border-radius: 40px; 
+      box-shadow: unset; 
+      color: inherit; 
+      -webkit-text-fill-color: unset;
+  } 
+  
+  ._9o26:hover ._9o2x  { 
+      opacity: 0;
+  } 
+  
+  /*.sp_ne2We4-LKTS { 
+      background-image: url(https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/oqeoqm6BMfN.png); 
+      background-size: auto; 
+      background-repeat: no-repeat; 
+      display: inline-block; 
+      height: 24px; 
+      width: 24px; 
+      background-repeat: no-repeat; 
+  } */
+  
+  i.img { 
+      -ms-high-contrast-adjust: none;
+  } 
+  
+  .sp_ne2We4-LKTS.sx_3c1ac7 { 
+      background-position: 0 -225px;
+  } 
+
+  
+}
+
+.GradientButtonText{
+  font-size: 12px;
+  padding: 40px 37px;
+  background-image: url(https://media.istockphoto.com/photos/dotted-grid-paper-background-texture-seamless-repeat-pattern-picture-id1320330053?b=1&k=20&m=1320330053&s=170667a&w=0&h=XisfN35UnuxAVP_sjq3ujbFDyWPurSfSTYd-Ll09Ncc=)!important;
+  background-position: 0;
+
+  //font-size: 72px;
+  //background: linear-gradient(#eee, #333);
+  background-clip: inherit!important;
+  background-origin: border-box!important;
+  border-radius: 40px!important;
+  box-shadow: unset!important;
+  color: inherit!important;
+  -webkit-text-fill-color: unset!important;
+}
+
+.GradientButtonText:hover{
+//  background-clip: text;
+  background-image: url(https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg)!important;
+  background-position: 0;
+
+  //font-size: 72px;
+  //background: linear-gradient(#eee, #333);
+  background-clip: inherit!important;
+  background-origin: border-box!important;
+  border-radius: 40px!important;
+  box-shadow: unset!important;
+  color: inherit!important;
+  -webkit-text-fill-color: unset!important;
+}

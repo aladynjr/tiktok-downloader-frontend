@@ -246,6 +246,39 @@ function HomePage() {
           setRequestID={setRequestID}
         />
 
+<div style={{display:'flex', width:'80%', maxWidth:'800px', margin:'auto', justifyContent:'space-around', marginBottom:'140px'}} >
+            <div className="GradientButton" style={{    filter: 'hue-rotate(298deg)'}} >
+              <div class="_9l28 snipcss-PjCMs" >
+                <div class="_9l2w">
+                  <div class="_8g86 _8kis _9o26 _a742" style={{  marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
+
+                    <a role="button" className='GradientButtonText' style={{fontWeight:'600', fontSize:'23px'}}  >
+                      Download Cover
+                    </a>
+                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div className="GradientButton" style={{    filter: 'hue-rotate(348deg)'}}>
+              <div class="_9l28 snipcss-PjCMs" >
+                <div class="_9l2w">
+                  <div class="_8g86 _8kis _9o26 _a742" style={{  marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
+
+                    <a role="button" className='GradientButtonText' style={{fontWeight:'600', fontSize:'23px'}}  >
+                      Download Video
+                    </a>
+                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            </div>
+
         <Qualitites />
         <HowToBox />
 

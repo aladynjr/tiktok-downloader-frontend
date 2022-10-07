@@ -152,40 +152,40 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
     }
   }, [thumbnailProgress])
 
- 
 
-const [option, setOption] = useState(1);
+
+  const [option, setOption] = useState(1);
 
   return (
     <div>
-      {(videoCover ||singleVideoSize) && <div style={{marginBottom:'10px'}} >
-  <button onClick={()=>setOption(1)} >OPTION 1 </button>
-  <button onClick={()=>setOption(4)} >OPTION 2 </button>
-  <button onClick={()=>setOption(3)} >OPTION 3 </button>
-  <button onClick={()=>setOption(2)} >OPTION 4 </button>
-  </div>}
+      {(videoCover || singleVideoSize) && <div style={{ marginBottom: '10px' }} >
+        <button onClick={() => setOption(1)} >OPTION 1 </button>
+        <button onClick={() => setOption(4)} >OPTION 2 </button>
+        <button onClick={() => setOption(3)} >OPTION 3 </button>
+        <button onClick={() => setOption(2)} >OPTION 4 </button>
+      </div>}
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '70%', margin: 'auto' }}>
 
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: (videoCover ||singleVideoSize  ) ? '84px' : '0' }} >
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: (videoCover || singleVideoSize) ? '84px' : '0' }} >
         {/* <TextField value={mainUrlField} onChange={(e) => { setMainUrlField(e.target.value) }} label="TikTok Video Url" variant="outlined" /> */}
-       {urlErrorMessage &&  <b style={{ color: 'red' }} >{urlErrorMessage}</b>}
+        {urlErrorMessage && <b style={{ color: 'red' }} >{urlErrorMessage}</b>}
 
 
-        {(videoCover ||singleVideoSize) && <img src={videoCover} className={clsx(option==1 &&'SingleResultsBackground',option==2 && 'SingleResultsBackground otheroption', option==3 && 'SingleResultsBackground otherotheroption', option==4 && 'SingleResultsBackground otherotherotheroption')}/>}
+        {(videoCover || singleVideoSize) && <img src={videoCover} className={clsx(option == 1 && 'SingleResultsBackground', option == 2 && 'SingleResultsBackground otheroption', option == 3 && 'SingleResultsBackground otherotheroption', option == 4 && 'SingleResultsBackground otherotherotheroption')} />}
         <div className='SinglePhotoVideoResults'  >
-          <div style={{ display: 'flex', flexDirection: 'column',alignItems:' center'  }} >
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: ' center' }} >
             {((singleDownloadRunning || singleVideoSize) && !hideVideoProgress) && <div className='SingleProgressContainer' > <VideoProgressBar videoProgress={videoProgress} singleVideoSize={singleVideoSize} /></div>}
 
-            {(singleDownloadRunning && !singleVideoSize) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginBottom:'40px'  }} variant="rectangular" width={200} height={400} />}
+            {(singleDownloadRunning && !singleVideoSize) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginBottom: '40px' }} variant="rectangular" width={200} height={400} />}
 
-            {singleVideoSize && <video style={{ height: '300px', borderRadius:'10px' }} controls>
+            {singleVideoSize && <video style={{ height: '300px', borderRadius: '10px' }} controls>
               <source src={process.env.REACT_APP_SERVER + '/api/single/display/video/' + videoFilename} type="video/mp4" />
               Your browser does not support HTML video.
             </video>}
             {/*(videoCover || singleVideoSize)*/singleVideoSize && <LoadingButton
-              endIcon={<FiDownload style={{ color: 'white', fontSize:'22px' }} />}
-              variant="contained"  style={{ marginBlock: '35px', backgroundColor:'#ff0050	', fontSize:'17px', width:'fit-content', padding:'12px 20px' }} >
+              endIcon={<FiDownload style={{ color: 'white', fontSize: '22px' }} />}
+              variant="contained" style={{ marginBlock: '35px', backgroundColor: '#ff0050	', fontSize: '17px', width: 'fit-content', padding: '12px 20px' }} >
               <a target="_blank" style={{ textDecoration: 'none', color: 'white' }}
                 href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + videoFilename}  >
                 Download Video</a>
@@ -194,24 +194,28 @@ const [option, setOption] = useState(1);
 
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems:' center' }} >
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: ' center' }} >
             {((singleDownloadRunning || videoCover) && !hideCoverProgress) && <div className='SingleProgressContainer' ><CoverProgressBar thumbnailProgress={thumbnailProgress} videoCover={videoCover} /> </div>}
 
-            {(singleDownloadRunning && !videoCover) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginBottom:'40px' }} variant="rectangular" width={200} height={400} />}
-            {videoCover && <img src={videoCover} style={{ height: '300px', maxWidth: '80vw', borderRadius:'10px'  }} />}
-            {/*(videoCover || singleVideoSize)*/videoCover && <LoadingButton
-              endIcon={<FiDownload style={{ color: 'black', fontSize:'22px' }} />}
-              variant="contained"  style={{ marginBlock: '35px', backgroundColor:'#00f2ea	', color:'black', width:'fit-content',fontSize:'17px', padding:'12px 20px' }} >
-              <a target="_blank " style={{ textDecoration: 'none', color: 'black', fontWeight:'900' }}
+            {(singleDownloadRunning && !videoCover) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginBottom: '40px' }} variant="rectangular" width={200} height={400} />}
+            {videoCover && <img src={videoCover} style={{ height: '300px', maxWidth: '80vw', borderRadius: '10px' }} />}
+            {/* {videoCover && <LoadingButton
+              endIcon={<FiDownload style={{ color: 'black', fontSize: '22px' }} />}
+              variant="contained" style={{ marginBlock: '35px', backgroundColor: '#00f2ea	', color: 'black', width: 'fit-content', fontSize: '17px', padding: '12px 20px' }} >
+              <a target="_blank " style={{ textDecoration: 'none', color: 'black', fontWeight: '900' }}
                 href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + photoFilename}  >
                 Download Cover</a>
-            </LoadingButton>}
+            </LoadingButton>} */}
+
+
+
           </div>
 
         </div>
 
 
       </div>
+      
     </div>
   )
 }
