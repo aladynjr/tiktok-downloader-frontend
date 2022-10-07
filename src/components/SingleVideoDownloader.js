@@ -196,7 +196,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
             </LoadingButton>}
 
-            {singleVideoSize || 1 && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg) saturate(1.6) ' }}>
+            {singleVideoSize || 1 && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg)  ' }}>
               <div class="_9l28 snipcss-PjCMs" >
                 <div class="_9l2w">
                   <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
@@ -211,7 +211,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
               </div>
             </div>}
-            {singleVideoSize || 1 && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg) saturate(1.6) ' }}>
+            {singleVideoSize || 1 && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg)  ' }}>
               <div class="_9l28 snipcss-PjCMs" >
                 <div class="_9l2w">
                   <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
