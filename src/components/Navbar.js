@@ -77,12 +77,12 @@ function Navbar(props) {
           </Box>
 
           <Button color='secondary' variant='outlined' href={'https://chrome.google.com/webstore/detail/tokaudit-tiktok-sorting-a/cijmoklipjlcmdipoacmehggpggoaman'} target='_blank'
-            style={{ textTransform: 'none', width: 'fit-content', background: 'linear-gradient(90deg, #000000 10%, #260134 70%)', borderRadius: '7px', border: '2px #d5d1d1 solid', margin: '7px' }} >
+            style={{ textTransform: 'none', width: 'fit-content', background: 'linear-gradient(90deg, #000000 10%, #260134 70%)', borderRadius: '7px', border: '2px #d5d1d1 solid', margin: '7px', scale:'0.75' }} >
             <div className='GetExtensionButton' >
 
               <img style={{ width: '44px', height: '39px' }} src={"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Google_Chrome_Web_Store_icon_2015.svg/1200px-Google_Chrome_Web_Store_icon_2015.svg.png"} />
               <div style={{ marginBottom: '-2px' }} >
-                <div style={{ fontSize: '11px', fontWeight: '100', marginBottom: '-8px', textAlign: 'left', paddingBlock: '3px' }} >
+                <div style={{ fontSize: '12px', fontWeight: '100', marginBottom: '-8px', textAlign: 'left', paddingBlock: '3px' }} >
                   GET THE EXTENSION ON</div>
                 <div style={{ fontSize: '20px' }} >Chrome Web Store</div>
               </div>

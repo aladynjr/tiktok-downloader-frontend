@@ -18,10 +18,10 @@ function Qualitites() {
     </div>
     <div class="content is-center">
       <h4 class="text-color--main u-bigger-text snip-h4">
-      Bulk Download
+      Multi Download
       </h4>
-      <div  >
-      Download more than 1 video / cover image at a time with our bulk download.
+      <div style={{textAlign:'left'}}  >
+      Save time by downloading multiple videos at once.
       </div>
     </div>
   </div>
@@ -33,9 +33,8 @@ function Qualitites() {
       <h4 class="text-color--main u-bigger-text snip-h4">
       Unlimited Downloads
       </h4>
-      <div>
-      Download as many videos as you want with NO watermark instantly.
-
+      <div style={{textAlign:'left'}} >
+      Download unlimited TikTok videos with NO watermark.
       </div>
     </div>
   </div>
@@ -47,8 +46,8 @@ function Qualitites() {
       <h4 class="text-color--main u-bigger-text snip-h4">
       Download Cover Images
       </h4>
-      <div>
-      Download the cover images of any TikTok video in 1 click!
+      <div style={{textAlign:'left'}} >
+      Download the cover images of any TikTok video with 1 click!
 
       </div>
     </div>

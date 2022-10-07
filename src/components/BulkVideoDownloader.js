@@ -159,12 +159,12 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   return (
     <div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: "wrap" ,alignItems: 'center'}} >
+      <div style={{ display: 'flex', justifyContent: 'space-evenly', flexWrap: 'wrap', alignItems: 'center', maxWidth: '1000px', margin: 'auto', flexWrap:'wrap', marginBlock:'25px'}} >
         <div>
 
          {/*(photosDownloadResult || detailsList)*/ (videosFolderName) && <LoadingButton
-            endIcon={<FiDownload style={{ color: 'black', marginLeft:'15px' }} />}
-            variant="contained"  style={{ margin: '7px',marginTop:'26px' , background: 'linear-gradient(90deg, #ff0050 82% , #00f2ea 50%)' }}  >
+            endIcon={<FiDownload style={{ color: 'white', marginLeft:'15px', fontSize:'22px' }} />}
+            variant="contained"  style={{ margin: '7px',marginTop:'26px' , background: ' #ff0050', fontSize:'19px', padding:'15px 20px' }}  >
             <a target="_blank" style={{ textDecoration: 'none', color: 'white' }}
               href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}  >
               Download All Videos </a>
@@ -183,11 +183,11 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
         <div>
 
           {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton
-            endIcon={<FiDownload style={{ color: 'black', marginLeft:'15px' }} />}
+            endIcon={<FiDownload style={{ color: 'black', marginLeft:'15px', fontSize:'22px' }} />}
             variant="contained" 
-            style={{ margin: '7px',marginTop:'26px', background: 'linear-gradient(90deg, #00f2ea 82% , #ff0050 50%)'  }}  >
+            style={{ margin: '7px',marginTop:'26px', background: '#00f2ea ', fontSize:'19px' , padding:'15px 20px' }}  >
             <a target="_blank"
-              style={{ textDecoration: 'none', color:'black' }}
+              style={{ textDecoration: 'none', color:'black', fontWeight:'900' }}
               href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}  >
               Download All Covers</a>
           </LoadingButton>}
@@ -214,8 +214,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
           }
           return (
             <div key={i} className='BulkResultPhotoCard' >
-              <b> {Title}</b>
-              <p style={{ fontSize: '12px' }} >ID : {detail.id}</p>
+              <p style={{ fontSize: '12px', margin:'0', opacity:'0.5',fontWeight:'900', marginTop:'-5px', marginBottom:'5px' }} > {i+1}</p>
               <img src={detail.cover} style={{ width: '170px' }} />
             </div>
           )
