@@ -183,13 +183,50 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
               <source src={process.env.REACT_APP_SERVER + '/api/single/display/video/' + videoFilename} type="video/mp4" />
               Your browser does not support HTML video.
             </video>}
-            {/*(videoCover || singleVideoSize)*/singleVideoSize && <LoadingButton
+
+
+            {singleVideoSize && <LoadingButton
               endIcon={<FiDownload style={{ color: 'white', fontSize: '22px' }} />}
-              variant="contained" style={{ marginBlock: '35px', backgroundColor: '#ff0050	', fontSize: '17px', width: 'fit-content', padding: '12px 20px' }} >
+              variant="contained"
+              style={{ marginBlock: '35px', backgroundColor: '#ff0050	', fontSize: '17px', width: 'fit-content', padding: '12px 20px' }} >
+
               <a target="_blank" style={{ textDecoration: 'none', color: 'white' }}
                 href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + videoFilename}  >
                 Download Video</a>
+
             </LoadingButton>}
+
+            {singleVideoSize || 1 && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg) saturate(1.6) ' }}>
+              <div class="_9l28 snipcss-PjCMs" >
+                <div class="_9l2w">
+                  <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
+
+                    <a role="button" className='GradientButtonText' style={{ fontWeight: '600', fontSize: '23px' }}  >
+                      Download Video <FiDownload className='GradientButtonIcon'  />
+                    </a>
+                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                  </div>
+                </div>
+
+              </div>
+            </div>}
+            {singleVideoSize || 1 && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg) saturate(1.6) ' }}>
+              <div class="_9l28 snipcss-PjCMs" >
+                <div class="_9l2w">
+                  <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
+
+                    <a role="button" className='GradientButtonText' style={{ fontWeight: '600', fontSize: '23px' }}  >
+                      Download Cover <FiDownload className='GradientButtonIcon'  />
+                    </a>
+                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                  </div>
+                </div>
+
+              </div>
+            </div>}
+
             {/* <h3 style={{color:'whitesmoke'}} >{singleVideoSize}</h3> */}
 
           </div>
@@ -215,7 +252,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
 
       </div>
-      
+
     </div>
   )
 }

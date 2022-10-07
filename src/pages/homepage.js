@@ -246,8 +246,8 @@ function HomePage() {
           setRequestID={setRequestID}
         />
 
-<div style={{display:'flex', width:'80%', maxWidth:'800px', margin:'auto', justifyContent:'space-around', marginBottom:'140px'}} >
-            <div className="GradientButton" style={{    filter: 'hue-rotate(298deg)'}} >
+{/* <div style={{display:'flex', width:'80%', maxWidth:'800px', margin:'auto', justifyContent:'space-around', marginBottom:'140px'}} >
+            <div className="GradientButton" style={{    filter: 'hue-rotate(298deg) saturate(1.6)'}} >
               <div class="_9l28 snipcss-PjCMs" >
                 <div class="_9l2w">
                   <div class="_8g86 _8kis _9o26 _a742" style={{  marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
@@ -262,7 +262,7 @@ function HomePage() {
 
               </div>
             </div>
-            <div className="GradientButton" style={{    filter: 'hue-rotate(348deg)'}}>
+            <div className="GradientButton" style={{    filter: 'hue-rotate(348deg) saturate(1.6) '}}>
               <div class="_9l28 snipcss-PjCMs" >
                 <div class="_9l2w">
                   <div class="_8g86 _8kis _9o26 _a742" style={{  marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
@@ -277,7 +277,7 @@ function HomePage() {
 
               </div>
             </div>
-            </div>
+            </div> */}
 
         <Qualitites />
         <HowToBox />
