@@ -179,7 +179,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
             {(singleDownloadRunning && !singleVideoSize) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginBottom: '40px' }} variant="rectangular" width={200} height={400} />}
 
-            {singleVideoSize && <video style={{ height: '300px', borderRadius: '10px' }} controls>
+            {singleVideoSize && <video style={{ height: '300px', borderRadius: '10px', maxWidth:'200px' }} controls>
               <source src={process.env.REACT_APP_SERVER + '/api/single/display/video/' + videoFilename} type="video/mp4" />
               Your browser does not support HTML video.
             </video>}
@@ -221,7 +221,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
             {((singleDownloadRunning || videoCover) && !hideCoverProgress) && <div className='SingleProgressContainer' ><CoverProgressBar thumbnailProgress={thumbnailProgress} videoCover={videoCover} /> </div>}
 
             {(singleDownloadRunning && !videoCover) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginBottom: '40px' }} variant="rectangular" width={200} height={400} />}
-            {videoCover && <img src={videoCover} style={{ height: '300px', maxWidth: '80vw', borderRadius: '10px' }} />}
+            {videoCover && <img src={videoCover} style={{ height: '300px',  maxWidth:'200px', borderRadius: '10px' }} />}
             {/* {videoCover && <LoadingButton
               endIcon={<FiDownload style={{ color: 'black', fontSize: '22px' }} />}
               variant="contained" style={{ marginBlock: '35px', backgroundColor: '#00f2ea	', color: 'black', width: 'fit-content', fontSize: '17px', padding: '12px 20px' }} >
