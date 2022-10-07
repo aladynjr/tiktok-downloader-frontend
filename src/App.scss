@@ -268,6 +268,17 @@ textarea {
   .main-highlights .responsive {
     max-width: 250px;
   }
+@media (max-width: 1050px) {
+   .responsive {
+    margin: auto;
+    margin-bottom: 80px;
+  }
+  .responsive:last-child{
+    margin: auto;
+
+    margin-bottom: -15px!important;
+  }
+}
 
   .is-center {
     text-align: center;
@@ -535,9 +546,6 @@ textarea {
   font-size: 19px !important;
 }
 
-#widget4 {
-  border-radius: 3% !important;
-}
 
 .GradientButton {
   ._9o26 {
@@ -766,4 +774,27 @@ textarea {
 
 .GradientButtonText:hover>.GradientButtonIcon {
   color: #ee00ff
+}
+
+
+#widget4 {
+  border-radius: 3% !important;
+  width: 100%;
+   max-width: 640px;
+  // background: #5940f1;
+   //padding: 55px;
+  // margin-block: 70px;
+}
+
+.VideoContainer{
+  max-width: 672px;
+    margin: auto;
+  background-color: #5940f1;
+  border-radius: 20px;
+  padding: 5% 5%;
+  margin-block: 57px 10px;
+}
+
+*{
+  //border : 1px solid red;
 }
