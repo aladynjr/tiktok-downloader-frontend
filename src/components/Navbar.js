@@ -13,6 +13,7 @@ import { BiMenu } from 'react-icons/bi'
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Logo from '../assets/logo.png';
 
 const drawerWidth = 240;
 const navItems = [{ name: 'TikTok Podcast', link: 'https://talkthetok.com' }, { name: 'TikTok Tools', link: 'https://toktools.com' }, { name: 'Download TikTok MP3', link: '' }];
@@ -27,9 +28,10 @@ function Navbar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }} style={{ fontWeight: '900' }} >
-      <Typography variant="h6" sx={{ my: 2 }}>
+      {/* <Typography variant="h6" sx={{ my: 2 }}>
         LOGO
-      </Typography>
+      </Typography> */}
+      <img src={Logo} alt="logo" style={{ width: '100px', height: '100px' }} />
       <Divider />
       <List  >
         {navItems.map((item) => (
@@ -66,7 +68,8 @@ function Navbar(props) {
             sx={{ display: { sm: 'block' } }}
             style={{ fontWeight: '900', width: '200px' }}
           >
-            LOGO
+                  <img src={Logo} alt="logo" style={{  width: '200px', cursor:'pointer' }} />
+
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'flex' } }} style={{ margin: 'auto', width: '50%' }}>
             {navItems.map((item) => (

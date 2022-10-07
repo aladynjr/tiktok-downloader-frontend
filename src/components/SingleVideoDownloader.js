@@ -158,13 +158,13 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
   return (
     <div>
-      {(videoCover || singleVideoSize) && <div style={{ marginBottom: '10px' }} >
+      {/* {(videoCover || singleVideoSize) && <div style={{ marginBottom: '10px' }} >
         <button onClick={() => setOption(1)} >OPTION 1 </button>
         <button onClick={() => setOption(4)} >OPTION 2 </button>
         <button onClick={() => setOption(3)} >OPTION 3 </button>
         <button onClick={() => setOption(2)} >OPTION 4 </button>
-      </div>}
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '70%', margin: 'auto' }}>
+      </div>} */}
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '70%', margin: 'auto', marginTop:'-8px' }}>
 
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: (videoCover || singleVideoSize) ? '84px' : '0' }} >
@@ -172,7 +172,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
         {urlErrorMessage && <b style={{ color: 'red' }} >{urlErrorMessage}</b>}
 
 
-        {(videoCover || singleVideoSize) && <img src={videoCover} className={clsx(option == 1 && 'SingleResultsBackground', option == 2 && 'SingleResultsBackground otheroption', option == 3 && 'SingleResultsBackground otherotheroption', option == 4 && 'SingleResultsBackground otherotherotheroption')} />}
+        {(videoCover || singleVideoSize) && <img src={videoCover} className={clsx('SingleResultsBackground', option == 2 && 'SingleResultsBackground otheroption', option == 3 && 'SingleResultsBackground otherotheroption', option == 4 && 'SingleResultsBackground otherotherotheroption')} />}
         <div className='SinglePhotoVideoResults'  >
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: ' center' }} >
             {((singleDownloadRunning || singleVideoSize) && !hideVideoProgress) && <div className='SingleProgressContainer' > <VideoProgressBar videoProgress={videoProgress} singleVideoSize={singleVideoSize} /></div>}
@@ -202,8 +202,8 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
                   <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
                     <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
-                    <a role="button" className='GradientButtonText'   >
-                      Download Video <FiDownload className='GradientButtonIcon'  />
+                    <a role="button" className='GradientButtonText' target="_blank" href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + videoFilename}   >
+                      DOWNLOAD VIDEO 
                     </a>
                     <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
                   </div>
@@ -236,8 +236,8 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
                   <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
                     <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
-                    <a role="button" className='GradientButtonText'   >
-                      Download Cover <FiDownload className='GradientButtonIcon'  />
+                    <a role="button" className='GradientButtonText' target="_blank " href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + photoFilename}   >
+                      DOWNLOAD COVER <FiDownload className='GradientButtonIcon'  />
                     </a>
                     <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
                   </div>
