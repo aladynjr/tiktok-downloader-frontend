@@ -173,13 +173,29 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
       <div style={{ display: 'flex', justifyContent: 'space-evenly', flexWrap: 'wrap', alignItems: 'center', maxWidth: '1000px', margin: 'auto', flexWrap:'wrap', marginBlock:'25px'}} >
         <div>
 
-         {/*(photosDownloadResult || detailsList)*/ (videosFolderName) && <LoadingButton
+         {/* {(videosFolderName) && <LoadingButton
             endIcon={<FiDownload style={{ color: 'white', marginLeft:'15px', fontSize:'22px' }} />}
             variant="contained"  style={{ margin: '7px',marginTop:'26px' , background: ' #ff0050', fontSize:'19px', padding:'15px 20px' }}  >
             <a target="_blank" style={{ textDecoration: 'none', color: 'white' }}
               href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}  >
               Download All Videos </a>
-          </LoadingButton>}
+          </LoadingButton>} */}
+
+          {videosFolderName && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg)  ', marginLeft:'-16px', marginTop:'17px' }}>
+              <div class="_9l28 snipcss-PjCMs" >
+                <div class="_9l2w">
+                  <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
+
+                    <a role="button" className='GradientButtonText' target="_blank" href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}    >
+                      DOWNLOAD ALL VIDEOS 
+                    </a>
+                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                  </div>
+                </div>
+
+              </div>
+            </div>}
 
           <div style={{ margin: '20px' }}  >
 
@@ -193,7 +209,7 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
         </div>
         <div>
 
-          {/*(photosDownloadResult || detailsList)*/ photosDownloadResult && <LoadingButton
+          {/* {photosDownloadResult && <LoadingButton
             endIcon={<FiDownload style={{ color: 'black', marginLeft:'15px', fontSize:'22px' }} />}
             variant="contained" 
             style={{ margin: '7px',marginTop:'26px', background: '#00f2ea ', fontSize:'19px' , padding:'15px 20px' }}  >
@@ -201,7 +217,22 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
               style={{ textDecoration: 'none', color:'black', fontWeight:'900' }}
               href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}  >
               Download All Covers</a>
-          </LoadingButton>}
+          </LoadingButton>} */}
+          {photosDownloadResult && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg)  ', marginLeft:'-16px', marginTop:'17px' }}>
+              <div class="_9l28 snipcss-PjCMs" >
+                <div class="_9l2w">
+                  <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
+
+                    <a role="button" className='GradientButtonText' target="_blank " href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}   >
+                      DOWNLOAD ALL COVERS {/*<FiDownload className='GradientButtonIcon'  />*/}
+                    </a>
+                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                  </div>
+                </div>
+
+              </div>
+            </div>}
 
           <div style={{ margin: '20px' }} >
 
