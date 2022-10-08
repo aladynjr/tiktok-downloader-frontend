@@ -130,67 +130,104 @@ function HomePage() {
   return (
     <div className='HomepageContainer' >
       <div className='Homepage' >
-        <div className="MainPart">
+          <div className="MainPart">
 
-       
-        <h1 style={{ color: 'white' }} >Download TikTok Videos & Cover Images</h1>
-        <h2 style={{ color: 'white' }} className='HomepageSubtitle' > No Watermarks - Bulk Download Videos & Cover Images</h2>
+        <Button className='HideExtensionOnDesktop' color='secondary' variant='outlined' href={'https://chrome.google.com/webstore/detail/tokaudit-tiktok-sorting-a/cijmoklipjlcmdipoacmehggpggoaman'} target='_blank'
+            style={{ textTransform: 'none', width: 'fit-content', background: 'linear-gradient(90deg, #000000 10%, #260134 70%)', borderRadius: '7px', border: '2px #d5d1d1 solid', margin: '7px', scale:'0.75' }} >
+            <div className='GetExtensionButton ' >
 
-        <div className='ButtonsAndMainInput' >
-          <div className='maininputfield' >
+              <img style={{ width: '44px', height: '39px' }} src={"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Google_Chrome_Web_Store_icon_2015.svg/1200px-Google_Chrome_Web_Store_icon_2015.svg.png"} />
+              <div style={{ marginBottom: '-2px', marginLeft:'5px' }} >
+                <div style={{ fontSize: '12px', fontWeight: '100', marginBottom: '-8px', textAlign: 'left', paddingBlock: '3px' }} >
+                  GET THE EXTENSION ON</div>
+                <div style={{ fontSize: '20px',whiteSpace:'nowrap' }} >Chrome Web Store</div>
+              </div>
 
-            <TextareaAutosize
-              maxRows={4}
-              placeholder={`Enter TikTok Url(s) Here
+            </div>
+          </Button>
+
+
+          <h1 style={{ color: 'white' }} >Download TikTok Videos & Cover Images</h1>
+          <h2 style={{ color: 'white' }} className='HomepageSubtitle' > No Watermarks - Bulk Download Videos & Cover Images</h2>
+
+          <div className='ButtonsAndMainInput' >
+            <div className='maininputfield' >
+
+              <TextareaAutosize
+                maxRows={4}
+                placeholder={`Enter TikTok Url(s) Here
 
                      ` }
-              /* www.tiktok.com/@user/video/325876398923320581
-               www.tiktok.com/@user/video/35478928923327777
-               www.tiktok.com/t/ZTlmHPdAS
-               ...*/
-              className='glasscard'
-              multiline
-              minRows={6.5}
-              value={mainUrlField}
-              onChange={(e) => { setMainUrlField(e.target.value) }}
-              style={{ outline: 'none', width: '90vw', maxWidth: '800px', margin: '20px auto' }}
-            />
+                /* www.tiktok.com/@user/video/325876398923320581
+                 www.tiktok.com/@user/video/35478928923327777
+                 www.tiktok.com/t/ZTlmHPdAS
+                 ...*/
+                className='glasscard'
+                multiline
+                minRows={6.5}
+                value={mainUrlField}
+                onChange={(e) => { setMainUrlField(e.target.value) }}
+                style={{ outline: 'none', width: '90vw', maxWidth: '800px', margin: '20px auto' }}
+              />
+
+            </div>
+            <div className='DownloadButtonsAndPaste' >
+              <div className='PasteButton' >
+                <Button variant="contained" 
+                  style={{ padding: '5px 6px', marginRight: '-10px', backgroundColor: 'white', color: '#b340c2', textTransform: 'none', fontSize: '13px' }}
+                  onClick={() => { Paste() }} >Paste <MdContentPaste style={{ fontSize: '18px' }} /> </Button>
+              </div>
+              <div className='DownloadButtons HideDonwloadButtonOnMobile' >
+
+                <div  >
+                  {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FiDownload style={{ fontSize: '25px' }} />}
+                    sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px', marginRight: '0' }}
+                    loading={!videoCover && !singleVideoSize && singleDownloadRunning}
+                    onClick={() => {
+                      JoinRoom(requestID)
+                      setStartSingleDownload(true)
+                    }}  >Download</LoadingButton>}
+                </div>
+
+                <div>
+                  {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px', marginRight: '0' }}
+                    onClick={() => {
+                      JoinRoom(requestID)
+                      setStartBulkDownload(true);
+                      setPhotosDownloadResult(false)
+                    }} endIcon={<FiDownload style={{ fontSize: '25px' }} />} loading={bulkDownloadRunning && !detailsList}
+                  >Download</LoadingButton >}
+                </div>
+
+              </div>
+
+
+            </div>
 
           </div>
-          <div className='DownloadButtonsAndPaste' >
+          <div className='DownloadButtons HideDonwloadButtonOnDesktop' >
+
+            <div  >
+              {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FiDownload style={{ fontSize: '25px' }} />}
+                sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px', marginRight: '0' }}
+                loading={!videoCover && !singleVideoSize && singleDownloadRunning}
+                onClick={() => {
+                  JoinRoom(requestID)
+                  setStartSingleDownload(true)
+                }}  >Download</LoadingButton>}
+            </div>
+
             <div>
-              <Button variant="contained"
-                style={{ padding: '5px 6px', marginRight: '-10px', backgroundColor: 'white', color: '#b340c2', textTransform: 'none', fontSize: '13px' }}
-                onClick={() => { Paste() }} >Paste <MdContentPaste style={{ fontSize: '18px' }} /> </Button>
+              {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px', marginRight: '0' }}
+                onClick={() => {
+                  JoinRoom(requestID)
+                  setStartBulkDownload(true);
+                  setPhotosDownloadResult(false)
+                }} endIcon={<FiDownload style={{ fontSize: '25px' }} />} loading={bulkDownloadRunning && !detailsList}
+              >Download</LoadingButton >}
             </div>
-            <div className='DownloadButtons' >
-
-              <div  >
-                {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FiDownload style={{ fontSize: '25px' }} />}
-                  sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px', marginRight:'0' }}
-                  loading={!videoCover && !singleVideoSize && singleDownloadRunning}
-                  onClick={() => {
-                    JoinRoom(requestID)
-                    setStartSingleDownload(true)
-                  }}  >Download</LoadingButton>}
-              </div>
-
-              <div>
-                {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px', marginRight:'0' }}
-                  onClick={() => {
-                    JoinRoom(requestID)
-                    setStartBulkDownload(true);
-                    setPhotosDownloadResult(false)
-                  }} endIcon={<FiDownload style={{ fontSize: '25px' }} />} loading={bulkDownloadRunning && !detailsList}
-                >Download</LoadingButton >}
-              </div>
-
-            </div>
-
 
           </div>
-
-        </div>
           <p className='UnderSubtitle' >Paste your TikTok links above and download in bulk</p>
         </div>
 
@@ -245,7 +282,7 @@ function HomePage() {
           setRequestID={setRequestID}
         />
 
-{/* <div style={{display:'flex', width:'80%', maxWidth:'800px', margin:'auto', justifyContent:'space-around', marginBottom:'140px'}} >
+        {/* <div style={{display:'flex', width:'80%', maxWidth:'800px', margin:'auto', justifyContent:'space-around', marginBottom:'140px'}} >
             <div className="GradientButton" style={{    filter: 'hue-rotate(298deg) saturate(1.6)'}} >
               <div class="_9l28 snipcss-PjCMs" >
                 <div class="_9l2w">

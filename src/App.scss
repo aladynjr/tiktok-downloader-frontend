@@ -116,11 +116,7 @@ h1 {
 }
 
 
-@media (max-width: 600px) {
-  .NavbarLogo {
-    position: absolute;
-  }
-}
+
 
 .ProgressLoader {
   width: 170px;
@@ -196,13 +192,17 @@ textarea {
   z-index: 10;
   max-width: 638px;
 }
-
+@media (max-width: 800px){
+  .SinglePhotoVideoResults{
+    flex-direction: column!important;
+  }
+}
 .SingleResultsBackground {
   width: 70%;
   position: absolute;
   max-width: 644px;
   filter: blur(2px) hue-rotate(15deg) brightness(0.15);
-  height: 467px;
+  height: 450px;
   margin-top: -9px;
   background: linear-gradient(#eb01a5, #d13531);
   mix-blend-mode: luminosity;
@@ -230,13 +230,15 @@ textarea {
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .SingleResultsBackground {
-    width: 95%;
+    width: 90%;
 
     height: 900px;
   }
-
+.MarginOnMobile{
+  margin-top: 50px;
+}
 }
 
 .BulkResultPhotoCard {
@@ -548,6 +550,7 @@ textarea {
 
 
 .GradientButton {
+  
   ._9o26 {
     align-items: center;
     background: transparent;
@@ -796,5 +799,77 @@ textarea {
 }
 
 *{
-  border : 1px solid red;
+  //border : 1px solid red;
+}
+@media (max-width: 900px){
+  .HideDonwloadButtonOnMobile{
+   // display: none!important;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .maininputfield{
+    margin-left: -67px;
+  }
+  .PasteButton{
+    position: absolute!important;
+    right: 40px!important;
+  }
+  .UnderSubtitle{
+    margin-top: 50px!important;
+  }
+  .HomepageSubtitle {
+    font-size: 20px!important;
+  }
+  h1{
+    font-size: 30px!important;
+  }
+
+  
+}
+@media (min-width: 900px){
+  .HideDonwloadButtonOnDesktop{
+    display: none!important;
+
+  }
+
+}
+
+.NavbarLogo {
+  width: 200px;
+}
+@media (max-width: 900px) {
+  .NavbarLogo {
+    position: absolute;
+  }
+}
+
+@media (max-width: 900px){
+  .HideLogoOnMobile{
+    display: none!important;
+
+  }
+  .NavbarLogo {
+    width: 50px;
+  }
+}
+
+@media (min-width: 900px){
+  .HideLogoOnDesktop{
+    display: none!important;
+  }
+
+}
+
+@media(max-width: 900px){
+
+  .HideExtensionOnMobile{
+    display: none!important;
+  }
+}
+
+@media(min-width: 900px){
+
+  .HideExtensionOnDesktop{
+    display: none!important;
+  }
 }

@@ -195,7 +195,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
             </LoadingButton>} */}
 
-            {singleVideoSize && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg)  ', marginLeft:'-16px', marginTop:'28px' }}>
+            {singleVideoSize && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg)  ', marginLeft:'-16px', marginTop:'17px' }}>
               <div class="_9l28 snipcss-PjCMs" >
                 <div class="_9l2w">
                   <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
@@ -220,7 +220,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
             {((singleDownloadRunning || videoCover) && !hideCoverProgress) && <div className='SingleProgressContainer' ><CoverProgressBar thumbnailProgress={thumbnailProgress} videoCover={videoCover} /> </div>}
 
             {(singleDownloadRunning && !videoCover) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginBottom: '40px' }} variant="rectangular" width={200} height={400} />}
-            {videoCover && <img src={videoCover} style={{ height: '300px',  maxWidth:'200px', borderRadius: '10px' }} />}
+            {videoCover && <img src={videoCover} className='MarginOnMobile' style={{ height: '300px',  maxWidth:'200px', borderRadius: '10px' }} />}
             {/* {videoCover && <LoadingButton
               endIcon={<FiDownload style={{ color: 'black', fontSize: '22px' }} />}
               variant="contained" style={{ marginBlock: '35px', backgroundColor: '#00f2ea	', color: 'black', width: 'fit-content', fontSize: '17px', padding: '12px 20px' }} >
@@ -229,14 +229,14 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
                 Download Cover</a>
             </LoadingButton>} */}
 
-{videoCover && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg)  ', marginLeft:'-16px', marginTop:'28px' }}>
+{videoCover && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg)  ', marginLeft:'-16px', marginTop:'17px' }}>
               <div class="_9l28 snipcss-PjCMs" >
                 <div class="_9l2w">
                   <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
                     <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
                     <a role="button" className='GradientButtonText' target="_blank " href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + photoFilename}   >
-                      DOWNLOAD COVER <FiDownload className='GradientButtonIcon'  />
+                      DOWNLOAD COVER {/*<FiDownload className='GradientButtonIcon'  />*/}
                     </a>
                     <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
                   </div>
