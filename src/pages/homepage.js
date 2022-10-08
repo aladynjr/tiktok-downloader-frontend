@@ -167,7 +167,7 @@ function HomePage() {
 
               <div  >
                 {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FiDownload style={{ fontSize: '25px' }} />}
-                  sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px' }}
+                  sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px', marginRight:'0' }}
                   loading={!videoCover && !singleVideoSize && singleDownloadRunning}
                   onClick={() => {
                     JoinRoom(requestID)
@@ -176,7 +176,7 @@ function HomePage() {
               </div>
 
               <div>
-                {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px' }}
+                {throttledManyUrls && <LoadingButton variant="contained" sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px', marginRight:'0' }}
                   onClick={() => {
                     JoinRoom(requestID)
                     setStartBulkDownload(true);
