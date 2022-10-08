@@ -103,7 +103,6 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
   //start download button clicked in parent component
   function StartDownloadButtonClicked() {
-
     setResetResults(true);
     setVideoCover('');
     setSingleVideoSize('');
@@ -150,7 +149,6 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
       }, 1000)
     }
   }, [thumbnailProgress])
-
 
 
   const [option, setOption] = useState(1);

@@ -1,6 +1,7 @@
 
 
 
+
 function TiktokUrlValidator(url, SuccessFunction, FailFunction) {
   //check if url is valid
     let domain = url.split('/')[2];
@@ -8,6 +9,7 @@ function TiktokUrlValidator(url, SuccessFunction, FailFunction) {
     if (domain === 'www.tiktok.com' || domain === 'vm.tiktok.com') {
 
       SuccessFunction()
+
     } else {
 
       FailFunction()

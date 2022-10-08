@@ -127,6 +127,21 @@ function HomePage() {
     });
   }
 
+ 
+//auto scroll 
+function ScrollToNextComponentSmoothly(){
+  document.getElementById('scrollid').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+    inline: 'nearest'
+  })
+}
+useEffect(()=>{
+if(singleDownloadRunning  || bulkDownloadRunning){
+  ScrollToNextComponentSmoothly()
+}
+},[singleDownloadRunning, bulkDownloadRunning ])
+  
   return (
     <div className='HomepageContainer' >
       <div className='Homepage' >
@@ -184,6 +199,7 @@ function HomePage() {
                     sx={{ padding: '14px 27px', marginInline: '20px', textTransform: 'none', fontSize: '17px', borderRadius: '6px', marginRight: '0' }}
                     loading={!videoCover && !singleVideoSize && singleDownloadRunning}
                     onClick={() => {
+                      
                       JoinRoom(requestID)
                       setStartSingleDownload(true)
                     }}  >Download</LoadingButton>}
@@ -205,7 +221,7 @@ function HomePage() {
             </div>
 
           </div>
-          <div className='DownloadButtons HideDonwloadButtonOnDesktop' >
+          <div className='DownloadButtons HideDonwloadButtonOnDesktop' id='scrollid' >
 
             <div  >
               {!throttledManyUrls && <LoadingButton variant="contained" endIcon={<FiDownload style={{ fontSize: '25px' }} />}
