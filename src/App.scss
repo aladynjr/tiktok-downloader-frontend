@@ -797,7 +797,11 @@ textarea {
   padding: 5% 5%;
   margin-block: 57px 10px;
 }
-
+#widget2{
+  border-radius: 3% !important;
+  width: 100%;
+   max-width: 640px;
+}
 *{
   //border : 1px solid red;
 }
