@@ -40,6 +40,8 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
   const [responseID, setResponseID] = useState('')
   const [photoFilename, setPhotoFilename] = useState('')
   const sendUrlToGetPhoto = async (url) => {
+    var timeOfSendingRequest = new Date().getTime();
+
     try {
       let response = await fetch(process.env.REACT_APP_SERVER + '/api/single/url/photo', {
         method: 'POST',
@@ -47,12 +49,15 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ link: url, requestID: requestID })
+        body: JSON.stringify({ link: url, requestID: requestID, timeOfSendingRequest: timeOfSendingRequest })
       })
 
       const jsonData = await response.json();
 
       if (jsonData.photosDownloadResult == 'success') {
+        var timeOfGettingResponse = new Date().getTime()
+
+
         setVideoCover(jsonData.videoCover);
         setResponseID(jsonData.id)
         setPhotoFilename(jsonData.filename)
@@ -60,6 +65,17 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
         if (singleVideoSize) {
           setSingleDownloadRunning(false)
         }
+
+        var totalDuration = (timeOfGettingResponse - timeOfSendingRequest);
+        var serverClientDuration = totalDuration - (jsonData.thumbnailRequestDuration + jsonData.thumbnailDownloadDuration)
+
+
+        console.log('%c ========== THUMBNAIL ===========', 'color: blue');
+        console.log('%c [i] Thumbnail Request From Tiktok Duration : ' + (jsonData.thumbnailRequestDuration)/1000 + ' s', 'color: blue');
+        console.log('%c [i] Thumbnail Download Duration : ' + (jsonData.thumbnailDownloadDuration)/1000 + ' s', 'color: blue');
+       console.log('%c [i] Total Duration Of Travelling between Client<=>Server : ' + (serverClientDuration )/1000 + ' s', 'color: blue');
+       console.log('%c [i] Total Duration  : ' + (totalDuration )/1000 + ' s', 'color: blue');
+
         //setSingleDownloadRunning(false)
       }
     }
@@ -72,6 +88,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
   //send url to get video
   const [videoFilename, setVideoFilename] = useState('')
   const sendUrlToGetVideo = async (url) => {
+    var timeOfSendingRequest = new Date().getTime();
     try {
       let response = await fetch(process.env.REACT_APP_SERVER + '/api/single/url/video', {
         method: 'POST',
@@ -79,12 +96,13 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ link: url })
+        body: JSON.stringify({ link: url, timeOfSendingRequest: timeOfSendingRequest })
       })
 
       const jsonData = await response.json();
 
       if (jsonData.videosDownloadResult == 'success') {
+        var timeOfGettingResponse = new Date().getTime()
         //setVideoCover(jsonData.cover);
         if (videoCover) {
           setSingleDownloadRunning(false)
@@ -92,6 +110,15 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
         setVideoFilename(jsonData.filename)
         setSingleVideoSize(jsonData.size);
         setResponseID(jsonData.id)
+        var totalDuration = (timeOfGettingResponse - timeOfSendingRequest);
+        var serverClientDuration = totalDuration - (jsonData.videoApiRequestDuration + jsonData.videoDownloadDuration)
+        console.log('%c ========== VIDEO ===========', 'color: blue');
+        console.log('%c [i] Video Request From Api Duration : ' + (jsonData.videoApiRequestDuration)/1000 + ' s', 'color: blue');
+        console.log('%c [i] Video Download Duration : ' + (jsonData.videoDownloadDuration)/1000 + ' s', 'color: blue');
+        console.log('%c [i] Total Duration Of Travelling between Client<=>Server : ' + (serverClientDuration )/1000 + ' s', 'color: blue');
+        console.log('%c [i] Total Duration  : ' + (totalDuration )/1000 + ' s', 'color: blue');
+
+        
         console.log('%c success : VIDEO is here !', 'color: green');
       }
     }
