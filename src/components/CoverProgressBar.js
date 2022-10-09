@@ -16,9 +16,9 @@ function CoverProgressBar({thumbnailProgress, photosDownloadResult, videoCover, 
     <BsImage className='tiktokicon' />
   </div>
 
-  <div style={{ fontSize: 18, marginTop: 5, opacity:'0.9' }}>
+ {totalNumberOfLinks &&  <div style={{ fontSize: 18, marginTop: 5, opacity:'0.9' }}>
   <strong>{numberOfDownloadedPhotos} / {totalNumberOfLinks?.length}   </strong>
-  </div>
+  </div>}
 </CircularProgressbarWithChildren>
 
 </div>

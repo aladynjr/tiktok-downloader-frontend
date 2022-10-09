@@ -34,8 +34,8 @@ function Navbar(props) {
       <img src={Logo} alt="logo" className='HideOnMobile' style={{ width: '90%' }} />
       <Divider />
       <List  >
-        {navItems.map((item) => (
-          <ListItem key={item.name} >
+        {navItems.map((item, i) => (
+          <ListItem key={i} >
             <ListItemButton href={item.link} target={'_blank'} sx={{ textAlign: 'center' }}>
               <ListItemText primary={item.name} />
             </ListItemButton>
@@ -86,8 +86,8 @@ function Navbar(props) {
 
           </Typography>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }} style={{ margin: 'auto', width: '50%' }}>
-            {navItems.map((item) => (
-              <Button key={item} href={item.link} target={'_blank'} color='secondary' style={{ textTransform: 'none', margin: 'auto' }} >
+            {navItems.map((item, i) => (
+              <Button key={i} href={item.link} target={'_blank'} color='secondary' style={{ textTransform: 'none', margin: 'auto' }} >
                 {item.name}
               </Button>
             ))}

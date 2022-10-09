@@ -18,16 +18,16 @@ function HowToBox() {
   return (
     <div>
       <div className='HowToBoxContainer' >
-        <section class="text snipcss-vfnyj">
-          <div class="text__container">
-            <h2 class="snip-h2">
+        <section className="text snipcss-vfnyj">
+          <div className="text__container">
+            <h2 className="snip-h2">
               How to download TikTok Videos & Cover Images without watermarks?
             </h2>
-            <div class="text__desc">
+            <div className="text__desc">
               TOKdownloads is a free tool helping you download TikTok Videos and Cover Images without watermarks. You can even download more than 1 video at time by pasting your links at one time. TOKdownloads will automatically download them all for you with 1 click of a button! Save TikTok Videos with the best quality in HD resolution. Just copy and paste your TikTok video links up above and hit download! It’s that simple.    </div>
-            {/* <div class="info-arrow">
+            {/* <div className="info-arrow">
       It's so simple, you can save your videos in three easy steps 
-      <img src="https://ssstik.io/images/info-arrow.png" alt="" class="snip-img"/>
+      <img src="https://ssstik.io/images/info-arrow.png" alt="" className="snip-img"/>
     </div> */}
           </div>
           <div className='VideoContainer' >
@@ -35,8 +35,8 @@ function HowToBox() {
           <YouTube videoId="rjjjlJw2cgM" />
           </div>
 
-          <div /*class="blue__block"*/>
-            {/* <h3 class="snip-h3">
+          <div /*className="blue__block"*/>
+            {/* <h3 className="snip-h3">
       How to download TikTok without watermark?
     </h3> */}
             {/* <ol>

@@ -11,13 +11,13 @@ function Qualitites() {
     <div className='QualityContainer' style={{ marginTop: '-27px' }} >
 
 
-      <div class="main-highlights snipcss-pOU4h" style={{ maxWidth: '900px', margin: '0 auto', flexWrap:'wrap' }}>
-        <div class="responsive">
-          <div class="is-center u-m-bottom img-wrapper">
-            <img src={Pic2} loading="lazy" height={height} class="snip-img" />
+      <div className="main-highlights snipcss-pOU4h" style={{ maxWidth: '900px', margin: '0 auto', flexWrap:'wrap' }}>
+        <div className="responsive">
+          <div className="is-center u-m-bottom img-wrapper">
+            <img src={Pic2} loading="lazy" height={height} className="snip-img" />
           </div>
-          <div class="content is-center">
-            <h4 class="text-color--main u-bigger-text snip-h4">
+          <div className="content is-center">
+            <h4 className="text-color--main u-bigger-text snip-h4">
               Multi Download
             </h4>
             <div style={{ textAlign: 'left' }}  >
@@ -25,12 +25,12 @@ function Qualitites() {
             </div>
           </div>
         </div>
-        <div class="responsive">
-          <div class="is-center u-m-bottom img-wrapper">
-            <img src={Pic3} loading="lazy" height={height} class="snip-img" />
+        <div className="responsive">
+          <div className="is-center u-m-bottom img-wrapper">
+            <img src={Pic3} loading="lazy" height={height} className="snip-img" />
           </div>
-          <div class="content is-center">
-            <h4 class="text-color--main u-bigger-text snip-h4">
+          <div className="content is-center">
+            <h4 className="text-color--main u-bigger-text snip-h4">
               Unlimited Downloads
             </h4>
             <div style={{ textAlign: 'left' }} >
@@ -38,12 +38,12 @@ function Qualitites() {
             </div>
           </div>
         </div>
-        <div class="responsive">
-          <div class="is-center u-m-bottom img-wrapper">
-            <img src={Pic1} loading="lazy" height={height} class="snip-img" />
+        <div className="responsive">
+          <div className="is-center u-m-bottom img-wrapper">
+            <img src={Pic1} loading="lazy" height={height} className="snip-img" />
           </div>
-          <div class="content is-center">
-            <h4 class="text-color--main u-bigger-text snip-h4">
+          <div className="content is-center">
+            <h4 className="text-color--main u-bigger-text snip-h4">
               Download Cover Images
             </h4>
             <div style={{ textAlign: 'left' }} >

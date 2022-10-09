@@ -16,9 +16,9 @@ function VideoProgressBar({videoProgress, detailsList, singleVideoSize,numberOfD
     <BsCameraVideoFill className='tiktokicon' />
   </div>
 
-  <div style={{ fontSize: 18, marginTop: -5, opacity:'0.9' }}>
+  {totalNumberOfLinks && <div style={{ fontSize: 18, marginTop: -5, opacity:'0.9' }}>
      <strong>{numberOfDownloadedVideos} / {totalNumberOfLinks?.length}   </strong>
-  </div>
+  </div>}
 </CircularProgressbarWithChildren>
 
 </div>

@@ -182,15 +182,15 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
           </LoadingButton>} */}
 
           {videosFolderName && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg)  ', marginLeft:'-16px', marginTop:'17px' }}>
-              <div class="_9l28 snipcss-PjCMs" >
-                <div class="_9l2w">
-                  <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
-                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
+              <div className="_9l28 snipcss-PjCMs" >
+                <div className="_9l2w">
+                  <div className="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img className="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
                     <a role="button" className='GradientButtonText' target="_blank" href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}    >
                       DOWNLOAD ALL VIDEOS 
                     </a>
-                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                    <img className=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
                   </div>
                 </div>
 
@@ -219,15 +219,15 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
               Download All Covers</a>
           </LoadingButton>} */}
           {photosDownloadResult && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg)  ', marginLeft:'-16px', marginTop:'17px' }}>
-              <div class="_9l28 snipcss-PjCMs" >
-                <div class="_9l2w">
-                  <div class="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
-                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
+              <div className="_9l28 snipcss-PjCMs" >
+                <div className="_9l2w">
+                  <div className="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img className="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
                     <a role="button" className='GradientButtonText' target="_blank " href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}   >
                       DOWNLOAD ALL COVERS {/*<FiDownload className='GradientButtonIcon'  />*/}
                     </a>
-                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                    <img className=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
                   </div>
                 </div>
 

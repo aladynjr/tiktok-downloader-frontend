@@ -73,8 +73,8 @@ function HomePage() {
       }
     })
     if (cleanTiktokBulkUrls[0]?.includes('tiktok.com/t') || cleanTiktokBulkUrls[0]?.includes('vm.tiktok.com') || cleanTiktokBulkUrls[0]?.includes('www.tiktok.com/@')) {
-     // setRequestID(GetID(cleanTiktokBulkUrls[0]))
-      GetID(cleanTiktokBulkUrls[0])
+      setRequestID(GetID(cleanTiktokBulkUrls[0]))
+     // GetID(cleanTiktokBulkUrls[0])
       //check if it contains a tiktok url 
     }
   }, [mainUrlField])
@@ -301,30 +301,30 @@ if(singleDownloadRunning  || bulkDownloadRunning){
 
         {/* <div style={{display:'flex', width:'80%', maxWidth:'800px', margin:'auto', justifyContent:'space-around', marginBottom:'140px'}} >
             <div className="GradientButton" style={{    filter: 'hue-rotate(298deg) saturate(1.6)'}} >
-              <div class="_9l28 snipcss-PjCMs" >
-                <div class="_9l2w">
-                  <div class="_8g86 _8kis _9o26 _a742" style={{  marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
-                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
+              <div className="_9l28 snipcss-PjCMs" >
+                <div className="_9l2w">
+                  <div className="_8g86 _8kis _9o26 _a742" style={{  marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img className="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
                     <a role="button" className='GradientButtonText' style={{fontWeight:'600', fontSize:'23px'}}  >
                       Download Cover
                     </a>
-                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                    <img className=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
                   </div>
                 </div>
 
               </div>
             </div>
             <div className="GradientButton" style={{    filter: 'hue-rotate(348deg) saturate(1.6) '}}>
-              <div class="_9l28 snipcss-PjCMs" >
-                <div class="_9l2w">
-                  <div class="_8g86 _8kis _9o26 _a742" style={{  marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
-                    <img class="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
+              <div className="_9l28 snipcss-PjCMs" >
+                <div className="_9l2w">
+                  <div className="_8g86 _8kis _9o26 _a742" style={{  marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
+                    <img className="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
                     <a role="button" className='GradientButtonText' style={{fontWeight:'600', fontSize:'23px'}}  >
                       Download Video
                     </a>
-                    <img class=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
+                    <img className=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
                   </div>
                 </div>
 
