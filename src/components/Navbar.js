@@ -16,7 +16,7 @@ import Button from '@mui/material/Button';
 import Logo from '../assets/logo.png';
 import Icon from '../assets/icon.png'
 const drawerWidth = 240;
-const navItems = [{ name: 'TikTok Podcast', link: 'https://talkthetok.com' }, { name: 'TikTok Tools', link: 'https://toktools.com' }, { name: 'Download TikTok MP3', link: '' }];
+const navItems = [{ name: 'TikTok Podcast', link: 'https://talkthetok.com' }, { name: 'TikTok Tools', link: 'https://toktools.com' }];
 
 function Navbar(props) {
   const { window } = props;
