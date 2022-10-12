@@ -32,7 +32,7 @@ function HowToBox() {
           </div>
           <div className='VideoContainer' >
 
-          <YouTube videoId="rjjjlJw2cgM" />
+          <YouTube videoId="UwNmniNzDM8" />
           </div>
 
           <div /*className="blue__block"*/>

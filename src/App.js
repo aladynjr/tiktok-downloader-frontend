@@ -4,6 +4,7 @@ import 'animate.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/homepage';
+import DashboardPage from './pages/dashboardpage';
 import Navbar from './components/Navbar';
 import { createTheme, ThemeProvider } from '@mui/material';
 import Footer from './components/Footer';
@@ -27,13 +28,14 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-<Navbar />
     <div className="App">
       <BrowserRouter>
+<Navbar />
         <div className="pages">
           <Routes>
 
             <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/dashboard" element={<DashboardPage />} />
 
 
 

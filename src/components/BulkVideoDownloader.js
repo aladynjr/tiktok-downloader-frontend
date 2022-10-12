@@ -63,7 +63,11 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
   //SEND URL TO GET PHOTOS 
   const [photosFolderName, setPhotosFolderName] = useState('')
 
+const [thumbnailDownloadDuration, setThumbnailDownloadDuration] = useState(0)
+
   const sendUrlsToGetPhotos = async (urls) => {
+    var timeOfSendingRequest = new Date().getTime();
+
     console.log('%c sent urls to get photos', 'color: blue')
     try {
       let response = await fetch(process.env.REACT_APP_SERVER + '/api/bulk/urls/photos', {
@@ -78,6 +82,9 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
       const jsonData = await response.json();
 
       if (jsonData.photosDownloadResult == 'success') {
+        var timeOfGettingResponse = new Date().getTime()
+        setThumbnailDownloadDuration((timeOfGettingResponse - timeOfSendingRequest)/1000);
+
         //setVideoCover(jsonData.cover);
         setPhotosDownloadResult(jsonData.photosDownloadResult);
         setPhotosFolderName(jsonData.photosFolderName)
@@ -100,7 +107,11 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
 
   const [videosFolderName, setVideosFolderName] = useState('')
 
+  const [videoDownloadDuration, setVideoDownloadDuration] = useState(0)
+
   const sendUrlsToGetVideos = async (urls) => {
+    var timeOfSendingRequest = new Date().getTime();
+
     console.log('%c sent urls to get videos', 'color: blue')
     try {
       let response = await fetch(process.env.REACT_APP_SERVER + '/api/bulk/urls/videos', {
@@ -115,6 +126,9 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
       const jsonData = await response.json();
 
       if (jsonData.videosDownloadResult == 'success') {
+        var timeOfGettingResponse = new Date().getTime()
+        setVideoDownloadDuration((timeOfGettingResponse - timeOfSendingRequest)/1000);
+
         //setVideoCover(jsonData.cover);
         setBulkDownloadRunning(false)
         setVideosFolderName(jsonData.videosFolderName)
@@ -165,6 +179,69 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
     }
   }, [resetResults])
 
+    //add download to database 
+    const [downloadDatabaseId, setDownloadDatabaseId] = useState(null)
+    const AddDownload = async (
+      download_type,
+      download_links,
+      download_link,
+      download_number_of_links,
+      download_cover,
+      download_video,
+      download_thumbnail_duration,
+      download_video_duration
+    ) => {
+      try {
+        let response = await fetch(process.env.REACT_APP_SERVER + '/api/dashboard', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            download_type: download_type,
+            download_links: download_links,
+            download_link: download_link,
+            download_number_of_links: download_number_of_links,
+            download_cover: download_cover,
+            download_video: download_video,
+            download_thumbnail_duration: download_thumbnail_duration,
+            download_video_duration: download_video_duration
+          })
+        })
+        let jsonData = await response.json();
+  console.log('%c download added succesfully', 'color: green');
+        setDownloadDatabaseId(jsonData.download_id)
+      }
+      catch (err) {
+        console.log(err);
+        // setShowPopup(true)
+      }
+  
+    }
+  
+  
+  //update download to database
+  const UpdateDownload = async (id, column, new_value) => {
+      //update duration inside db using PUT with route /api/dashboard 
+      try {
+        let response = await fetch(process.env.REACT_APP_SERVER + '/api/dashboard', {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: id, column: column, new_value: new_value })
+          //body: JSON.stringify({ id: [1], column: ["download_thumbnail_duration"], new_value: [(totalDuration) / 1000] })
+        })
+        console.log('%c download updated successfully', 'color: green')
+      } catch (e) {
+        console.log("error when trying to update download ")
+        console.log(e)
+      }
+  }
+  
+  
 
 
   return (
@@ -187,7 +264,25 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
                   <div className="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
                     <img className="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
-                    <a role="button" className='GradientButtonText' target="_blank" href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}    >
+                    <a role="button" className='GradientButtonText' target="_blank" 
+                   href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + videosFolderName}  
+                    onClick={()=> {if(!downloadDatabaseId){AddDownload(
+                      'bulk',
+                      tiktokBulkUrls,
+                      null,
+                      tiktokBulkUrls?.length,
+                      null,
+                      true,
+                      null,
+                      videoDownloadDuration,
+                    )} else {
+                      //update duration, if downloaded cover yet
+                      UpdateDownload([downloadDatabaseId, downloadDatabaseId],
+                        ['download_video_duration', 'download_video'],
+                        [videoDownloadDuration, true])
+                    }
+                  } }
+                    >
                       DOWNLOAD ALL VIDEOS 
                     </a>
                     <img className=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
@@ -224,7 +319,25 @@ function BulkVideoDownloader({ mainUrlField, resetResults, setResetResults, star
                   <div className="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
                     <img className="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
-                    <a role="button" className='GradientButtonText' target="_blank " href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}   >
+                    <a role="button" className='GradientButtonText' target="_blank " 
+                    href={process.env.REACT_APP_SERVER + '/api/bulk/download/' + photosFolderName}  
+                    onClick={()=> {if(!downloadDatabaseId){AddDownload(
+                      'bulk',
+                      tiktokBulkUrls,
+                      null,
+                      tiktokBulkUrls?.length,
+                      true,
+                      null,
+                      thumbnailDownloadDuration,
+                      null,
+                    )} else {
+                      //update duration, if downloaded cover yet
+                      UpdateDownload([downloadDatabaseId, downloadDatabaseId],
+                        ['download_thumbnail_duration', 'download_cover'],
+                        [thumbnailDownloadDuration, true])
+                    }
+                  } }
+                    >
                       DOWNLOAD ALL COVERS {/*<FiDownload className='GradientButtonIcon'  />*/}
                     </a>
                     <img className=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />

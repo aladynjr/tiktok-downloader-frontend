@@ -15,10 +15,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Logo from '../assets/logo.png';
 import Icon from '../assets/icon.png'
+import { useLocation } from 'react-router-dom';
+
 const drawerWidth = 240;
 const navItems = [{ name: 'TikTok Podcast', link: 'https://talkthetok.com' }, { name: 'TikTok Tools', link: 'https://toktools.com' }];
 
 function Navbar(props) {
+  const location = useLocation();
+
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -60,9 +65,10 @@ function Navbar(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-
+console.log(location.pathname)
   return (
-    <Box sx={{ display: 'flex' }}>
+    <div>
+    {(location.pathname!== '/dashboard') && <Box sx={{ display: 'flex' }}>
       <AppBar component="nav" color='default' >
         <Toolbar style={{ width: '90%', margin: 'auto' }} >
           <IconButton
@@ -128,7 +134,8 @@ function Navbar(props) {
         </Drawer>
       </Box>
 
-    </Box>
+    </Box>}
+    </div>
   );
 }
 

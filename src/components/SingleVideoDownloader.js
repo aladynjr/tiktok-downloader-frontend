@@ -29,7 +29,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
     })
 
     socket.on('videoProgress', (data) => {
-       // console.log('video  :  ' + data)
+      // console.log('video  :  ' + data)
       setVideoProgress(data)
 
     })
@@ -39,7 +39,9 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
   //send url to get thumbnail
   const [responseID, setResponseID] = useState('')
   const [photoFilename, setPhotoFilename] = useState('')
-  const sendUrlToGetPhoto = async (url) => {
+const [thumbnailDownloadDuration, setThumbnailDownloadDuration] = useState(0)
+
+const sendUrlToGetPhoto = async (url) => {
     var timeOfSendingRequest = new Date().getTime();
 
     try {
@@ -69,12 +71,13 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
         var totalDuration = (timeOfGettingResponse - timeOfSendingRequest);
         var serverClientDuration = totalDuration - (jsonData.thumbnailRequestDuration + jsonData.thumbnailDownloadDuration)
 
+        setThumbnailDownloadDuration((totalDuration) / 1000)
 
         console.log('%c ========== THUMBNAIL ===========', 'color: blue');
-        console.log('%c [i] Thumbnail Request From Tiktok Duration : ' + (jsonData.thumbnailRequestDuration)/1000 + ' s', 'color: blue');
-        console.log('%c [i] Thumbnail Download Duration : ' + (jsonData.thumbnailDownloadDuration)/1000 + ' s', 'color: blue');
-       console.log('%c [i] Total Duration Of Travelling between Client<=>Server : ' + (serverClientDuration )/1000 + ' s', 'color: blue');
-       console.log('%c [i] Total Duration  : ' + (totalDuration )/1000 + ' s', 'color: blue');
+        console.log('%c [i] Thumbnail Request From Tiktok Duration : ' + (jsonData.thumbnailRequestDuration) / 1000 + ' s', 'color: blue');
+        console.log('%c [i] Thumbnail Download Duration : ' + (jsonData.thumbnailDownloadDuration) / 1000 + ' s', 'color: blue');
+        console.log('%c [i] Total Duration Of Travelling between Client<=>Server : ' + (serverClientDuration) / 1000 + ' s', 'color: blue');
+        console.log('%c [i] Total Duration  : ' + (totalDuration) / 1000 + ' s', 'color: blue');
 
         //setSingleDownloadRunning(false)
       }
@@ -87,6 +90,9 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
   //send url to get video
   const [videoFilename, setVideoFilename] = useState('')
+  const [videoDownloadDuration, setVideoDownloadDuration] = useState(0)
+
+
   const sendUrlToGetVideo = async (url) => {
     var timeOfSendingRequest = new Date().getTime();
     try {
@@ -110,15 +116,19 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
         setVideoFilename(jsonData.filename)
         setSingleVideoSize(jsonData.size);
         setResponseID(jsonData.id)
+
         var totalDuration = (timeOfGettingResponse - timeOfSendingRequest);
         var serverClientDuration = totalDuration - (jsonData.videoApiRequestDuration + jsonData.videoDownloadDuration)
-        console.log('%c ========== VIDEO ===========', 'color: blue');
-        console.log('%c [i] Video Request From Api Duration : ' + (jsonData.videoApiRequestDuration)/1000 + ' s', 'color: blue');
-        console.log('%c [i] Video Download Duration : ' + (jsonData.videoDownloadDuration)/1000 + ' s', 'color: blue');
-        console.log('%c [i] Total Duration Of Travelling between Client<=>Server : ' + (serverClientDuration )/1000 + ' s', 'color: blue');
-        console.log('%c [i] Total Duration  : ' + (totalDuration )/1000 + ' s', 'color: blue');
 
-        
+        setVideoDownloadDuration((totalDuration) / 1000)
+
+        console.log('%c ========== VIDEO ===========', 'color: blue');
+        console.log('%c [i] Video Request From Api Duration : ' + (jsonData.videoApiRequestDuration) / 1000 + ' s', 'color: blue');
+        console.log('%c [i] Video Download Duration : ' + (jsonData.videoDownloadDuration) / 1000 + ' s', 'color: blue');
+        console.log('%c [i] Total Duration Of Travelling between Client<=>Server : ' + (serverClientDuration) / 1000 + ' s', 'color: blue');
+        console.log('%c [i] Total Duration  : ' + (totalDuration) / 1000 + ' s', 'color: blue');
+
+
         console.log('%c success : VIDEO is here !', 'color: green');
       }
     }
@@ -180,6 +190,70 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
   const [option, setOption] = useState(1);
 
+  //add download to database 
+  const [downloadDatabaseId, setDownloadDatabaseId] = useState(null)
+  const AddDownload = async (
+    download_type,
+    download_links,
+    download_link,
+    download_number_of_links,
+    download_cover,
+    download_video,
+    download_thumbnail_duration,
+    download_video_duration
+  ) => {
+    try {
+      let response = await fetch(process.env.REACT_APP_SERVER + '/api/dashboard', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          download_type: download_type,
+          download_links: download_links,
+          download_link: download_link,
+          download_number_of_links: download_number_of_links,
+          download_cover: download_cover,
+          download_video: download_video,
+          download_thumbnail_duration: download_thumbnail_duration,
+          download_video_duration: download_video_duration
+        })
+      })
+      let jsonData = await response.json();
+console.log('%c download added succesfully', 'color: green');
+      setDownloadDatabaseId(jsonData.download_id)
+    }
+    catch (err) {
+      console.log(err);
+      // setShowPopup(true)
+    }
+
+  }
+
+
+//update download to database
+const UpdateDownload = async (id, column, new_value) => {
+    //update duration inside db using PUT with route /api/dashboard 
+    try {
+      let response = await fetch(process.env.REACT_APP_SERVER + '/api/dashboard', {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: id, column: column, new_value: new_value })
+        //body: JSON.stringify({ id: [1], column: ["download_thumbnail_duration"], new_value: [(totalDuration) / 1000] })
+      })
+      console.log('%c download updated successfully', 'color: green')
+    } catch (e) {
+      console.log("error when trying to update download ")
+      console.log(e)
+    }
+}
+
+
+
   return (
     <div>
       {/* {(videoCover || singleVideoSize) && <div style={{ marginBottom: '10px' }} >
@@ -188,7 +262,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
         <button onClick={() => setOption(3)} >OPTION 3 </button>
         <button onClick={() => setOption(2)} >OPTION 4 </button>
       </div>} */}
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '70%', margin: 'auto', marginTop:'-8px' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '70%', margin: 'auto', marginTop: '-8px' }}>
 
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: (videoCover || singleVideoSize) ? '84px' : '0' }} >
@@ -203,7 +277,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
             {(singleDownloadRunning && !singleVideoSize) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginBottom: '40px' }} variant="rectangular" width={200} height={400} />}
 
-            {singleVideoSize && <video style={{ height: '300px', borderRadius: '10px', maxWidth:'200px' }} controls>
+            {singleVideoSize && <video style={{ height: '300px', borderRadius: '10px', maxWidth: '200px' }} controls>
               <source src={process.env.REACT_APP_SERVER + '/api/single/display/video/' + videoFilename} type="video/mp4" />
               Your browser does not support HTML video.
             </video>}
@@ -220,14 +294,32 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
             </LoadingButton>} */}
 
-            {singleVideoSize && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg)  ', marginLeft:'-16px', marginTop:'17px' }}>
+            {singleVideoSize && <div className="GradientButton" style={{ filter: 'hue-rotate(348deg)  ', marginLeft: '-16px', marginTop: '17px' }}>
               <div className="_9l28 snipcss-PjCMs" >
                 <div className="_9l2w">
                   <div className="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
                     <img className="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
-                    <a role="button" className='GradientButtonText' target="_blank" href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + videoFilename}   >
-                      DOWNLOAD VIDEO 
+                    <a role="button" className='GradientButtonText' target="_blank" 
+                    href={process.env.REACT_APP_SERVER + '/api/single/download/video/' + videoFilename}  
+                    onClick={()=> {if(!downloadDatabaseId){AddDownload(
+                      'single',
+                      null,
+                      mainUrlField,
+                      1,
+                      null,
+                      true,
+                      null,
+                      videoDownloadDuration,
+                    )} else {
+                      //update duration, if downloaded cover yet
+                      UpdateDownload([downloadDatabaseId, downloadDatabaseId],
+                        ['download_video_duration', 'download_video'],
+                        [videoDownloadDuration, true])
+                    }
+                  } }
+                    >
+                      DOWNLOAD VIDEO
                     </a>
                     <img className=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
                   </div>
@@ -235,7 +327,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
 
               </div>
             </div>}
-           
+
 
             {/* <h3 style={{color:'whitesmoke'}} >{singleVideoSize}</h3> */}
 
@@ -245,7 +337,7 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
             {((singleDownloadRunning || videoCover) && !hideCoverProgress) && <div className='SingleProgressContainer' ><CoverProgressBar thumbnailProgress={thumbnailProgress} videoCover={videoCover} /> </div>}
 
             {(singleDownloadRunning && !videoCover) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginBottom: '40px' }} variant="rectangular" width={200} height={400} />}
-            {videoCover && <img src={videoCover} className='MarginOnMobile' style={{ height: '300px',  maxWidth:'200px', borderRadius: '10px' }} />}
+            {videoCover && <img src={videoCover} className='MarginOnMobile' style={{ height: '300px', maxWidth: '200px', borderRadius: '10px' }} />}
             {/* {videoCover && <LoadingButton
               endIcon={<FiDownload style={{ color: 'black', fontSize: '22px' }} />}
               variant="contained" style={{ marginBlock: '35px', backgroundColor: '#00f2ea	', color: 'black', width: 'fit-content', fontSize: '17px', padding: '12px 20px' }} >
@@ -254,13 +346,30 @@ function SingleVideoDownloader({ mainUrlField, resetResults, setResetResults, st
                 Download Cover</a>
             </LoadingButton>} */}
 
-{videoCover && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg)  ', marginLeft:'-16px', marginTop:'17px' }}>
+            {videoCover && <div className="GradientButton" style={{ filter: 'hue-rotate(298deg)  ', marginLeft: '-16px', marginTop: '17px' }}>
               <div className="_9l28 snipcss-PjCMs" >
                 <div className="_9l2w">
                   <div className="_8g86 _8kis _9o26 _a742" style={{ marginTop: '0', display: 'flex', height: '60px', alignItems: 'center', cursor: 'pointer' }}  >
                     <img className="  _8gj0 _8gj2 _9o2u _9o2w _9pju img snip-img full" src="https://static.xx.fbcdn.net/rsrc.php/yD/r/LM6M2GhE0cX.svg" />
 
-                    <a role="button" className='GradientButtonText' target="_blank " href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + photoFilename}   >
+                    <a role="button" className='GradientButtonText' target="_blank " 
+                    href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + photoFilename} 
+                    onClick={()=> {if(!downloadDatabaseId){AddDownload(
+                      'single',
+                      null,
+                      mainUrlField,
+                      1,
+                      true,
+                      null,
+                      thumbnailDownloadDuration,
+                      null,
+                    )} else {
+                      //update duration, if downloaded cover yet
+                      UpdateDownload([downloadDatabaseId, downloadDatabaseId],
+                        ['download_thumbnail_duration', 'download_cover'],
+                        [thumbnailDownloadDuration, true])
+                    }
+                  } }  >
                       DOWNLOAD COVER {/*<FiDownload className='GradientButtonIcon'  />*/}
                     </a>
                     <img className=" _8gj0 _8gj1 _9o2u _9o2x _9pju img border" src="https://static.xx.fbcdn.net/rsrc.php/ys/r/t-mEQ1-Zrdi.svg" />
