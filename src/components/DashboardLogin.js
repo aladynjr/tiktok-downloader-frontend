@@ -6,6 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
+import LinesAnimation from './LinesAnimation'
 
 function DashboardLogin({success,setSuccess}) {
 
@@ -24,7 +25,9 @@ function DashboardLogin({success,setSuccess}) {
     }
 
     return (
-        <Card sx={{ width: '90%', maxWidth: 345, /*position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)'*/ }} >
+        <div>
+
+        <Card sx={{ width: '90%', maxWidth: 345, position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', zIndex:'10' }} >
             <CardMedia
                 component="img"
                 alt="green iguana"
@@ -47,6 +50,8 @@ function DashboardLogin({success,setSuccess}) {
             </CardActions>
         <p style={{color:'red'}} >{error}</p>
         </Card>
+
+        </div>
     )
 }
 
