@@ -56,7 +56,8 @@ export default function DownloadsTable({ rows }) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
+//sort rows based on id from big to small 
+  const handleSort = () => rows
   return (
     <Paper className='DashboardCard' style={{width:'90%'}}>
       <TableContainer component={Paper}>
@@ -73,6 +74,8 @@ export default function DownloadsTable({ rows }) {
           </TableHead>
           <TableBody>
             {rows
+              //sort by date
+              ?.sort(function(a, b){	return a.download_id < b.download_id ? 1 : a.download_id > b.download_id ? -1 : 0;})
               ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               ?.map((row, i) => (
                 <TableRow key={row?.download_id} sx={{ '&:last-child td, &:last-child th': { border: 0 }, backgroundColor: (row?.download_type == 'bulk') ? '#5e5e5e0d' : 'auto'}} >

@@ -4,16 +4,21 @@ import { Button } from '@mui/material'
 import DownloadsTable from '../components/DownloadsTable'
 import ReactApexChart from 'react-apexcharts'
 import LinesAnimation from '../components/LinesAnimation'
-
-function QuickViewCard({Title, Color, Number, numberTitle}){
+import LoadingButton from '@mui/lab/LoadingButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Fab from '@mui/material/Fab';
+import { FaCalendarAlt } from "react-icons/fa"
+import { BiLoader } from 'react-icons/bi'
+function QuickViewCard({ Title, Color, Number, numberTitle }) {
   return (
-    <div className='DashboardCard' style={{width:'90%', maxWidth:'220px', minHeight:'130px'}}>
-    <p className='TotalNumbersTitle'  >{Title} : </p>
-    <div style={{fontSize:'60px', fontWeight:'900px', color:Color}} >
-  {Number}
-  </div>
-  <div className='DashboardCardNumberTitle' style={{color: Color}} >{numberTitle}</div>
-  </div>
+    <div className='DashboardCard' style={{ width: '90%', maxWidth: '220px', minHeight: '130px' }}>
+      <p className='TotalNumbersTitle'  >{Title} : </p>
+      <div style={{ fontSize: '60px', fontWeight: '900px', color: Color }} >
+        {Number}
+      </div>
+      <div className='DashboardCardNumberTitle' style={{ color: Color }} >{numberTitle}</div>
+    </div>
   )
 }
 
@@ -38,14 +43,14 @@ function DashboardPage() {
   var formattedDateLastWeek = (Number(yyyy)) + '-' + (Number(mm)) + '-' + (Number(dd) - 7);
   var formattedDateLastMonth = (Number(yyyy)) + '-' + (Number(mm) - 1) + '-' + (Number(dd));
   var formattedDateLastYear = (Number(yyyy) - 1) + '-' + (Number(mm)) + '-' + (Number(dd));
-  var formattedDateAllTime = '2022-10-01';
+  var formattedDateAllTime = '2022-10-10';
 
 
   //fetch donwloads data data
   const [downloadsData, setDownloadsData] = useState(null)
-
+  const [downloadsDataLoading, setDownloadsDataLoading] = useState(false);
   const FetchDownloadsData = async (startDate, endDate) => {
-
+    setDownloadsDataLoading(true);
     try {
       const response = await fetch(process.env.REACT_APP_SERVER + '/api/dashboard/range/' + startDate + '/' + endDate);
       const jsonData = await response.json();
@@ -57,6 +62,9 @@ function DashboardPage() {
     } catch (err) {
       console.error(err.message);
       console.log('%c downloads data NOT fetched', 'color: red')
+    }
+    finally {
+      setDownloadsDataLoading(false);
     }
   }
 
@@ -314,31 +322,85 @@ function DashboardPage() {
 
   };
 
-  return (
-    <div style={{ backgroundColor: '#f1f5f9', marginTop: '-16px' }} className='DashboardPage' >
-      {success ? <div>
-   
+  function RangeButtons() {
+    return (
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }} >
+        <LoadingButton loading={downloadsDataLoading && (dataRange == 'day')} size='small' style={{ marginInline: '20px' }} variant={(!downloadsDataLoading && (dataRange == 'day')) ? 'contained' : 'outlined'} onClick={() => setDataRange('day')} > Today </LoadingButton>
+        <LoadingButton loading={downloadsDataLoading && (dataRange == 'week')} size='small' style={{ marginInline: '20px' }} variant={(!downloadsDataLoading && (dataRange == 'week')) ? 'contained' : 'outlined'} onClick={() => setDataRange('week')}>  7 Days </LoadingButton>
+        <LoadingButton loading={downloadsDataLoading && (dataRange == 'month')} size='small' style={{ marginInline: '20px' }} variant={(!downloadsDataLoading && (dataRange == 'month')) ? 'contained' : 'outlined'} onClick={() => setDataRange('month')}>  30 Days </LoadingButton>
+        <LoadingButton loading={downloadsDataLoading && (dataRange == 'year')} size='small' style={{ marginInline: '20px' }} variant={(!downloadsDataLoading && (dataRange == 'year')) ? 'contained' : 'outlined'} onClick={() => setDataRange('year')}>  Year </LoadingButton>
+        <LoadingButton loading={downloadsDataLoading && (dataRange == 'alltime')} size='small' style={{ marginInline: '20px' }} variant={(!downloadsDataLoading && (dataRange == 'alltime')) ? 'contained' : 'outlined'} onClick={() => setDataRange('alltime')}> All-time </LoadingButton>
 
-<div className='QuickViewCards' >
-        <QuickViewCard Title={'Bulk Videos'} Color={'#ff4560'} Number={totalNumberOfBulkVideos} numberTitle={'Videos'} />
-        <QuickViewCard Title={'Bulk Thumbnails'} Color={'#feb019'} Number={totalNumberOfBulkThumbnails} numberTitle={'Thumbnails'} />
-        <QuickViewCard Title={'Single Videos'} Color={'#00e396'} Number={totalNumberOfSingleVideos} numberTitle={'Videos'} />
-        <QuickViewCard Title={'Single Thumbnails'} Color={'#008ffb'} Number={totalNumberOfSingleThumbnails} numberTitle={'Thumbnails'} />
-        <QuickViewCard Title={'Total Thumbnails'} Color={'rgb(14 56 72)'} Number={totalNumberOfThumbnailsDownloaded} numberTitle={'Thumbnails'} />
-        <QuickViewCard Title={'Total Videos'} Color={'rgb(14 56 72)'} Number={totalNumberOfVideosDownloaded} numberTitle={'Videos'} />
-</div>
-<div style={{display:'flex', flexWrap:'wrap', justifyContent:'center' }} >
-        <Button size='small' style={{marginInline:'20px'}} variant='outlined' onClick={() => setDataRange('day')} > Today </Button>
-        <Button size='small' style={{marginInline:'20px'}} variant='outlined' onClick={() => setDataRange('week')}> Last 7 Days </Button>
-        <Button size='small' style={{marginInline:'20px'}} variant='outlined' onClick={() => setDataRange('month')}> Last 30 Days </Button>
-        <Button size='small' style={{marginInline:'20px'}} variant='outlined' onClick={() => setDataRange('year')}> Last Year </Button>
-        <Button size='small' style={{marginInline:'20px'}} variant='outlined' onClick={() => setDataRange('alltime')}> All-time </Button>
-</div>
-        <ReactApexChart options={chartData2.options} series={chartData2.series} type="pie" width={380} className='DashboardCard' style={{ width: 'fit-content' }} />
+
+      </div>
+    )
+  }
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = (dataRange) => {
+    setDataRange(dataRange)
+    setAnchorEl(null);
+  };
+
+  return (
+    <div style={{ backgroundColor: '#f1f5f9', marginTop: '-16px', paddingBlock: '40px 200px' }} className='DashboardPage' >
+      {success ? <div>
+
+
+
+        <Fab variant="extended" 
+          onClick={handleClick}
+          style={{ position: 'fixed', bottom: '20px', right: '20px', }}
+          disabled={downloadsDataLoading}
+        >
+          {(!downloadsDataLoading) && <FaCalendarAlt style={{ fontSize: '19px', marginInline: '10px', marginTop: '-2px' }} />}
+          {downloadsDataLoading && <div class="lds-ring"><div></div><div></div><div></div><div></div></div>}
+          {(dataRange == 'day') && 'Today'}
+          {(dataRange == 'week') && '7 Days'}
+          {(dataRange == 'month') && '1 Month'}
+          {(dataRange == 'year') && 'Year'}
+          {(dataRange == 'alltime') && 'All Time'}
+
+        </Fab>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          {(dataRange !== 'day') && <MenuItem onClick={() => handleClose('day')}>Today</MenuItem>}
+          {(dataRange !== 'week') && <MenuItem onClick={() => handleClose('week')}>7 Days</MenuItem>}
+          {(dataRange !== 'month') && <MenuItem onClick={() => handleClose('month')}>1 Month</MenuItem>}
+          {(dataRange !== 'year') && <MenuItem onClick={() => handleClose('year')}>Year</MenuItem>}
+          {(dataRange !== 'alltime') && <MenuItem onClick={() => handleClose('alltime')}>All Time</MenuItem>}
+
+        </Menu>
+        <h2 className='DashboardComponentTitle'  >Quick Reports : </h2>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', maxWidth: '1450px', margin: 'auto' }} >
+          <div className='QuickViewCards' >
+            <QuickViewCard Title={'Bulk Videos'} Color={'#ff4560'} Number={totalNumberOfBulkVideos} numberTitle={'Videos'} />
+            <QuickViewCard Title={'Bulk Thumbnails'} Color={'#feb019'} Number={totalNumberOfBulkThumbnails} numberTitle={'Thumbnails'} />
+            <QuickViewCard Title={'Single Videos'} Color={'#00e396'} Number={totalNumberOfSingleVideos} numberTitle={'Videos'} />
+            <QuickViewCard Title={'Single Thumbnails'} Color={'#008ffb'} Number={totalNumberOfSingleThumbnails} numberTitle={'Thumbnails'} />
+            <QuickViewCard Title={'Total Thumbnails'} Color={'rgb(14 56 72)'} Number={totalNumberOfThumbnailsDownloaded} numberTitle={'Thumbnails'} />
+            <QuickViewCard Title={'Total Videos'} Color={'rgb(14 56 72)'} Number={totalNumberOfVideosDownloaded} numberTitle={'Videos'} />
+          </div>
+
+          <ReactApexChart options={chartData2.options} series={chartData2.series} type="pie" width={380} className='DashboardCard' style={{ width: 'fit-content', height: 'fit-content' }} />
+        </div>
+        <h2 className='DashboardComponentTitle'  > Single Videos vs Single Thumbnails vs Bulk Videos vs Bulk Thumbnails : </h2>
 
         <ReactApexChart options={chartData1.options} series={chartData1.series} type="area" height={350} className='DashboardCard' style={{ width: '90%' }} />
 
-
+          <h2 className='DashboardComponentTitle'  >History</h2>
         {downloadsData && <DownloadsTable rows={downloadsData} />}
 
       </div>
@@ -346,7 +408,7 @@ function DashboardPage() {
         : <div>             <DashboardLogin success={success} setSuccess={setSuccess} /></div>}
 
 
-      {success && <Button size='medium' color='error' style={{ position: 'absolute', right: '20px' }} onClick={() => { localStorage.setItem('admin', 'false'); setSuccess(false) }} >Logout</Button>}
+      {success && <Button size='medium' color='error' style={{ position: 'absolute', right: '20px', top:'10px' }} onClick={() => { localStorage.setItem('admin', 'false'); setSuccess(false) }} >Logout</Button>}
 
     </div>
   )
