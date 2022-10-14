@@ -10,6 +10,19 @@ import MenuItem from '@mui/material/MenuItem';
 import Fab from '@mui/material/Fab';
 import { FaCalendarAlt } from "react-icons/fa"
 import { BiLoader } from 'react-icons/bi'
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
+
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+
+
 function QuickViewCard({ Title, Color, Number, numberTitle }) {
   return (
     <div className='DashboardCard' style={{ width: '90%', maxWidth: '220px', minHeight: '130px' }}>
@@ -45,6 +58,9 @@ function DashboardPage() {
   var formattedDateLastYear = (Number(yyyy) - 1) + '-' + (Number(mm)) + '-' + (Number(dd));
   var formattedDateAllTime = '2022-10-10';
 
+  const [customRangeStartDate,setCustomRangeStartDate] = useState('')
+  const [customRangeEndDate,setCustomRangeEndDate] = useState('')
+
 
   //fetch donwloads data data
   const [downloadsData, setDownloadsData] = useState(null)
@@ -74,6 +90,7 @@ function DashboardPage() {
 
   //fetch data for different ranges of time
   const [dataRange, setDataRange] = useState('day')
+  const [anotherCustomDate, setAnotherCustomDate] = useState(1);
 
   useEffect(() => {
     //fetch data in different ranges of time based on the value of dataRange with a switch case 
@@ -93,11 +110,12 @@ function DashboardPage() {
         break;
 
       case 'alltime': FetchDownloadsData(formattedDateAllTime, formattedDateToday)
+
+      case 'custom': FetchDownloadsData(customRangeStartDate, customRangeEndDate)
         break;
     }
 
-  }, [dataRange])
-
+  }, [dataRange, anotherCustomDate])
 
   //totals quick view data 
   const [totalNumberOfLinks, setTotalNumberOfLinks] = useState(0)
@@ -172,6 +190,8 @@ function DashboardPage() {
     //all time start with first date on downloadsData and ends with today 
     case 'alltime': dateStart = new Date(formattedDateAllTime); dateEnd = new Date(formattedDateToday); break;
 
+    case 'custom': dateStart = new Date(customRangeStartDate); dateEnd = new Date(customRangeEndDate); break;
+
     default: dateStart = new Date(formattedDateToday); break;
   }
   //get all the dates (daily) in a day object in this format 'dd/MM/yy HH:mm' between day start and date end 
@@ -182,8 +202,6 @@ function DashboardPage() {
     day.setDate(day.getDate() + 1);
   }
 
-
-  console.log({ dates })
 
   //get downloads series for chart
 
@@ -247,8 +265,6 @@ function DashboardPage() {
 
   }, [downloadsData])
 
-  console.log({ bulkThumbnailsSeries })
-  console.log({ bulkVideosSeries })
   const chartData1 = {
 
     series: [{
@@ -346,15 +362,55 @@ function DashboardPage() {
     setAnchorEl(null);
   };
 
+  //CUSTOM RANGE 
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+  };
+  const handleDialogClose = (dataRange) => {
+    if(dataRange) {
+      //put random number in anotherCustomDAte
+      setAnotherCustomDate(new Date().getSeconds());
+      setDataRange(dataRange)}
+    setOpenDialog(false);
+  };
+
+
+
+const handleDatePickerChangeStartDate = (newValue) => {
+  var date = new Date(newValue)
+  var dd = String(date.getDate()).padStart(2, '0');
+  var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = date.getFullYear();
+
+  date = yyyy + '-' + mm + '-' + dd;
+
+  setCustomRangeStartDate(date);
+
+};
+
+const handleDatePickerChangeEndDate = (newValue) => {
+  var date = new Date(newValue)
+  var dd = String(date.getDate()).padStart(2, '0');
+  var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = date.getFullYear();
+
+  date = yyyy + '-' + mm + '-' + dd;
+
+  setCustomRangeEndDate(date);
+}
+
   return (
-    <div style={{ backgroundColor: '#f1f5f9', marginTop: '-16px', paddingBlock: '40px 200px' }} className='DashboardPage' >
+    <div style={{ backgroundColor: '#f1f5f9', marginTop: '-16px', paddingBlock: '40px 200px', minHeight:'100vh' }} className='DashboardPage' >
       {success ? <div>
 
 
 
         <Fab variant="extended" 
           onClick={handleClick}
-          style={{ position: 'fixed', bottom: '20px', right: '20px', }}
+          style={{ position: 'fixed', bottom: '20px', right: '20px' }}
+          color="secondary"
           disabled={downloadsDataLoading}
         >
           {(!downloadsDataLoading) && <FaCalendarAlt style={{ fontSize: '19px', marginInline: '10px', marginTop: '-2px' }} />}
@@ -364,7 +420,8 @@ function DashboardPage() {
           {(dataRange == 'month') && '1 Month'}
           {(dataRange == 'year') && 'Year'}
           {(dataRange == 'alltime') && 'All Time'}
-
+          {(dataRange == 'custom') && 'Custom Range'}
+          
         </Fab>
         <Menu
           id="basic-menu"
@@ -380,8 +437,57 @@ function DashboardPage() {
           {(dataRange !== 'month') && <MenuItem onClick={() => handleClose('month')}>1 Month</MenuItem>}
           {(dataRange !== 'year') && <MenuItem onClick={() => handleClose('year')}>Year</MenuItem>}
           {(dataRange !== 'alltime') && <MenuItem onClick={() => handleClose('alltime')}>All Time</MenuItem>}
+          { <MenuItem onClick={()=>{handleClickOpen(); setAnchorEl(null);}}>Custom Range</MenuItem>}
 
         </Menu>
+
+        <Dialog
+        open={openDialog}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Enter Custom Date Range
+        </DialogTitle>
+        <DialogContent>
+
+            <p style={{opacity:'0.7'}} >
+            IMPORTANT : Dates must be in this EXACT format : yyyy-mm-dd          </p>
+       {/* <TextField fullWidth margin="dense" value={customRangeStartDate}  label="Start Date"  onChange={(e) => {setCustomRangeStartDate(e.target.value);}} />
+       <TextField fullWidth margin="dense" value={customRangeEndDate}  label="End Date"  onChange={(e) => {setCustomRangeEndDate(e.target.value);}} /> */}
+       <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DesktopDatePicker
+        
+          label="Start Date"
+          inputFormat="MM/DD/YYYY"
+          value={customRangeStartDate}
+          onChange={handleDatePickerChangeStartDate}
+          renderInput={(params) => <TextField fullWidth
+            margin="dense" {...params} />}
+        />
+        <DesktopDatePicker
+        fullWidth
+        margin="dense"
+          label="End Date"
+          inputFormat="MM/DD/YYYY"
+          value={customRangeEndDate}
+          onChange={handleDatePickerChangeEndDate}
+          renderInput={(params) => <TextField fullWidth
+            margin="dense" {...params} />}
+        />
+    </LocalizationProvider>
+
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={()=>handleDialogClose()}>Cancel</Button>
+          <Button onClick={()=>{setDataRange(''); handleDialogClose('custom')}} autoFocus>
+            Set
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
         <h2 className='DashboardComponentTitle'  >Quick Reports : </h2>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', maxWidth: '1450px', margin: 'auto' }} >

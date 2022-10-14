@@ -41,7 +41,7 @@ function DashboardLogin({success,setSuccess}) {
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     <TextField value={username} onChange={(e)=>{setUsername(e.target.value)}} id="outlined-basic" label="Username" variant="outlined" style={{ width: '100%', marginBottom: '20px', marginTop: '30px' }} />
-                    <TextField value={password} onChange={(e)=>{setPassword(e.target.value)}} id="outlined-basic" label="Password" variant="outlined" style={{ width: '100%', marginBottom: '20px' }} />
+                    <TextField value={password} type={"password"} onChange={(e)=>{setPassword(e.target.value)}} id="outlined-basic" label="Password" variant="outlined" style={{ width: '100%', marginBottom: '20px' }} />
                 </Typography>
             </CardContent>
 
