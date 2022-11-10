@@ -277,7 +277,7 @@ const UpdateDownload = async (id, column, new_value) => {
 
             {(singleDownloadRunning && !singleVideoSize) && <Skeleton style={{ backgroundColor: '#f5f5f55c', marginBottom: '40px' }} variant="rectangular" width={200} height={400} />}
 
-            {singleVideoSize && <video style={{ height: '300px', borderRadius: '10px', maxWidth: '200px' }} controls>
+            {singleVideoSize && <video style={{ height: '300px', borderRadius: '10px', maxWidth: '200px', marginTop:'14px' }} controls>
               <source src={process.env.REACT_APP_SERVER + '/api/single/display/video/' + videoFilename} type="video/mp4" />
               Your browser does not support HTML video.
             </video>}
@@ -354,16 +354,8 @@ const UpdateDownload = async (id, column, new_value) => {
 
                     <a role="button" className='GradientButtonText' target="_blank " 
                     href={process.env.REACT_APP_SERVER + '/api/single/download/photo/' + photoFilename} 
-                    onClick={()=> {if(!downloadDatabaseId){AddDownload(
-                      'single',
-                      null,
-                      mainUrlField,
-                      1,
-                      true,
-                      null,
-                      thumbnailDownloadDuration,
-                      null,
-                    )} else {
+                    onClick={()=> {if(!downloadDatabaseId){AddDownload( 'single', null, mainUrlField, 1,  true,  null,  thumbnailDownloadDuration, null,)} 
+                    else {
                       //update duration, if downloaded cover yet
                       UpdateDownload([downloadDatabaseId, downloadDatabaseId],
                         ['download_thumbnail_duration', 'download_cover'],
