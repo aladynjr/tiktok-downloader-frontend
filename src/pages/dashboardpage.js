@@ -452,8 +452,8 @@ const handleDatePickerChangeEndDate = (newValue) => {
         </DialogTitle>
         <DialogContent>
 
-            <p style={{opacity:'0.7'}} >
-            IMPORTANT : Dates must be in this EXACT format : yyyy-mm-dd          </p>
+            {/* <p style={{opacity:'0.7'}} >
+            IMPORTANT : Dates must be in this EXACT format : yyyy-mm-dd          </p> */}
        {/* <TextField fullWidth margin="dense" value={customRangeStartDate}  label="Start Date"  onChange={(e) => {setCustomRangeStartDate(e.target.value);}} />
        <TextField fullWidth margin="dense" value={customRangeEndDate}  label="End Date"  onChange={(e) => {setCustomRangeEndDate(e.target.value);}} /> */}
        <LocalizationProvider dateAdapter={AdapterDayjs}>

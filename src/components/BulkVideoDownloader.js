@@ -242,6 +242,23 @@ const [thumbnailDownloadDuration, setThumbnailDownloadDuration] = useState(0)
   }
   
   
+//sort details list by using first chars until '-' in  filename 
+const [sortedDetailsList, setSortedDetailsList] = useState(null)
+  useEffect(() => {
+    if (detailsList) {
+      var sortedDetailsList = detailsList.sort((a, b) => {
+        var aName = Number(a.filename.split('-')[0])
+        //convet to number
+        var bName = Number(b.filename.split('-')[0])
+        return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
+
+      })
+      setSortedDetailsList(sortedDetailsList)
+    }
+
+  }, [detailsList])
+
+  console.log({sortedDetailsList})
 
 
   return (
@@ -362,14 +379,21 @@ const [thumbnailDownloadDuration, setThumbnailDownloadDuration] = useState(0)
       </div>
 
       <div  className='BulkResultPhotos' >
-        {detailsList && detailsList.map((detail, i) => {
-          var Title = detail.title.toString();
-          if (Title.length > 20) {
-            Title = Title.substring(0, 20) + '...'
+        {sortedDetailsList && sortedDetailsList.map((detail, i) => {
+        
+          //get the first 2 chars from detail.filename and if it's not a proper number get only the first char from detail.filename
+          var fileNumber; 
+          if(isNaN(detail.filename.substring(0,2))){
+            fileNumber = detail.filename.substring(0,1)
+          } else {
+            fileNumber = detail.filename.substring(0,2)
           }
+
+
+
           return (
             <div key={i} className='BulkResultPhotoCard' >
-              <p style={{ fontSize: '12px', margin:'0', opacity:'0.5',fontWeight:'900', marginTop:'-5px', marginBottom:'5px' }} > {i+1}</p>
+              <p style={{ fontSize: '12px', margin:'0', opacity:'0.5',fontWeight:'900', marginTop:'-5px', marginBottom:'5px' }} > {fileNumber}</p>
               <img src={detail.cover} style={{ width: '170px' }} />
             </div>
           )

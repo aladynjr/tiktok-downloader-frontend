@@ -12,6 +12,10 @@ import { GiEmptyChessboard } from 'react-icons/gi'
 import Link from '@mui/material/Link';
 import { CSVLink, CSVDownload } from "react-csv";
 import { Button } from '@mui/material'
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
+import {BsThreeDotsVertical} from 'react-icons/bs';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -130,11 +134,41 @@ export default function DownloadsTable({ rows }) {
     setDownloadCSV(false)
   }, [downloadCSV])
 
-
+//menu 
+const [anchorEl, setAnchorEl] = React.useState(null);
+const open = Boolean(anchorEl);
+const handleMenuClick = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+const handleMenuClose = () => {
+  setAnchorEl(null);
+};
   return (
+    <div>
+       <BsThreeDotsVertical style={{fontSize:'26px', color:'grey', cursor:'pointer', marginTop:'-42px',position:'absolute', right:'5%'}}
+       aria-controls={open ? 'basic-menu' : undefined}
+       aria-haspopup="true"
+       aria-expanded={open ? 'true' : undefined}
+       onClick={handleMenuClick}
+       />
+         <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleMenuClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleMenuClose}><CSVLink style={{textDecoration:'none', color:'black', opacity:'0.9'}} {...csvLink}>Export to CSV</CSVLink></MenuItem>
+      </Menu>
     <Paper className='DashboardCard' style={{ width: '90%' }}>
-      <Button variant="outlined" size="small" onClick={() => downloadCSV(true)}  >Download CSV</Button>
-      <CSVLink {...csvLink}>Export to CSV</CSVLink>
+
+
+     
+
+      {/* <Button variant="outlined" size="small" onClick={() => downloadCSV(true)}  >Download CSV</Button> */}
+      
 
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table" >
@@ -170,7 +204,7 @@ export default function DownloadsTable({ rows }) {
                         {(row?.download_links).map((link) => {
                           return (
                             <Link underline='hover' href={link} target={'_blank'} >
-                              {link.substring((link.includes('https://') ? 8 : 0), 45)}...
+                              {link.substring((link.includes('https://') ? 8 : 0), 45)}
                             </Link>
                           )
                         })}
@@ -192,5 +226,6 @@ export default function DownloadsTable({ rows }) {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </div>
   );
 }
